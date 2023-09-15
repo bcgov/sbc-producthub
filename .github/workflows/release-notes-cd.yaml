@@ -1,0 +1,33 @@
+name: Release Notes CD
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "apps/release-notes/**"
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment"
+        required: true
+        type: choice
+        options:
+        - test
+        - prod
+      tagname:
+        description: "Specify a previous version (git tag) to deploy"
+        required: false
+        default: ""
+
+jobs:
+  release-notes-cd:
+    uses: bcgov/bcregistry-sre/.github/workflows/ui-cd-node20.yaml@main
+    with:
+        environment: ${{ inputs.environment }}
+        tagname: ${{ inputs.tagname }}
+        working_directory: "./apps/release-notes"
+    secrets:
+        APP_NAME: "release-notes"
+        OP_CONNECT_URL: ${{ secrets.OP_CONNECT_URL }}
+        OP_CONNECT_TOKEN: ${{ secrets.OP_CONNECT_TOKEN }}
