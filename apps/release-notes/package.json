@@ -21,5 +21,8 @@
     "eslint": "^8.49.0",
     "nuxt": "^3.7.3",
     "vitest": "^0.34.4"
+  },
+  "dependencies": {
+    "@harv46/vue-table": "^0.0.6"
   }
 }
