@@ -1,9 +1,11 @@
-<template>
+<!-- <template>
     <div>
         <h1>BC Registries Status Dashboard</h1>
         <p>{{date}}</p>
         <VueTable :headers="header" :data="data" :keys="keys" />
-        <!-- <NuxtLink to="/home">Home page</NuxtLink> -->
+        <NuxtLink to="/home">Home page</NuxtLink>
+        <pre>{{ data }}</pre>
+        <h1>Hi</h1>
     </div>
     
 </template>
@@ -28,6 +30,20 @@ const data = [{
 }]
 const current = new Date();
 const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+const {data} = await useFetch('/api/hello')
+console.log({data})
 </script>
 
-  
+   -->
+
+<script setup lang="ts">
+    const { data } = await useFetch('/api/hello')
+    console.log(data)
+</script>
+
+<template>
+    <!-- <pre>{{ data }}</pre> -->
+    <NuxtLink to="/home">{{ data.hello }}</NuxtLink>
+    <h1>Hi</h1>
+</template>
+   
