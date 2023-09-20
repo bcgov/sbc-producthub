@@ -39,6 +39,85 @@ console.log({data})
 <script setup lang="ts">
     const { data } = await useFetch('/api/hello')
     console.log(data)
+    import { ApolloClient, InMemoryCache, gql, WatchQueryOptions } from '@apollo/client/core';
+
+// Get the API key from environment variables
+const apiKey = process.env.ZENHUB_APIKEY;
+if (!apiKey) {
+  console.error("API key is missing in the environment variables.");
+  process.exit(1); // Optionally, exit the application if the API key is missing
+}
+
+const client = new ApolloClient({
+  uri: 'https://api.zenhub.com/public/graphql',
+  cache: new InMemoryCache(),
+  headers: {
+    authorization: `Bearer ${apiKey}`
+  }
+});
+
+const GET_REPORT = gql`
+        query getRepositoryReleaseReports($repositoryGhId: [Int!]!) {
+          repositoriesByGhId(ghIds: $repositoryGhId) {
+            id
+            releases(first: 50) {
+              nodes {
+                id
+                title
+                description
+                startOn
+                endOn
+                issues(first: 50) {
+                  nodes {
+                    id
+                    title
+                    number
+                  }
+                }
+              }
+            }
+          }
+        }
+`;
+
+// function getReport() {
+//     const {loading, error, data} = useQuery(GET_REPORT, {variables: [157936592, 222018242]});
+//     if (loading) return null;
+//     if (error) return 'Error! ${error}';
+//     return data
+// }
+
+apollo: {
+    report: {
+        query: gql`query getRepositoryReleaseReports($repositoryGhId: [Int!]!) {
+          repositoriesByGhId(ghIds: $repositoryGhId) {
+            id
+            releases(first: 50) {
+              nodes {
+                id
+                title
+                description
+                startOn
+                endOn
+                issues(first: 50) {
+                  nodes {
+                    id
+                    title
+                    number
+                  }
+                }
+              }
+            }
+          }
+        }`
+        variables: {
+            repositoryGhId: [157936592, 222018242]
+        }
+    }
+    
+}
+
+// console.log(getReport())
 </script>
 
 <template>
