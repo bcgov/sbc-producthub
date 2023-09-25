@@ -4,10 +4,5 @@
     ],
     "rules": {
       "no-console": "off"
-    },
-    "parser": '@typescript-eslint/parser',
-    "parserOptions": {
-      "project": './tsconfig.json', // Path to your tsconfig.json file
-      "extraFileExtensions": ['.vue'] // Path to your tsconfig.json file
     }
   }
