@@ -41,6 +41,11 @@ jobs:
       - name: Install dependencies
         run: |
           pnpm install
+      - name: run build
+        env:
+          ZENHUB_APIKEY: ${{  secrets.ZENHUB_APIKEY  }}
+        run: |
+          pnpm run build
       - name: Linting
         run: |
           pnpm run lint
@@ -97,5 +102,7 @@ jobs:
           pnpm install
 
       - name: run test
+        env:
+          ZENHUB_APIKEY: ${{  secrets.ZENHUB_APIKEY  }}
         run: |
           pnpm run build
