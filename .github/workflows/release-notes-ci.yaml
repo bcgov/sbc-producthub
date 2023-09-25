@@ -94,4 +94,8 @@ jobs:
           version: 8
       - name: Install dependencies
         run: |
+          pnpm install
+
+      - name: run test
+        run: |
           pnpm run build
