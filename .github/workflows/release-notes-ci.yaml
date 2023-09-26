@@ -41,6 +41,9 @@ jobs:
       - name: Install dependencies
         run: |
           pnpm install
+      - name: run build
+        run: |
+          pnpm run build
       - name: Linting
         run: |
           pnpm run lint
