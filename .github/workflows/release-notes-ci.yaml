@@ -27,7 +27,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.5.1]
+        node-version: [20.6.1]
 
     steps:
       - uses: actions/checkout@v3
@@ -41,6 +41,9 @@ jobs:
       - name: Install dependencies
         run: |
           pnpm install
+      - name: build
+        run: |
+          pnpm run build-check
       - name: Linting
         run: |
           pnpm run lint
@@ -51,7 +54,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.5.1]
+        node-version: [20.6.1]
 
     steps:
       - uses: actions/checkout@v3
@@ -81,7 +84,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.5.1]
+        node-version: [20.6.1]
 
     steps:
       - uses: actions/checkout@v3
@@ -94,4 +97,8 @@ jobs:
           version: 8
       - name: Install dependencies
         run: |
-          pnpm run build
+          pnpm install
+
+      - name: run test
+        run: |
+          pnpm run build-check
