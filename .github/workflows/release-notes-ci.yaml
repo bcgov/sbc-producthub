@@ -105,4 +105,4 @@ jobs:
         env:
           ZENHUB_APIKEY: ${{  secrets.ZENHUB_APIKEY  }}
         run: |
-          pnpm run build
+          pnpm run build-check

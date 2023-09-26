@@ -2,7 +2,8 @@
   "name": "release-notes",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
+    "build-check": "nuxt build",
+    "build": "nuxt generate",
     "dev": "nuxt dev",
     "lint": "eslint .",
     "lintfix": "eslint . --fix",
