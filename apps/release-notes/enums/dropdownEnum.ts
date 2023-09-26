@@ -3,5 +3,5 @@ enum GhRepo {
 }
 
 export {
-    GhRepo
+  GhRepo
 }
