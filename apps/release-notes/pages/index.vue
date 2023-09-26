@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {getReport} from '../composable/getreport'
+import { getReport } from '../composable/getreport'
 
 // Hard code one github repo, which is frm Entities team
 const myGhIds: number[] = [157936592]

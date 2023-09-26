@@ -1,8 +1,8 @@
-import { gql } from "@apollo/client/core";
-import getClient from "./getClient";
+import { gql } from '@apollo/client/core'
+import getClient from './getClient'
 
-export async function getReport(ghId: number[]) {
-  const client = await getClient()
+export async function getReport (ghId: number[]) {
+  const client = getClient()
   try {
     const result = await client.query({
       query: gql`
@@ -29,13 +29,13 @@ export async function getReport(ghId: number[]) {
         }
       `,
       variables: {
-        repositoryGhId: ghId,
-      },
-    });
+        repositoryGhId: ghId
+      }
+    })
 
-    return result.data.repositoriesByGhId[0].releases;
+    return result.data.repositoriesByGhId[0].releases
   } catch (error) {
-    console.error(error);
-    throw error;
+    console.error(error)
+    throw error
   }
 }
