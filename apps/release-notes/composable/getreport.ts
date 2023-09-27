@@ -9,18 +9,27 @@ export async function getReport (ghId: number[]) {
         query getRepositoryReleaseReports($repositoryGhId: [Int!]!) {
           repositoriesByGhId(ghIds: $repositoryGhId) {
             id
-            releases(first: 50) {
+            releases(first: 10) {
               nodes {
                 id
                 title
                 description
                 startOn
                 endOn
-                issues(first: 50) {
+                state
+                issues(first: 10) {
                   nodes {
                     id
                     title
                     number
+                    labels {
+                      edges{
+                        node {
+                          id
+                          name
+                        }
+                      }
+                    }
                   }
                 }
               }
@@ -29,9 +38,9 @@ export async function getReport (ghId: number[]) {
         }
       `,
       variables: {
-        repositoryGhId: ghId
-      }
-    })
+        repositoryGhId: ghId,
+      },
+    });
 
     return result.data.repositoriesByGhId[0].releases
   } catch (error) {
