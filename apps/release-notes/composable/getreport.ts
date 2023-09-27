@@ -38,9 +38,9 @@ export async function getReport (ghId: number[]) {
         }
       `,
       variables: {
-        repositoryGhId: ghId,
-      },
-    });
+        repositoryGhId: ghId
+      }
+    })
 
     return result.data.repositoriesByGhId[0].releases
   } catch (error) {
