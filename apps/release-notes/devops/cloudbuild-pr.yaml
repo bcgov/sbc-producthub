@@ -1,12 +1,14 @@
 steps:
   # install / setup ci
-  - name: node:20.5.1
-    entrypoint: bash
-    args:
-    - -c
-    - cp .env.example .env
-    - npm install -g pnpm && pnpm install && pnpm build
+  - name: node:20.6.1
+    script: |
+      #!/usr/bin/env bash
+      npm install --global pnpm
+      pnpm install
+      pnpm build
     dir: 'apps/release-notes'
+    env:
+      - 'ZENHUB_APIKEY=$_ZENHUB_APIKEY'
 
   #
   # Deploy to firebase channel, using the PR #
@@ -15,7 +17,7 @@ steps:
   - name: gcr.io/yfthig-dev/firebase
     dir: "apps/release-notes"
     entrypoint: bash
-    args: ['-c', 'firebase hosting:channel:deploy --project=release-notes-dev PR-$_PR_NUMBER > /workspace/firebase-deploy.txt']
+    args: ['-c', 'firebase hosting:channel:deploy --project=yfthig-dev PR-$_PR_NUMBER > /workspace/firebase-deploy.txt']
 
   #
   # Update the PR with the temporary URL
@@ -33,7 +35,7 @@ steps:
         echo "this is the body:"
         echo '{"body": "Temporary Url for review:'"$url"'"}'
         curl -X POST \
-        https://api.github.com/repos/bcgov/ppr/issues/$_PR_NUMBER/comments \
+        https://api.github.com/repos/bcgov/sbc-producthub/issues/$_PR_NUMBER/comments \
         --header "Authorization: Token $$TOKEN" \
         --header "Accept: application/vnd.github.v3+json" \
         --data-binary '{"body": "Temporary Url for review: '"$url"'"}'
