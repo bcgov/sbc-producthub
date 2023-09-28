@@ -5,12 +5,12 @@
         <p>{{date}}</p>
       </div>
       <VueTable :headers='header' :data='data' :keys='keys'>
-        <template th>
+        <template #th>
           <th>
             Application
           </th>
         </template>
-        <template td='{item}' style='align-items: center;'>
+        <template #td='{item}'>
           <td>
             <NuxtLink to='/home'>{{item.application}}</NuxtLink>
           </td>

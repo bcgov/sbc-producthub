@@ -10,6 +10,7 @@ console.log(dis)
 
 <template>
   <div class="release-page">
+    <h1>BC Registries Releases</h1>
     <div v-if="dis">
       <!-- Display the releases data here -->
       <ul>
@@ -20,7 +21,7 @@ console.log(dis)
           <h2>Issues:</h2>
           <li v-for="issue in release.issues.nodes" :key="issue.id">
             <h2>
-              {{ issue.title }}
+              {{ issue.title }} - {{ issue.number }} - {{ issue.htmlUrl }}
             </h2>
             <h3>
               Labels

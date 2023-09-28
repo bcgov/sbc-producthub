@@ -22,8 +22,9 @@ export async function getReport (ghId: number[]) {
                     id
                     title
                     number
+                    htmlUrl
                     labels {
-                      edges{
+                      edges {
                         node {
                           id
                           name
