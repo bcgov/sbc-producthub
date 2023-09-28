@@ -1,23 +1,24 @@
 <template>
-    <div class='home'>
-      <div class = 'title'>
-        <h1>BC Registries Status Dashboard</h1>
-        <p>{{date}}</p>
-      </div>
-      <VueTable :headers='header' :data='data' :keys='keys'>
-        <template #th>
-          <th>
-            Application
-          </th>
-        </template>
-        <template #td='{item}'>
-          <td>
-            <NuxtLink to='/home'>{{item.application}}</NuxtLink>
-          </td>
-        </template>
-      </VueTable>
+  <div class="home">
+    <div class="title">
+      <h1>BC Registries Status Dashboard</h1>
+      <p>{{ date }}</p>
     </div>
-
+    <VueTable :headers="header" :data="data" :keys="keys">
+      <template #th>
+        <th>
+          Application
+        </th>
+      </template>
+      <template #td="{item}">
+        <td>
+          <NuxtLink to="/home">
+            {{ item.application }}
+          </NuxtLink>
+        </td>
+      </template>
+    </VueTable>
+  </div>
 </template>
 
 <script setup>

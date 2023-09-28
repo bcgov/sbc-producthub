@@ -19,19 +19,21 @@ console.log(dis)
           <h2>Title {{ release.title }}</h2>
           <div>Note {{ release.description }}</div>
           <h2>Issues:</h2>
-          <li v-for="issue in release.issues.nodes" :key="issue.id">
-            <h2>
-              {{ issue.title }} - {{ issue.number }} - {{ issue.htmlUrl }}
-            </h2>
-            <h3>
-              Labels
-            </h3>
-            <li v-for="label in issue.labels.edges" :key="label.id">
-              <div>
-                {{ label.node.name }}
-              </div>
+          <ul>
+            <li v-for="issue in release.issues.nodes" :key="issue.id">
+              <h2>
+                {{ issue.title }} - {{ issue.number }} - {{ issue.htmlUrl }}
+              </h2>
+              <h3>Labels</h3>
+              <ul>
+                <li v-for="label in issue.labels.edges" :key="label.id">
+                  <div>
+                    {{ label.node.name }}
+                  </div>
+                </li>
+              </ul>
             </li>
-          </li>
+          </ul>
         </li>
       </ul>
     </div>
