@@ -2,14 +2,13 @@
 import { getReport } from '../composable/getreport'
 import { GhRepo } from '../enums/dropdownEnum'
 
-// Hard code one github repo, which is frm Entities team
-const myGhIds: number[] = [GhRepo.ENTITIES]
-const dis = await getReport(myGhIds)
-console.log(dis)
+  const myGhIds: number[] = [GhRepo.ENTITIES]
+  const dis = await getReport(myGhIds)
+  // console.log(dis)
 </script>
 
 <template>
-  <div class="release-page">
+  <div class="release-page" >
     <h1>BC Registries Releases</h1>
     <div v-if="dis">
       <!-- Display the releases data here -->
