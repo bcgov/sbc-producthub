@@ -1,18 +1,30 @@
-<script setup lang="ts">
+<script lang="ts">
 import { getReport } from '../composable/getreport'
 import { GhRepo } from '../enums/dropdownEnum'
 
-// Hard code one github repo, which is frm Entities team
-const myGhIds: number[] = [GhRepo.ENTITIES]
-const dis = await getReport(myGhIds)
-console.log(dis)
+export default {
+  data () {
+    return {
+      dis: {}
+    }
+  },
+  beforeMount () {
+    this.created()
+  },
+  methods: {
+    async created () {
+      const myGhIds: number[] = [GhRepo.ENTITIES]
+      this.dis = await getReport(myGhIds)
+    }
+  }
+}
 </script>
 
 <template>
   <div class="release-page">
     <h1>BC Registries Releases</h1>
     <div v-if="dis">
-      <!-- Display the releases data here -->
+      <!-- Display the releases d ata here -->
       <ul>
         <li v-for="release in dis.nodes" :key="release.id">
           <h1>{{ release.endOn }} - {{ release.state }}</h1>

@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client/core'
-import getClient from './getClient'
+import { getClient } from './getClient'
 
 export async function getReport (ghId: number[]) {
   const client = getClient()
