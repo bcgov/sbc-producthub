@@ -1,6 +1,6 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client/core'
 
-export default function getClient () {
+export function getClient () {
   // Get the API key from environment variables
   const config = useRuntimeConfig()
   const apiKey = config.public.zenhubAPI
