@@ -2,22 +2,22 @@
 import { getReport } from '../composable/getreport'
 import { GhRepo } from '../enums/dropdownEnum'
 
-  export default {
-    data() {
-      return {
-        dis: {}
-      }
-    },
-    methods: {
-    async created() {
+export default {
+  data () {
+    return {
+      dis: {}
+    }
+  },
+  beforeMount () {
+    this.created()
+  },
+  methods: {
+    async created () {
       const myGhIds: number[] = [GhRepo.ENTITIES]
       this.dis = await getReport(myGhIds)
-      }
-    },
-    beforeMount() {
-      this.created()
     }
   }
+}
 </script>
 
 <template>
