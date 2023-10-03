@@ -42,8 +42,15 @@ export async function getReport (ghId: number[]) {
         repositoryGhId: ghId
       }
     })
-
-    return result.data.repositoriesByGhId[0].releases
+    const items = result.data.repositoriesByGhId[0].releases.nodes;
+    const itemArray = Array.isArray(items) ? items : [];
+    for (let i = 0; i < itemArray.length; i++) {
+      const item = itemArray[i];
+      // Access and process each item here
+      console.log(item); // Assuming there's a 'name' field in your data
+    }
+    // console.log(result.data.repositoriesByGhId[0].releases.nodes);
+    return result.data.repositoriesByGhId[0].releases;
   } catch (error) {
     console.error(error)
     throw error
