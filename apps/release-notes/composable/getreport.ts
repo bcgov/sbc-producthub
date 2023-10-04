@@ -42,7 +42,7 @@ export async function getReport (ghId: number[]) {
         repositoryGhId: ghId
       }
     })
-    return result.data.repositoriesByGhId[0].releases.nodes;
+    return result.data.repositoriesByGhId[0].releases.nodes
   } catch (error) {
     console.error(error)
     throw error

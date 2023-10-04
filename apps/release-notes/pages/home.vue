@@ -1,16 +1,16 @@
 <script lang="ts">
-import {classifyReleases} from '../composable/classifyRelease'
+import { classifyReleases } from '../composable/classifyRelease'
 import { Release, Releases } from '../interface/interfaces'
 
 export default {
   data () {
-    var releases: Releases = {open: [], close: []}
-    var state: string = "open"
-    var display: Release[] = releases.open
+    const releases: Releases = { open: [], close: [] }
+    const state: string = 'open'
+    const display: Release[] = releases.open
     return {
-      releases: releases,
-      state: state,
-      display: display
+      releases,
+      state,
+      display
     }
   },
   beforeMount () {
@@ -18,18 +18,17 @@ export default {
   },
   methods: {
     async created () {
-      console.log("hello")
-      this.releases = await classifyReleases("ENTITIES")
+      console.log('hello')
+      this.releases = await classifyReleases('ENTITIES')
       this.display = this.releases.open
     },
 
-    switchState() {
-      if (this.state == "open"){
-        this.state = "close"
+    switchState () {
+      if (this.state === 'open') {
+        this.state = 'close'
         this.display = this.releases.close
-      }
-      else {
-        this.state = "open"
+      } else {
+        this.state = 'open'
         this.display = this.releases.open
       }
     }
@@ -42,7 +41,9 @@ export default {
     <h1>BC Registries Releases</h1>
     <div v-if="releases">
       <!-- Display the releases d ata here -->
-      <button class="state-button" @click="switchState">{{ state }}</button>
+      <button class="state-button" @click="switchState">
+        {{ state }}
+      </button>
       <ul>
         <li v-for="release in display" :key="release.id">
           <h1>{{ release.endOn }} - {{ release.state }}</h1>
@@ -51,7 +52,9 @@ export default {
           <h2>Issues:</h2>
           <ul>
             <li v-for="issue in release.issues" :key="issue.id">
-              <NuxtLink to="https://calendar.google.com/calendar"> {{ issue.number }}</NuxtLink>
+              <NuxtLink to="https://calendar.google.com/calendar">
+                {{ issue.number }}
+              </NuxtLink>
               <h2>
                 {{ issue.title }} - {{ issue.number }} - {{ issue.htmlUrl }}
               </h2>

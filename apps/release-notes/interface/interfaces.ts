@@ -3,6 +3,14 @@ export interface Label {
   name: string;
 }
 
+export interface Issue {
+  id: string;
+  title: string;
+  number: string;
+  htmlUrl: string;
+  labels: Label[];
+}
+
 export interface Release {
   id: string;
   title: string;
@@ -12,15 +20,8 @@ export interface Release {
   state: string;
   issues: Issue[];
 }
+
 export interface Releases {
   open: Release[];
   close: Release[];
-}
-
-export interface Issue {
-  id: string;
-  title: string;
-  number: string;
-  htmlUrl: string;
-  labels: Label[];
 }
