@@ -1,11 +1,16 @@
 <script lang="ts">
-import { getReport } from '../composable/getreport'
-import { GhRepo } from '../enums/dropdownEnum'
+import {classifyReleases} from '../composable/classifyRelease'
+import { Release, Releases } from '../interface/interfaces'
 
 export default {
   data () {
+    var releases: Releases = {open: [], close: []}
+    var state: string = "open"
+    var display: Release[] = releases.open
     return {
-      dis: {}
+      releases: releases,
+      state: state,
+      display: display
     }
   },
   beforeMount () {
@@ -13,8 +18,20 @@ export default {
   },
   methods: {
     async created () {
-      const myGhIds: number[] = [GhRepo.ENTITIES]
-      this.dis = await getReport(myGhIds)
+      console.log("hello")
+      this.releases = await classifyReleases("ENTITIES")
+      this.display = this.releases.open
+    },
+
+    switchState() {
+      if (this.state == "open"){
+        this.state = "close"
+        this.display = this.releases.close
+      }
+      else {
+        this.state = "open"
+        this.display = this.releases.open
+      }
     }
   }
 }
@@ -23,24 +40,26 @@ export default {
 <template>
   <div class="release-page">
     <h1>BC Registries Releases</h1>
-    <div v-if="dis">
+    <div v-if="releases">
       <!-- Display the releases d ata here -->
+      <button class="state-button" @click="switchState">{{ state }}</button>
       <ul>
-        <li v-for="release in dis.nodes" :key="release.id">
+        <li v-for="release in display" :key="release.id">
           <h1>{{ release.endOn }} - {{ release.state }}</h1>
           <h2>Title {{ release.title }}</h2>
           <div>Note {{ release.description }}</div>
           <h2>Issues:</h2>
           <ul>
-            <li v-for="issue in release.issues.nodes" :key="issue.id">
+            <li v-for="issue in release.issues" :key="issue.id">
+              <NuxtLink to="https://calendar.google.com/calendar"> {{ issue.number }}</NuxtLink>
               <h2>
                 {{ issue.title }} - {{ issue.number }} - {{ issue.htmlUrl }}
               </h2>
               <h3>Labels</h3>
               <ul>
-                <li v-for="label in issue.labels.edges" :key="label.id">
+                <li v-for="label in issue.labels" :key="label.id">
                   <div>
-                    {{ label.node.name }}
+                    {{ label.name }}
                   </div>
                 </li>
               </ul>
@@ -70,5 +89,12 @@ h2 {
 h3 {
   font-size: 15px;
   color: blueviolet;
+}
+
+.state-button {
+  height: 30px;
+  width: 90px;
+  background-color: blue;
+  color: white;
 }
 </style>
