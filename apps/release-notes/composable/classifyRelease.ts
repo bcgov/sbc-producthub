@@ -25,13 +25,14 @@ export async function classifyReleases (team: string) {
  * @param itemArray
  * @returns Releases
  */
-function filterResponse (itemArray: any[]) {
+export function filterResponse (itemArray: any[]) {
   const releases: Releases = {
     open: [],
     close: []
   }
   for (let i = 0; i < itemArray.length; i++) {
     const item = itemArray[i]
+    console.log(item)
     const issues = getIssues(item.issues.nodes)
     if (item.state === 'CLOSED') {
       releases.close.push({
@@ -63,11 +64,10 @@ function filterResponse (itemArray: any[]) {
  * @param issueArray
  * @returns Issue[]
  */
-function getIssues (issueArray: any[]) {
+export function getIssues (issueArray: any[]) {
   const issues: Issue[] = []
   for (let i = 0; i < issueArray.length; i++) {
     const issue = issueArray[i]
-    console.log(issue.labels.edges)
     const labels = getLabels(issue.labels.edges)
     issues.push({
       id: issue.id,
