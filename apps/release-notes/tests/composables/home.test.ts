@@ -1,29 +1,3 @@
-// const labelsRaw = [
-//   {
-//     node: {
-//       id: "Z2lkOi8vcmFwdG9yL0xhYmVsLzc0MzQ3OTEz",
-//       name: "Assets",
-//     },
-//   },
-//   {
-//     node: {
-//       id: "Z2lkOi8vcmFwdG9yL0xhYmVsLzgzOTc5NA",
-//       name: "bug",
-//     },
-//   },
-// ];
-
-// const labelExpected = [
-//   {
-//     id: "1",
-//     name: "Team 1",
-//   },
-//   {
-//     id: "2",
-//     name: "Team 2",
-//   },
-// ];
-
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { getLabels } from '../../composable/classifyRelease'
 
