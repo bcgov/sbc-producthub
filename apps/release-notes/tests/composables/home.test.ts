@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { getLabels, getIssues, filterResponse } from '../../composable/classifyRelease'
-import { Releases } from '~/interface/interfaces';
+import { Releases } from '~/interface/interfaces'
 const labels = {
   items: [
     {
@@ -32,91 +32,89 @@ const labels = {
 const issues = {
   items: [
     {
-      id: "1",
-      title: "Direct to Google",
+      id: '1',
+      title: 'Direct to Google',
       number: 1,
-      htmlUrl: "https://www.google.com/",
-      labels: { edges: labels.items },
+      htmlUrl: 'https://www.google.com/',
+      labels: { edges: labels.items }
     },
     {
-      id: "2",
-      title: "Direct to Youtube",
+      id: '2',
+      title: 'Direct to Youtube',
       number: 2,
-      htmlUrl: "https://www.youtube.com/",
-      labels: { edges: labels.items },
-    },
+      htmlUrl: 'https://www.youtube.com/',
+      labels: { edges: labels.items }
+    }
   ],
 
   expected: [
     {
-      id: "1",
-      title: "Direct to Google",
+      id: '1',
+      title: 'Direct to Google',
       number: 1,
-      htmlUrl: "https://www.google.com/",
-      labels: labels.expected,
+      htmlUrl: 'https://www.google.com/',
+      labels: labels.expected
     },
     {
-      id: "2",
-      title: "Direct to Youtube",
+      id: '2',
+      title: 'Direct to Youtube',
       number: 2,
-      htmlUrl: "https://www.youtube.com/",
-      labels: labels.expected,
-    },
+      htmlUrl: 'https://www.youtube.com/',
+      labels: labels.expected
+    }
   ],
-  getIssues,
-};
+  getIssues
+}
 
 const releases = {
   items: [
     {
-      id: "1",
-      title: "Release 1",
-      description: "This is release 1",
-      startOn: "2023-10-02",
-      endOn: "2023-12-04",
-      state: "OPEN",
-      issues: {nodes: issues.items},
+      id: '1',
+      title: 'Release 1',
+      description: 'This is release 1',
+      startOn: '2023-10-02',
+      endOn: '2023-12-04',
+      state: 'OPEN',
+      issues: { nodes: issues.items }
     },
     {
-      id: "2",
-      title: "Release 2",
-      description: "This is release 2",
-      startOn: "2022-11-19",
-      endOn: "2023-02-24",
-      state: "CLOSED",
-      issues: {nodes: issues.items},
-    },
+      id: '2',
+      title: 'Release 2',
+      description: 'This is release 2',
+      startOn: '2022-11-19',
+      endOn: '2023-02-24',
+      state: 'CLOSED',
+      issues: { nodes: issues.items }
+    }
   ],
 
   expected: {
     open: [
       {
-        id: "1",
-        title: "Release 1",
-        description: "This is release 1",
-        startOn: "2023-10-02",
-        endOn: "2023-12-04",
-        state: "OPEN",
-        issues: issues.expected,
-      },
+        id: '1',
+        title: 'Release 1',
+        description: 'This is release 1',
+        startOn: '2023-10-02',
+        endOn: '2023-12-04',
+        state: 'OPEN',
+        issues: issues.expected
+      }
     ],
     close: [
       {
-        id: "2",
-        title: "Release 2",
-        description: "This is release 2",
-        startOn: "2022-11-19",
-        endOn: "2023-02-24",
-        state: "CLOSED",
-        issues: issues.expected,
-      },
-    ],
+        id: '2',
+        title: 'Release 2',
+        description: 'This is release 2',
+        startOn: '2022-11-19',
+        endOn: '2023-02-24',
+        state: 'CLOSED',
+        issues: issues.expected
+      }
+    ]
   },
 
   filterResponse
-};
-
-
+}
 
 describe('helper functions test', () => {
   afterEach(() => {
@@ -137,28 +135,28 @@ describe('helper functions test', () => {
     expect(spy).toHaveBeenCalledTimes(2)
   })
 
-  it("Test getIssues function", () => {
-    const spy = vi.spyOn(issues, "getIssues");
-    expect(spy.getMockName()).toEqual("getIssues");
-    expect(issues.getIssues(issues.items)).toEqual(issues.expected);
-    expect(spy).toHaveBeenCalledTimes(1);
+  it('Test getIssues function', () => {
+    const spy = vi.spyOn(issues, 'getIssues')
+    expect(spy.getMockName()).toEqual('getIssues')
+    expect(issues.getIssues(issues.items)).toEqual(issues.expected)
+    expect(spy).toHaveBeenCalledTimes(1)
 
-    spy.mockImplementationOnce(() => []);
-    expect(issues.getIssues(issues.items)).toEqual([]);
+    spy.mockImplementationOnce(() => [])
+    expect(issues.getIssues(issues.items)).toEqual([])
 
-    expect(spy).toHaveBeenCalledTimes(2);
-  });
+    expect(spy).toHaveBeenCalledTimes(2)
+  })
 
-  it("Test filterResponse function", () => {
-    const spy = vi.spyOn(releases, "filterResponse");
-    expect(spy.getMockName()).toEqual("filterResponse");
-    expect(releases.filterResponse(releases.items)).toEqual(releases.expected);
-    expect(spy).toHaveBeenCalledTimes(1);
+  it('Test filterResponse function', () => {
+    const spy = vi.spyOn(releases, 'filterResponse')
+    expect(spy.getMockName()).toEqual('filterResponse')
+    expect(releases.filterResponse(releases.items)).toEqual(releases.expected)
+    expect(spy).toHaveBeenCalledTimes(1)
 
-    const empty: Releases = { open: [], close: [] };
-    spy.mockImplementationOnce(() => empty);
-    expect(releases.filterResponse(releases.items)).toEqual(empty);
+    const empty: Releases = { open: [], close: [] }
+    spy.mockImplementationOnce(() => empty)
+    expect(releases.filterResponse(releases.items)).toEqual(empty)
 
-    expect(spy).toHaveBeenCalledTimes(2);
-  });
+    expect(spy).toHaveBeenCalledTimes(2)
+  })
 })
