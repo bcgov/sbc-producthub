@@ -7,7 +7,7 @@
     "dev": "nuxt dev",
     "lint": "eslint .",
     "lintfix": "eslint . --fix",
-    "test": "vitest",
+    "test": "vitest --passWithNoTests",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "coverage": "vitest run --coverage"
