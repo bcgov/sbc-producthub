@@ -24,40 +24,38 @@
 //   },
 // ];
 
-import { getLabels } from '../../composable/classifyRelease';
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from 'vitest'
+import { getLabels } from '../../composable/classifyRelease'
 
 const labels = {
   items: [
     {
       node: {
-        id: "1",
-        name: "Team 1",
-      },
+        id: '1',
+        name: 'Team 1'
+      }
     },
     {
       node: {
-        id: "2",
-        name: "Team 2",
-      },
-    },
+        id: '2',
+        name: 'Team 2'
+      }
+    }
   ],
-  expected:  [
+  expected: [
     {
-      id: "1",
-      name: "Team 1",
+      id: '1',
+      name: 'Team 1'
     },
     {
-      id: "2",
-      name: "Team 2",
-    },
+      id: '2',
+      name: 'Team 2'
+    }
   ],
-  getLabels,
-};
-
+  getLabels
+}
 
 describe('helper functions test', () => {
-
   afterEach(() => {
     vi.resetAllMocks()
   })
@@ -68,11 +66,11 @@ describe('helper functions test', () => {
     expect(labels.getLabels(labels.items)).toEqual(
       labels.expected
     )
-    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledTimes(1)
 
-    spy.mockImplementationOnce(() => []);
-    expect(labels.getLabels(labels.items)).toEqual([]);
+    spy.mockImplementationOnce(() => [])
+    expect(labels.getLabels(labels.items)).toEqual([])
 
-    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenCalledTimes(2)
   })
 })
