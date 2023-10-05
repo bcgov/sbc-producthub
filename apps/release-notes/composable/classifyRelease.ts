@@ -1,6 +1,6 @@
 import { getReport } from './getreport'
 import { Issue, Label, Releases } from '~/interface/interfaces'
-import { GhRepo } from '~/enums/dropdownEnum'
+import { GhRepo } from '../enums/dropdownEnum'
 
 /**
  * This function is to get the response from ZenhubAPI and
@@ -67,6 +67,7 @@ function getIssues (issueArray: any[]) {
   const issues: Issue[] = []
   for (let i = 0; i < issueArray.length; i++) {
     const issue = issueArray[i]
+    console.log(issue.labels.edges)
     const labels = getLabels(issue.labels.edges)
     issues.push({
       id: issue.id,
@@ -85,7 +86,7 @@ function getIssues (issueArray: any[]) {
  * @param labelsArray
  * @returns Label[]
  */
-function getLabels (labelsArray: any[]) {
+export function getLabels (labelsArray: any[]) {
   const labels: Label[] = []
   for (let i = 0; i < labelsArray.length; i++) {
     const label = labelsArray[i].node
