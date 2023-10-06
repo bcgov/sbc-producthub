@@ -35,7 +35,7 @@ export default {
       }
     },
 
-    getLink(gitLink: string) {
+    getLink (gitLink: string) {
       this.link = gitLink
       return this.link
     }
@@ -59,7 +59,7 @@ export default {
           <h2>Issues:</h2>
           <ul>
             <li v-for="issue in release.issues" :key="issue.id">
-              <NuxtLink :to= issue.htmlUrl >
+              <NuxtLink :to="issue.htmlUrl">
                 {{ issue.number }}
               </NuxtLink>
               <h2>
