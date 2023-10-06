@@ -80,6 +80,9 @@ jobs:
           flags: releasenotes
           name: codecov-release-notes
           fail_ci_if_error: true
+      - name: Coverage
+        run: |
+          pnpm run coverage
 
   build-check:
     needs: setup-job
