@@ -7,10 +7,12 @@ export default {
     const releases: Releases = { open: [], close: [] }
     const state: string = 'open'
     const display: Release[] = releases.open
+    const link: string = ''
     return {
       releases,
       state,
-      display
+      display,
+      link
     }
   },
   beforeMount () {
@@ -31,6 +33,11 @@ export default {
         this.state = 'open'
         this.display = this.releases.open
       }
+    },
+
+    getLink(gitLink: string) {
+      this.link = gitLink
+      return this.link
     }
   }
 }
@@ -52,7 +59,7 @@ export default {
           <h2>Issues:</h2>
           <ul>
             <li v-for="issue in release.issues" :key="issue.id">
-              <NuxtLink to="https://calendar.google.com/calendar">
+              <NuxtLink :to= issue.htmlUrl >
                 {{ issue.number }}
               </NuxtLink>
               <h2>
