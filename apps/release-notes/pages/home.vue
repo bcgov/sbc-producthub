@@ -7,12 +7,10 @@ export default {
     const releases: Releases = { open: [], close: [] }
     const state: string = 'open'
     const display: Release[] = releases.open
-    const link: string = ''
     return {
       releases,
       state,
-      display,
-      link
+      display
     }
   },
   beforeMount () {
@@ -33,11 +31,6 @@ export default {
         this.state = 'open'
         this.display = this.releases.open
       }
-    },
-
-    getLink (gitLink: string) {
-      this.link = gitLink
-      return this.link
     }
   }
 }
