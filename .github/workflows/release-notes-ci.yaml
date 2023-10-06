@@ -73,16 +73,13 @@ jobs:
           pnpm run build-check
       - name: Testing
         run: |
-          pnpm run test
+          pnpm run test --coverage
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
           flags: releasenotes
           name: codecov-release-notes
           fail_ci_if_error: true
-      - name: Coverage
-        run: |
-          pnpm run coverage
 
   build-check:
     needs: setup-job
