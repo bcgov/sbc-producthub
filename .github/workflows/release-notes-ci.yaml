@@ -68,9 +68,12 @@ jobs:
       - name: Install dependencies
         run: |
           pnpm install
+      - name: build
+        run: |
+          pnpm run build-check
       - name: Testing
         run: |
-          pnpm run test
+          pnpm run test --coverage
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
