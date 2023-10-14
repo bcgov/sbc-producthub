@@ -22,7 +22,7 @@ on:
 
 jobs:
   release-notes-cd:
-    uses: bcgov/bcregistry-sre/.github/workflows/ui-cd-node20.yaml@main
+    uses: bcgov/bcregistry-sre/.github/workflows/ui-cd-pnpm.yaml@main
     with:
         environment: ${{ inputs.environment }}
         tagname: ${{ inputs.tagname }}
