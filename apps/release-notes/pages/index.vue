@@ -1,31 +1,39 @@
 <template>
-  <div class="home">
-    <div class="title">
-      <h1>BC Registries Status Dashboard</h1>
-      <p>{{ date }}</p>
+  <div>
+    <header>
+      <navbar />
+    </header>
+    <div class="home">
+      <div class="title">
+        <h1>BC Registries Status Dashboard</h1>
+        <p>{{ date }}</p>
+      </div>
+      <VueTable :headers="header" :data="data" :keys="keys">
+        <template #th>
+          <th>
+            Open
+          </th>
+        </template>
+        <template #td>
+          <td>
+            <NuxtLink to="/home">
+              <button>
+                Open
+              </button>
+            </NuxtLink>
+          </td>
+        </template>
+      </VueTable>
     </div>
-    <VueTable :headers="header" :data="data" :keys="keys">
-      <template #th>
-        <th>
-          Application
-        </th>
-      </template>
-      <template #td="{item}">
-        <td>
-          <NuxtLink to="/home">
-            {{ item.application }}
-          </NuxtLink>
-        </td>
-      </template>
-    </VueTable>
   </div>
 </template>
 
 <script setup>
 import { VueTable } from '@harv46/vue-table'
 import '@harv46/vue-table/dist/style.css'
-const header = ['Release Version', 'Release Note', 'Status']
-const keys = ['version', 'note', 'status']
+import navbar from '~/components/navbar.vue'
+const header = ['Application', 'Release Version', 'Release Note', 'Status']
+const keys = ['application', 'version', 'note', 'status']
 const data = [
   {
     application: 'Business Registry',
@@ -111,7 +119,35 @@ h1 {
 }
 
 th {
-  color: white;
-  background-color: #003366;
+  background-color: #e2e8ee;
+  width: 176px;
+  height: 24px;
+  font-family: Noto Sans;
+  font-size: 18px;
+  color: #212529;
+  text-decoration: none solid rgb(33, 37, 41);
+}
+
+td {
+  width: 176px;
+  height: 90px;
+  border-top-width: 1px;
+  border-style: solid;
+  border-color: #dee2e6;
+  background-color: #ffffff;
+  background-size: cover;
+}
+
+button {
+  width: 88px;
+  height: 34px;
+  border-radius: 4px;
+  background-color: #1669bb;
+  background-size: cover;
+  font-family: Noto Sans;
+  font-size: 14px;
+  color: #ffffff;
+  text-decoration: none solid rgb(255, 255, 255);
+  text-align: center;
 }
 </style>
