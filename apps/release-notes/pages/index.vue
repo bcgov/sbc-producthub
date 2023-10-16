@@ -1,11 +1,14 @@
 <template>
   <div>
+    <head>
+      <link href="/dist/output.css" rel="stylesheet">
+    </head>
     <header>
       <navbar />
     </header>
     <div class="home">
       <div class="title">
-        <h1>BC Registries Status Dashboard</h1>
+        <h1 class="text-3xl font-bold underline">BC Registries Status Dashboard</h1>
         <p>{{ date }}</p>
       </div>
       <VueTable :headers="header" :data="data" :keys="keys">
@@ -16,7 +19,7 @@
         </template>
         <template #td>
           <td>
-            <NuxtLink to="/home">
+            <NuxtLink to="/releases">
               <button>
                 Open
               </button>
