@@ -5,7 +5,7 @@ import { Release, Releases } from '../interface/interfaces'
 export default {
   data () {
     const releases: Releases = { open: [], close: [] }
-    const state: string = 'open'
+    const state: string = 'close'
     const display: Release[] = releases.open
     return {
       releases,
@@ -20,7 +20,7 @@ export default {
     async created () {
       console.log('hello')
       this.releases = await classifyReleases('ENTITIES')
-      this.display = this.releases.open
+      this.display = this.releases.close
     },
 
     switchState () {
