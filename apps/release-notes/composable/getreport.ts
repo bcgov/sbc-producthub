@@ -9,7 +9,7 @@ export async function getReport (ghId: number[]) {
         query getRepositoryReleaseReports($repositoryGhId: [Int!]!) {
           repositoriesByGhId(ghIds: $repositoryGhId) {
             id
-            releases(first: 10) {
+            releases(first: 20) {
               nodes {
                 id
                 title
@@ -17,7 +17,7 @@ export async function getReport (ghId: number[]) {
                 startOn
                 endOn
                 state
-                issues(first: 10) {
+                issues(first: 15) {
                   nodes {
                     id
                     title
