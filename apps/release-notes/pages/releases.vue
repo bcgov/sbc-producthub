@@ -1,0 +1,197 @@
+<script lang="ts">
+import { classifyReleases } from '../composable/classifyRelease'
+import { Release, Releases } from '../interface/interfaces'
+export default {
+  data () {
+    const releases: Releases = { open: [], close: [] }
+    const state: string = 'close'
+    const display: Release[] = releases.close
+    return {
+      releases,
+      state,
+      display
+    }
+  },
+  beforeMount () {
+    this.created()
+  },
+  methods: {
+    async created () {
+      console.log('hello')
+      this.releases = await classifyReleases('ENTITIES')
+      if (this.state === 'close') {
+        this.display = this.releases.close
+      } else {
+        this.display = this.releases.open
+      }
+    },
+
+    switchState () {
+      if (this.state === 'open') {
+        this.state = 'open'
+        this.display = this.releases.open
+      } else {
+        this.state = 'close'
+        this.display = this.releases.close
+      }
+    }
+  }
+}
+</script>
+
+<template>
+  <div>
+    <header>
+      <navbar />
+    </header>
+    <body>
+      <div class="title-page">
+        <h1 class="title">
+          BC Registries Releases
+        </h1>
+        <h2 class="path">
+          BC Registries and Online Services > {{ state }}
+        </h2>
+        <select id="status" v-model="state" class="state-options">
+          <option value="close">
+            Completed Releases
+          </option>
+          <option value="open">
+            In Progress Releases
+          </option>
+        </select>
+        <button class="state-button" type="submit" @click="switchState">
+          Filter
+        </button>
+      </div>
+
+      <div class="release-page">
+        <div v-if="releases">
+          <div class="page">
+            <div class="date-range">
+              <ul>
+                <li v-for="release in display" :key="release.id">
+                  {{ release.endOn }}
+                </li>
+              </ul>
+            </div>
+            <div class="content">
+              <ul>
+                <li v-for="release in display" :key="release.id">
+                  <h1>{{ release.endOn }} - {{ release.state }}</h1>
+                  <h1> {{ release.title }} </h1>
+                  <br>
+                  <div class="release-content">
+                    <h2>Release Summary</h2>
+                    <div class="issue">
+                      {{ release.description }}
+                    </div>
+                    <br>
+                    <h2>Issues</h2>
+                    <ul>
+                      <li v-for="issue in release.issues" :key="issue.id">
+                        <h3 class="issue">
+                          {{ issue.title }} -
+                          <NuxtLink class="link" :to="issue.htmlUrl">
+                            {{ issue.number }}
+                          </NuxtLink>
+                        </h3>
+                      </li>
+                    </ul>
+                  </div>
+                  <br>
+                  <br>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+  </div>
+</template>
+
+<style>
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.release-page {
+  margin: 40px;
+}
+
+h1 {
+  font-size: 22px;
+  font-weight: bolder;
+  color: #1669bb;
+}
+
+h2 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.issue {
+  font-size: 15px;
+  padding-left: 30px;
+}
+
+.release-content {
+  padding-left: 30px;
+}
+
+.state-button {
+  width: 88px;
+  height: 34px;
+  border-radius: 4px;
+  background-color: #1669bb;
+  background-size: cover;
+  font-family: Noto Sans;
+  font-size: 14px;
+  color: #ffffff;
+  text-decoration: none solid rgb(255, 255, 255);
+  text-align: center;
+}
+
+.date-range {
+  flex-direction: column;
+  width: 20%;
+  font-weight: 500;
+}
+
+.title-page {
+  margin: 40px;
+  display: flex;
+}
+.title {
+  flex-direction: column;
+  align-self: center;
+  width: 50%;
+}
+
+.path {
+  flex-direction: column;
+  width: 50%;
+}
+
+.page {
+  display: flex;
+}
+
+.content {
+  flex-direction: column;
+  width: 80%
+}
+
+.link {
+  color:#1669bb;
+}
+
+.state-options, .state-options > option {
+  /* margin-left: 60%; */
+  width: 166px;
+  height: 44px;
+  border-radius: 4px;
+  background-color: #e2e8ee;
+  text-decoration: none solid rgb(22, 105, 187);
+}
+</style>
