@@ -8,7 +8,9 @@
     </header>
     <div class="home">
       <div class="title">
-        <h1 class="text-3xl font-bold underline">BC Registries Status Dashboard</h1>
+        <h1 class="text-3xl font-bold underline">
+          BC Registries Status Dashboard
+        </h1>
         <p>{{ date }}</p>
       </div>
       <VueTable :headers="header" :data="data" :keys="keys">

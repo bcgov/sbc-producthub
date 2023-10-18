@@ -5,13 +5,6 @@
     </div>
 </template>
 
-<!-- <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator'
-
-@Component
-export default class NavBar
-</script> -->
-
 <style>
 .rec {
   height: 53px;
@@ -21,7 +14,7 @@ export default class NavBar
 }
 
 .rec > img {
-  margin-left: 10%;
+  margin-left: 2.5%;
   resize: both;
 }
 
