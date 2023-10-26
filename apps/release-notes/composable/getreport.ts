@@ -1,48 +1,57 @@
 import { gql } from '@apollo/client/core'
 import { getClient } from './getClient'
 
-export async function getReport (ghId: number[]) {
+export async function getReport (ghId: String, start: String) {
   const client = getClient()
   try {
     const result = await client.query({
       query: gql`
-        query getRepositoryReleaseReports($repositoryGhId: [Int!]!) {
-          repositoriesByGhId(ghIds: $repositoryGhId) {
-            id
-            releases(first: 20) {
+        query RepositoriesByGhId($workspaceID: ID!, $startCursor: String) {
+          workspace(id: $workspaceID) {
+            displayName
+            releases(last: 10, before: $startCursor) {
+              totalCount
               nodes {
-                id
-                title
-                description
                 startOn
                 endOn
+                description
+                id
+                title
                 state
-                issues(first: 15) {
+                issues {
                   nodes {
                     id
                     title
                     number
                     htmlUrl
-                    labels {
-                      edges {
-                        node {
-                          id
-                          name
-                        }
-                      }
-                    }
+                    # labels {
+                    #   edges {
+                    #     node {
+                    #       id
+                    #       name
+                    #     }
+                    #   }
+                    # }
                   }
                 }
+              }
+              pageInfo {
+                hasPreviousPage
+                startCursor
               }
             }
           }
         }
       `,
       variables: {
-        repositoryGhId: ghId
-      }
-    })
-    return result.data.repositoriesByGhId[0].releases.nodes
+        workspaceID: ghId,
+        startCursor: start,
+      },
+    });
+    // console.log(result)  
+    return (
+      result.data.workspace.releases
+    );
   } catch (error) {
     console.error(error)
     throw error

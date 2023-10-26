@@ -1,21 +1,31 @@
 import { GhRepo } from '../enums/dropdownEnum'
 import { getReport } from './getreport'
-import { Issue, Label, Releases } from '~/interface/interfaces'
+import { Issue, Label, Releases, PageInfo } from '~/interface/interfaces'
 
 /**
  * This function is to get the response from ZenhubAPI and
  * @param team string
  * @returns Releases
  */
-export async function classifyReleases (team: string) {
+export async function classifyReleases (team: string, cursor: String) {
   let items = {}
+  let pageInfo: PageInfo = {
+    hasPreviousPage: false,
+    startCursor: ""
+  }
   if (team === 'ENTITIES') {
-    const myGhIds: number[] = [GhRepo.ENTITIES]
-    items = await getReport(myGhIds)
+    const myGhIds: String = GhRepo.ENTITIES
+    const response = await getReport(myGhIds, cursor);
+    items = response.nodes
+    pageInfo = response.pageInfo
   }
   const itemArray = Array.isArray(items) ? items : []
+  // console.log(itemArray)
   const releases = filterResponse(itemArray)
-  return releases
+  return {
+    releases: releases,
+    pageInfo: pageInfo
+  }
 }
 
 /**
@@ -68,13 +78,13 @@ export function getIssues (issueArray: any[]) {
   const issues: Issue[] = []
   for (let i = 0; i < issueArray.length; i++) {
     const issue = issueArray[i]
-    const labels = getLabels(issue.labels.edges)
+    // const labels = getLabels(issue.labels.edges)
     issues.push({
       id: issue.id,
       title: issue.title,
       number: issue.number,
       htmlUrl: issue.htmlUrl,
-      labels
+      // labels
     })
   }
 
