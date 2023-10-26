@@ -8,7 +8,7 @@ export interface Issue {
   title: string;
   number: string;
   htmlUrl: string;
-  labels: Label[];
+  // labels: Label[];
 }
 
 export interface Release {
@@ -24,4 +24,9 @@ export interface Release {
 export interface Releases {
   open: Release[];
   close: Release[];
+}
+
+export interface PageInfo {
+  hasPreviousPage: boolean;
+  startCursor: string
 }

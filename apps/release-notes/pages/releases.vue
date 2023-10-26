@@ -1,15 +1,36 @@
 <script lang="ts">
 import { classifyReleases } from '../composable/classifyRelease'
-import { Release, Releases } from '../interface/interfaces'
+import { Release, Releases, PageInfo } from '../interface/interfaces'
+// import { useState } from '../composable/state';
+import { useCursor } from '~/composable/state'
+import ButtonComponent from '~/components/ButtonComponent.vue'
+import { Colors, Sizes } from '~/enums/ButtonEnum'
+
 export default {
   data () {
     const releases: Releases = { open: [], close: [] }
     const state: string = 'close'
+    const cursor = useCursor()
     const display: Release[] = releases.close
+    const statusDisplay = 'Done'
+    const button = {
+      color: Colors.Cyan,
+      size: Sizes.Md,
+      text: 'next page'
+    }
+    const pageInfo: PageInfo = {
+      hasPreviousPage: false,
+      startCursor: ''
+    }
     return {
       releases,
       state,
-      display
+      display,
+      pageInfo,
+      cursor,
+      ButtonComponent,
+      statusDisplay,
+      button
     }
   },
   beforeMount () {
@@ -18,7 +39,12 @@ export default {
   methods: {
     async created () {
       console.log('hello')
-      this.releases = await classifyReleases('ENTITIES')
+      const response = await classifyReleases('ENTITIES', this.cursor)
+      this.releases = response.releases
+      this.pageInfo = {
+        hasPreviousPage: response.pageInfo.hasPreviousPage,
+        startCursor: response.pageInfo.startCursor
+      }
       if (this.state === 'close') {
         this.display = this.releases.close
       } else {
@@ -30,10 +56,17 @@ export default {
       if (this.state === 'open') {
         this.state = 'open'
         this.display = this.releases.open
+        this.statusDisplay = 'In progress'
       } else {
         this.state = 'close'
         this.display = this.releases.close
+        this.statusDisplay = 'Done'
       }
+    },
+
+    changeCursor () {
+      this.cursor = this.pageInfo.startCursor
+      this.created()
     }
   }
 }
@@ -50,11 +83,11 @@ export default {
           BC Registries Releases
         </h1>
         <h2 class="path">
-          BC Registries and Online Services > {{ state }}
+          BC Registries and Online Services > {{ statusDisplay }}
         </h2>
         <select id="status" v-model="state" class="state-options">
           <option value="close">
-            Completed Releases
+            Done Releases
           </option>
           <option value="open">
             In Progress Releases
@@ -62,6 +95,9 @@ export default {
         </select>
         <button class="state-button" type="submit" @click="switchState">
           Filter
+        </button>
+        <button class="pagination" type="submit" @click="changeCursor">
+          Next
         </button>
       </div>
 
@@ -78,7 +114,9 @@ export default {
             <div class="content">
               <ul>
                 <li v-for="release in display" :key="release.id">
-                  <h1>{{ release.endOn }} - {{ release.state }}</h1>
+                  <h1 class="font-display">
+                    {{ release.endOn }} - {{ statusDisplay }}
+                  </h1>
                   <h1> {{ release.title }} </h1>
                   <br>
                   <div class="release-content">
@@ -107,14 +145,15 @@ export default {
           </div>
         </div>
       </div>
+
+      <div class="pagination">
+        <ButtonComponent :color="button.color" :size="button.size" :text="button.text" type="submit" @click="changeCursor" />
+      </div>
     </body>
   </div>
 </template>
 
 <style>
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 .release-page {
   margin: 40px;
 }

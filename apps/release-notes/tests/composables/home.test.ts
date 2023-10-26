@@ -1,33 +1,33 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { getLabels, getIssues, filterResponse } from '../../composable/classifyRelease'
+import { getIssues, filterResponse } from '../../composable/classifyRelease'
 import { Releases } from '~/interface/interfaces'
-const labels = {
-  items: [
-    {
-      node: {
-        id: '1',
-        name: 'Team 1'
-      }
-    },
-    {
-      node: {
-        id: '2',
-        name: 'Team 2'
-      }
-    }
-  ],
-  expected: [
-    {
-      id: '1',
-      name: 'Team 1'
-    },
-    {
-      id: '2',
-      name: 'Team 2'
-    }
-  ],
-  getLabels
-}
+// const labels = {
+//   items: [
+//     {
+//       node: {
+//         id: '1',
+//         name: 'Team 1'
+//       }
+//     },
+//     {
+//       node: {
+//         id: '2',
+//         name: 'Team 2'
+//       }
+//     }
+//   ],
+//   expected: [
+//     {
+//       id: '1',
+//       name: 'Team 1'
+//     },
+//     {
+//       id: '2',
+//       name: 'Team 2'
+//     }
+//   ]
+//   // getLabels
+// }
 
 const issues = {
   items: [
@@ -35,15 +35,15 @@ const issues = {
       id: '1',
       title: 'Direct to Google',
       number: 1,
-      htmlUrl: 'https://www.google.com/',
-      labels: { edges: labels.items }
+      htmlUrl: 'https://www.google.com/'
+      // labels: { edges: labels.items }
     },
     {
       id: '2',
       title: 'Direct to Youtube',
       number: 2,
-      htmlUrl: 'https://www.youtube.com/',
-      labels: { edges: labels.items }
+      htmlUrl: 'https://www.youtube.com/'
+      // labels: { edges: labels.items }
     }
   ],
 
@@ -52,15 +52,15 @@ const issues = {
       id: '1',
       title: 'Direct to Google',
       number: 1,
-      htmlUrl: 'https://www.google.com/',
-      labels: labels.expected
+      htmlUrl: 'https://www.google.com/'
+      // labels: labels.expected
     },
     {
       id: '2',
       title: 'Direct to Youtube',
       number: 2,
-      htmlUrl: 'https://www.youtube.com/',
-      labels: labels.expected
+      htmlUrl: 'https://www.youtube.com/'
+      // labels: labels.expected
     }
   ],
   getIssues
@@ -121,19 +121,19 @@ describe('helper functions test', () => {
     vi.resetAllMocks()
   })
 
-  it('Test getLabels function', () => {
-    const spy = vi.spyOn(labels, 'getLabels')
-    expect(spy.getMockName()).toEqual('getLabels')
-    expect(labels.getLabels(labels.items)).toEqual(
-      labels.expected
-    )
-    expect(spy).toHaveBeenCalledTimes(1)
+  // it('Test getLabels function', () => {
+  //   const spy = vi.spyOn(labels, 'getLabels')
+  //   expect(spy.getMockName()).toEqual('getLabels')
+  //   expect(labels.getLabels(labels.items)).toEqual(
+  //     labels.expected
+  //   )
+  //   expect(spy).toHaveBeenCalledTimes(1)
 
-    spy.mockImplementationOnce(() => [])
-    expect(labels.getLabels(labels.items)).toEqual([])
+  //   spy.mockImplementationOnce(() => [])
+  //   expect(labels.getLabels(labels.items)).toEqual([])
 
-    expect(spy).toHaveBeenCalledTimes(2)
-  })
+  //   expect(spy).toHaveBeenCalledTimes(2)
+  // })
 
   it('Test getIssues function', () => {
     const spy = vi.spyOn(issues, 'getIssues')

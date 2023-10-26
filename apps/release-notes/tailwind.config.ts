@@ -7,6 +7,9 @@ export default <Partial<Config>>{
       // colors: {
       //   primary: defaultTheme.colors.green
       // },
+      fontFamily: {
+        sans: 'Noto Sans, ui-serif'
+      },
       transitionProperty: {
         flow: 'background-position'
       },
