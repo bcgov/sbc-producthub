@@ -11,11 +11,11 @@ export async function classifyReleases (team: string, cursor: String) {
   let items = {}
   let pageInfo: PageInfo = {
     hasPreviousPage: false,
-    startCursor: ""
+    startCursor: ''
   }
   if (team === 'ENTITIES') {
     const myGhIds: String = GhRepo.ENTITIES
-    const response = await getReport(myGhIds, cursor);
+    const response = await getReport(myGhIds, cursor)
     items = response.nodes
     pageInfo = response.pageInfo
   }
@@ -23,8 +23,8 @@ export async function classifyReleases (team: string, cursor: String) {
   // console.log(itemArray)
   const releases = filterResponse(itemArray)
   return {
-    releases: releases,
-    pageInfo: pageInfo
+    releases,
+    pageInfo
   }
 }
 
@@ -83,7 +83,7 @@ export function getIssues (issueArray: any[]) {
       id: issue.id,
       title: issue.title,
       number: issue.number,
-      htmlUrl: issue.htmlUrl,
+      htmlUrl: issue.htmlUrl
       // labels
     })
   }

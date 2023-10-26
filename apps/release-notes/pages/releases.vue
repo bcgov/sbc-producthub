@@ -3,8 +3,8 @@ import { classifyReleases } from '../composable/classifyRelease'
 import { Release, Releases, PageInfo } from '../interface/interfaces'
 // import { useState } from '../composable/state';
 import { useCursor } from '~/composable/state'
-import ButtonComponent from '~/components/ButtonComponent.vue';
-import { Colors, Sizes, Texts } from '~/enums/ButtonEnum';
+import ButtonComponent from '~/components/ButtonComponent.vue'
+import { Colors, Sizes } from '~/enums/ButtonEnum'
 
 export default {
   data () {
@@ -12,15 +12,15 @@ export default {
     const state: string = 'close'
     const cursor = useCursor()
     const display: Release[] = releases.close
-    var statusDisplay = "Done"
-    const button ={
-      color:  Colors.Cyan,
+    const statusDisplay = 'Done'
+    const button = {
+      color: Colors.Cyan,
       size: Sizes.Md,
-      text: "next page"
+      text: 'next page'
     }
     const pageInfo: PageInfo = {
       hasPreviousPage: false,
-      startCursor: ""
+      startCursor: ''
     }
     return {
       releases,
@@ -56,15 +56,15 @@ export default {
       if (this.state === 'open') {
         this.state = 'open'
         this.display = this.releases.open
-        this.statusDisplay = "In progress"
+        this.statusDisplay = 'In progress'
       } else {
         this.state = 'close'
         this.display = this.releases.close
-        this.statusDisplay = "Done"
+        this.statusDisplay = 'Done'
       }
     },
 
-    changeCursor() {
+    changeCursor () {
       this.cursor = this.pageInfo.startCursor
       this.created()
     }
@@ -114,7 +114,9 @@ export default {
             <div class="content">
               <ul>
                 <li v-for="release in display" :key="release.id">
-                  <h1 class="font-display"> {{ release.endOn }} - {{ statusDisplay}} </h1>
+                  <h1 class="font-display">
+                    {{ release.endOn }} - {{ statusDisplay }}
+                  </h1>
                   <h1> {{ release.title }} </h1>
                   <br>
                   <div class="release-content">
@@ -145,9 +147,8 @@ export default {
       </div>
 
       <div class="pagination">
-        <ButtonComponent :color="button.color" :size="button.size" :text="button.text" type="submit" @click="changeCursor"/>
+        <ButtonComponent :color="button.color" :size="button.size" :text="button.text" type="submit" @click="changeCursor" />
       </div>
-      
     </body>
   </div>
 </template>

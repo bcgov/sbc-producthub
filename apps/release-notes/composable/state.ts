@@ -1,6 +1,6 @@
 // export const useCounter = () => useState  ("counter", () => 0);
 // export const useColor = () => useState<string>("color", () => "pink");
-export const useCursor = () => useState("cursor", () => "")
+export const useCursor = () => useState('cursor', () => '')
 // export const releases = () => useState ("releases", () => "")
 // import { readonly, ref } from "vue";
 

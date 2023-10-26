@@ -45,13 +45,13 @@ export async function getReport (ghId: String, start: String) {
       `,
       variables: {
         workspaceID: ghId,
-        startCursor: start,
-      },
-    });
-    // console.log(result)  
+        startCursor: start
+      }
+    })
+    // console.log(result)
     return (
       result.data.workspace.releases
-    );
+    )
   } catch (error) {
     console.error(error)
     throw error
