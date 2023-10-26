@@ -3,9 +3,6 @@ import type { Config } from 'tailwindcss'
 
 export default <Partial<Config>>{
   theme: {
-    colors: {
-      blue: '#1669bb'
-    },
     extend: {
       // colors: {
       //   primary: defaultTheme.colors.green
@@ -23,11 +20,6 @@ export default <Partial<Config>>{
         'nuxt-gradient':
           'linear-gradient(30deg,#475569,#475569 25%,#0007dc 50%,#5400dc 75%,#dc00bf)'
       },
-      backgroundColor: {
-        blue: {
-          500: '#1669bb'
-        }
-      }
     }
   }
 }
