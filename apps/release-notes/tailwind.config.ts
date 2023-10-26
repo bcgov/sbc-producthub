@@ -19,7 +19,7 @@ export default <Partial<Config>>{
       backgroundImage: {
         'nuxt-gradient':
           'linear-gradient(30deg,#475569,#475569 25%,#0007dc 50%,#5400dc 75%,#dc00bf)'
-      },
+      }
     }
   }
 }
