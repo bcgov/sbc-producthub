@@ -95,17 +95,18 @@ export default {
           <h2>All releases that are {{ statusDisplay }} are noted below.</h2>
         </div>
         <div class="choose-state">
-            <select id="status" v-model="state" class="state-options">
-              <option value="close">
-                Done Releases
-              </option>
-              <option value="open">
-                In Progress Releases
-              </option>
-            </select>
-            <div class="filter-button">
-              <ButtonComponent :text="filterButton.text" type="submit" @click="switchState"/>
-            </div>
+          <p>Go to:</p>
+          <select id="status" v-model="state" class="state-options">
+            <option value="close">
+              Done Releases
+            </option>
+            <option value="open">
+              In Progress Releases
+            </option>
+          </select>
+          <div class="filter-button">
+            <ButtonComponent :text="filterButton.text" type="submit" @click="switchState"/>
+          </div>
             
         </div>
       </div>
@@ -247,25 +248,35 @@ h2 {
   border-radius: 4px;
   background-color: #e2e8ee;
   text-decoration: none solid rgb(22, 105, 187);
-  font-family: Noto Sans;
 }
 .pagination {
   flex-direction: row;
-  margin-left: 90%
+  margin-left: 92%;
+  margin-bottom: 5%;
 }
 
 .contact {
   flex-direction: column;
-  width: 20%
+  margin-left: 10%
 }
 
 .choose-state {
   display: flex;
   align-items: center;
+  margin-right: 4%;
+}
+.choose-state > p {
+  flex-direction: column;
+  width: 40%;
+}
+
+.choose-state > select {
+  text-align: center;
 }
 
 .filter-button {
-  flex-direction: row;
+  flex-direction: column;
+  width: 10%;
   margin-left: 10%;
 }
 </style>
