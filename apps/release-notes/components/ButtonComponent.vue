@@ -1,23 +1,23 @@
 <template>
-  <button type="button" className="btn btn-blue">
+  <button type="button" className="buttonClasses">
     <slot>{{ text }}</slot>
   </button>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { Colors, Sizes, Texts } from '~/enums/ButtonEnum';
+import { Colors, Sizes } from '~/enums/ButtonEnum';
 
 
 export default defineComponent({
   props: {
     color: {
       type: String as PropType<Colors>,
-      required: true,
+      required: false,
     },
     size: {
       type: String as PropType<Sizes>,
-      required: true,
+      required: false,
     },
     text: {
       type: String,
@@ -49,8 +49,8 @@ export default defineComponent({
 </script>
 
 <style>
-/* .buttonClasses {
-  width: 88px;
+.buttonClasses {
+  width: 88px ;
   height: 34px;
   border-radius: 4px;
   background-color: #1669bb;
@@ -60,9 +60,9 @@ export default defineComponent({
   color: #ffffff;
   text-decoration: none solid rgb(255, 255, 255);
   text-align: center;
-} */
+}
 
-.btn {
+/* .btn {
   @apply font-bold py-2 px-4 rounded;
 }
 .btn-blue {
@@ -70,5 +70,5 @@ export default defineComponent({
 }
 .btn-blue:hover {
   @apply bg-blue-700;
-}
+} */
 </style>
