@@ -8,75 +8,73 @@ import { Colors, Sizes } from '~/enums/ButtonEnum'
 import ContactCard from '~/components/ContactCard.vue'
 
 export default {
-    data() {
-        const releases: Releases = { open: [], close: [] };
-        const state: string = 'close';
-        const cursor = useCursor();
-        const display: Release[] = releases.close;
-        const statusDisplay = 'Done';
-        var pages = [cursor];
-        const nextButton = {
-            color: Colors.Cyan,
-            size: Sizes.Md,
-            text: 'Next'
-        };
-        const filterButton = {
-            text: 'Filter'
-        };
-        const pageInfo: PageInfo = {
-            hasPreviousPage: false,
-            startCursor: ''
-        };
-        return {
-            releases,
-            state,
-            display,
-            pageInfo,
-            cursor,
-            ButtonComponent,
-            statusDisplay,
-            nextButton,
-            filterButton,
-            pages
-        };
+  components: { ContactCard },
+  data () {
+    const releases: Releases = { open: [], close: [] }
+    const state: string = 'close'
+    const cursor = useCursor()
+    const display: Release[] = releases.close
+    const statusDisplay = 'Done'
+    const pages = [cursor]
+    const nextButton = {
+      color: Colors.Cyan,
+      size: Sizes.Md,
+      text: 'Next'
+    }
+    const filterButton = {
+      text: 'Filter'
+    }
+    const pageInfo: PageInfo = {
+      hasPreviousPage: false,
+      startCursor: ''
+    }
+    return {
+      releases,
+      state,
+      display,
+      pageInfo,
+      cursor,
+      ButtonComponent,
+      statusDisplay,
+      nextButton,
+      filterButton,
+      pages
+    }
+  },
+  beforeMount () {
+    this.created()
+  },
+  methods: {
+    async created () {
+      console.log('hello')
+      const response = await classifyReleases('ENTITIES', this.cursor)
+      this.releases = response.releases
+      this.pageInfo = {
+        hasPreviousPage: response.pageInfo.hasPreviousPage,
+        startCursor: response.pageInfo.startCursor
+      }
+      if (this.state === 'close') {
+        this.display = this.releases.close
+      } else {
+        this.display = this.releases.open
+      }
     },
-    beforeMount() {
-        this.created();
+    switchState () {
+      if (this.state === 'open') {
+        this.state = 'open'
+        this.display = this.releases.open
+        this.statusDisplay = 'In progress'
+      } else {
+        this.state = 'close'
+        this.display = this.releases.close
+        this.statusDisplay = 'Done'
+      }
     },
-    methods: {
-        async created() {
-            console.log('hello');
-            const response = await classifyReleases('ENTITIES', this.cursor);
-            this.releases = response.releases;
-            this.pageInfo = {
-                hasPreviousPage: response.pageInfo.hasPreviousPage,
-                startCursor: response.pageInfo.startCursor
-            };
-            if (this.state === 'close') {
-                this.display = this.releases.close;
-            }
-            else {
-                this.display = this.releases.open;
-            }
-        },
-        switchState() {
-            if (this.state === 'open') {
-                this.state = 'open';
-                this.display = this.releases.open;
-                this.statusDisplay = 'In progress';
-            }
-            else {
-                this.state = 'close';
-                this.display = this.releases.close;
-                this.statusDisplay = 'Done';
-            }
-        },
-        changeCursor() {
-            this.cursor = this.pageInfo.startCursor;
-            this.created();
-        }
-    },
-    components: { ContactCard }
+    changeCursor () {
+      this.cursor = this.pageInfo.startCursor
+      this.created()
+    }
+  }
 }
 </script>
 
@@ -105,9 +103,8 @@ export default {
             </option>
           </select>
           <div class="filter-button">
-            <ButtonComponent :text="filterButton.text" type="submit" @click="switchState"/>
+            <ButtonComponent :text="filterButton.text" type="submit" @click="switchState" />
           </div>
-            
         </div>
       </div>
 
@@ -121,7 +118,7 @@ export default {
                 </li>
               </ul>
             </div>
-            
+
             <div class="content">
               <ul>
                 <li v-for="release in display" :key="release.id">
@@ -155,7 +152,7 @@ export default {
             </div>
 
             <div class="contact">
-              <ContactCard/>
+              <ContactCard />
             </div>
           </div>
         </div>
@@ -215,7 +212,7 @@ h2 {
   width: 50%;
   font-weight: bolder;
   display: flex;
-  
+
 }
 
 .path > h1 {

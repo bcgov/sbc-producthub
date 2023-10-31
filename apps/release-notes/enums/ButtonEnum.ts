@@ -6,7 +6,7 @@ enum Sizes {
 enum Colors {
   Indigo = 'indigo',
   Cyan = 'cyan',
-} 
+}
 
 enum Texts {
   Sans = 'Noto Sans, ui-serif',

@@ -46,9 +46,9 @@ export default defineComponent ({
 </script>
 
 <style>
-    /* .contact-card {
-        width: 30%
-    } */
+    .contact-card > h1 {
+        color: black;
+    }
     .email {
         color:#1669bb;
     }
