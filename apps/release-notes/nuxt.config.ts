@@ -5,16 +5,18 @@ export default defineNuxtConfig({
   tailwindcss: {
     cssPath: '~/assets/css/tailwind.css',
     configPath: 'tailwind.config'
-    // exposeConfig: false,
-    // config: {},
-    // injectPosition: 0,
-    // viewer: true,
+  },
+  app: {
+    head: {
+      link: [
+        {
+          rel: 'stylesheet',
+          href: 'https://drive.google.com/file/d/18cwKBO0ZzLNQEnoqjEfC_6PCxqETDSqt/view?usp=sharing'
+        }
+      ]
+    }
   },
   runtimeConfig: {
-    // Private keys are only available on the server
-    // apiSecret: '123',
-
-    // Public keys that are exposed to the client
     public: {
       zenhubAPI: process.env.ZENHUB_APIKEY
     }

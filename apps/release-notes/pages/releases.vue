@@ -5,18 +5,24 @@ import { Release, Releases, PageInfo } from '../interface/interfaces'
 import { useCursor } from '~/composable/state'
 import ButtonComponent from '~/components/ButtonComponent.vue'
 import { Colors, Sizes } from '~/enums/ButtonEnum'
+import ContactCard from '~/components/ContactCard.vue'
 
 export default {
+  components: { ContactCard },
   data () {
     const releases: Releases = { open: [], close: [] }
     const state: string = 'close'
     const cursor = useCursor()
     const display: Release[] = releases.close
     const statusDisplay = 'Done'
-    const button = {
+    const pages = [cursor]
+    const nextButton = {
       color: Colors.Cyan,
       size: Sizes.Md,
-      text: 'next page'
+      text: 'Next'
+    }
+    const filterButton = {
+      text: 'Filter'
     }
     const pageInfo: PageInfo = {
       hasPreviousPage: false,
@@ -30,7 +36,9 @@ export default {
       cursor,
       ButtonComponent,
       statusDisplay,
-      button
+      nextButton,
+      filterButton,
+      pages
     }
   },
   beforeMount () {
@@ -51,7 +59,6 @@ export default {
         this.display = this.releases.open
       }
     },
-
     switchState () {
       if (this.state === 'open') {
         this.state = 'open'
@@ -63,7 +70,6 @@ export default {
         this.statusDisplay = 'Done'
       }
     },
-
     changeCursor () {
       this.cursor = this.pageInfo.startCursor
       this.created()
@@ -80,25 +86,26 @@ export default {
     <body>
       <div class="title-page">
         <h1 class="title">
-          BC Registries Releases
+          Release Dates
         </h1>
-        <h2 class="path">
-          BC Registries and Online Services > {{ statusDisplay }}
-        </h2>
-        <select id="status" v-model="state" class="state-options">
-          <option value="close">
-            Done Releases
-          </option>
-          <option value="open">
-            In Progress Releases
-          </option>
-        </select>
-        <button class="state-button" type="submit" @click="switchState">
-          Filter
-        </button>
-        <button class="pagination" type="submit" @click="changeCursor">
-          Next
-        </button>
+        <div class="path">
+          <h1>BC Registries and Online Services Application Releases & Notes</h1>
+          <h2>All releases that are {{ statusDisplay }} are noted below.</h2>
+        </div>
+        <div class="choose-state">
+          <p>Go to:</p>
+          <select id="status" v-model="state" class="state-options">
+            <option value="close">
+              Done Releases
+            </option>
+            <option value="open">
+              In Progress Releases
+            </option>
+          </select>
+          <div class="filter-button">
+            <ButtonComponent :text="filterButton.text" type="submit" @click="switchState" />
+          </div>
+        </div>
       </div>
 
       <div class="release-page">
@@ -111,6 +118,7 @@ export default {
                 </li>
               </ul>
             </div>
+
             <div class="content">
               <ul>
                 <li v-for="release in display" :key="release.id">
@@ -142,12 +150,16 @@ export default {
                 </li>
               </ul>
             </div>
+
+            <div class="contact">
+              <ContactCard />
+            </div>
           </div>
         </div>
       </div>
 
       <div class="pagination">
-        <ButtonComponent :color="button.color" :size="button.size" :text="button.text" type="submit" @click="changeCursor" />
+        <ButtonComponent :color="nextButton.color" :size="nextButton.size" :text="nextButton.text" type="submit" @click="changeCursor" />
       </div>
     </body>
   </div>
@@ -178,19 +190,6 @@ h2 {
   padding-left: 30px;
 }
 
-.state-button {
-  width: 88px;
-  height: 34px;
-  border-radius: 4px;
-  background-color: #1669bb;
-  background-size: cover;
-  font-family: Noto Sans;
-  font-size: 14px;
-  color: #ffffff;
-  text-decoration: none solid rgb(255, 255, 255);
-  text-align: center;
-}
-
 .date-range {
   flex-direction: column;
   width: 20%;
@@ -204,12 +203,26 @@ h2 {
 .title {
   flex-direction: column;
   align-self: center;
-  width: 50%;
+  width: 30%;
+  color: black;
 }
 
 .path {
   flex-direction: column;
   width: 50%;
+  font-weight: bolder;
+  display: flex;
+
+}
+
+.path > h1 {
+  color: black;
+}
+
+.path > h2 {
+  color: #757575;
+  flex-direction: column;
+  margin-left: 15%;
 }
 
 .page {
@@ -218,7 +231,7 @@ h2 {
 
 .content {
   flex-direction: column;
-  width: 80%
+  width: 60%
 }
 
 .link {
@@ -232,5 +245,35 @@ h2 {
   border-radius: 4px;
   background-color: #e2e8ee;
   text-decoration: none solid rgb(22, 105, 187);
+}
+.pagination {
+  flex-direction: row;
+  margin-left: 92%;
+  margin-bottom: 5%;
+}
+
+.contact {
+  flex-direction: column;
+  margin-left: 10%
+}
+
+.choose-state {
+  display: flex;
+  align-items: center;
+  margin-right: 4%;
+}
+.choose-state > p {
+  flex-direction: column;
+  width: 40%;
+}
+
+.choose-state > select {
+  text-align: center;
+}
+
+.filter-button {
+  flex-direction: column;
+  width: 10%;
+  margin-left: 10%;
 }
 </style>

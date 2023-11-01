@@ -9,7 +9,7 @@ export async function getReport (ghId: String, start: String) {
         query RepositoriesByGhId($workspaceID: ID!, $startCursor: String) {
           workspace(id: $workspaceID) {
             displayName
-            releases(last: 10, before: $startCursor) {
+            releases(last: 20, before: $startCursor) {
               totalCount
               nodes {
                 startOn

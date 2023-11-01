@@ -5,3 +5,7 @@
 .btn {
     @apply p-4;
 }
+
+html {
+    font-family: "BC Sans";
+}
