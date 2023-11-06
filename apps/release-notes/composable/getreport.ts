@@ -1,15 +1,15 @@
 import { gql } from '@apollo/client/core'
 import { getClient } from './getClient'
 
-export async function getReport (ghId: String, start: String) {
+export async function getReport (ghId: String, start: String, end: String) {
   const client = getClient()
   try {
     const result = await client.query({
       query: gql`
-        query RepositoriesByGhId($workspaceID: ID!, $startCursor: String) {
+        query RepositoriesByGhId($workspaceID: ID!, $startCursor: String, $endCursor: String) {
           workspace(id: $workspaceID) {
             displayName
-            releases(last: 20, before: $startCursor) {
+            releases(last: 20, before: $startCursor, after: $endCursor) {
               totalCount
               nodes {
                 startOn
@@ -37,7 +37,9 @@ export async function getReport (ghId: String, start: String) {
               }
               pageInfo {
                 hasPreviousPage
+                hasNextPage
                 startCursor
+                endCursor
               }
             }
           }
@@ -45,10 +47,11 @@ export async function getReport (ghId: String, start: String) {
       `,
       variables: {
         workspaceID: ghId,
-        startCursor: start
+        startCursor: start,
+        endCursor: end
       }
     })
-    // console.log(result)
+    console.log(result.data.workspace.releases)
     return (
       result.data.workspace.releases
     )

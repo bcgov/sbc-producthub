@@ -56,4 +56,8 @@ export default defineComponent ({
     b {
         color: #757575;
     }
+
+    .contact-card {
+        margin: 5%
+    }
 </style>

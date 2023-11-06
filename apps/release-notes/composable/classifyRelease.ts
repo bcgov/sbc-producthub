@@ -7,15 +7,21 @@ import { Issue, Label, Releases, PageInfo } from '~/interface/interfaces'
  * @param team string
  * @returns Releases
  */
-export async function classifyReleases (team: string, cursor: String) {
+export async function classifyReleases (
+  team: string,
+  startCursor: String,
+  endCursor: String
+) {
   let items = {}
   let pageInfo: PageInfo = {
     hasPreviousPage: false,
-    startCursor: ''
+    hasNextPage: false,
+    startCursor: '',
+    endCursor: ''
   }
   if (team === 'ENTITIES') {
     const myGhIds: String = GhRepo.ENTITIES
-    const response = await getReport(myGhIds, cursor)
+    const response = await getReport(myGhIds, startCursor, endCursor)
     items = response.nodes
     pageInfo = response.pageInfo
   }
@@ -40,9 +46,9 @@ export function filterResponse (itemArray: any[]) {
     open: [],
     close: []
   }
-  for (let i = 0; i < itemArray.length; i++) {
+  for (let i = itemArray.length - 1; i > -1; i--) {
     const item = itemArray[i]
-    console.log(item)
+    // console.log(item)
     const issues = getIssues(item.issues.nodes)
     if (item.state === 'CLOSED') {
       releases.close.push({

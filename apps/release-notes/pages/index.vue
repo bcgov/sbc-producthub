@@ -4,7 +4,6 @@ import { Release, Releases, PageInfo } from '../interface/interfaces'
 // import { useState } from '../composable/state';
 import { useCursor } from '~/composable/state'
 import ButtonComponent from '~/components/ButtonComponent.vue'
-import { Colors, Sizes } from '~/enums/ButtonEnum'
 import ContactCard from '~/components/ContactCard.vue'
 
 export default {
@@ -12,33 +11,34 @@ export default {
   data () {
     const releases: Releases = { open: [], close: [] }
     const state: string = 'close'
-    const cursor = useCursor()
+    const startCursor = useCursor()
+    const endCursor = useCursor()
     const display: Release[] = releases.close
     const statusDisplay = 'Done'
-    const pages = [cursor]
-    const nextButton = {
-      color: Colors.Cyan,
-      size: Sizes.Md,
-      text: 'Next'
+    const navButton = {
+      nextText: 'Next',
+      prevText: 'Prev'
     }
     const filterButton = {
       text: 'Filter'
     }
     const pageInfo: PageInfo = {
       hasPreviousPage: false,
-      startCursor: ''
+      hasNextPage: false,
+      startCursor: '',
+      endCursor: ''
     }
     return {
       releases,
       state,
       display,
       pageInfo,
-      cursor,
+      startCursor,
+      endCursor,
       ButtonComponent,
       statusDisplay,
-      nextButton,
-      filterButton,
-      pages
+      navButton,
+      filterButton
     }
   },
   beforeMount () {
@@ -46,12 +46,14 @@ export default {
   },
   methods: {
     async created () {
-      console.log('hello')
-      const response = await classifyReleases('ENTITIES', this.cursor)
+      console.log(this.pageInfo)
+      const response = await classifyReleases('ENTITIES', this.pageInfo.startCursor, this.pageInfo.endCursor)
       this.releases = response.releases
       this.pageInfo = {
         hasPreviousPage: response.pageInfo.hasPreviousPage,
-        startCursor: response.pageInfo.startCursor
+        hasNextPage: response.pageInfo.hasNextPage,
+        startCursor: response.pageInfo.startCursor,
+        endCursor: response.pageInfo.endCursor
       }
       if (this.state === 'close') {
         this.display = this.releases.close
@@ -70,9 +72,17 @@ export default {
         this.statusDisplay = 'Done'
       }
     },
-    changeCursor () {
-      this.cursor = this.pageInfo.startCursor
-      this.created()
+    changeStartCursor () {
+      if (this.pageInfo.hasPreviousPage) {
+        this.pageInfo.endCursor = ''
+        this.created()
+      }
+    },
+    changeEndCursor () {
+      if (this.pageInfo.hasNextPage) {
+        this.pageInfo.startCursor = ''
+        this.created()
+      }
     }
   }
 }
@@ -112,11 +122,13 @@ export default {
         <div v-if="releases">
           <div class="page">
             <div class="date-range">
-              <ul>
-                <li v-for="release in display" :key="release.id">
-                  {{ release.endOn }}
-                </li>
-              </ul>
+              <div class="dates">
+                <ul>
+                  <li v-for="release in display" :key="release.id">
+                    {{ release.endOn }}
+                  </li>
+                </ul>
+              </div>
             </div>
 
             <div class="content">
@@ -159,7 +171,12 @@ export default {
       </div>
 
       <div class="pagination">
-        <ButtonComponent :color="nextButton.color" :size="nextButton.size" :text="nextButton.text" type="submit" @click="changeCursor" />
+        <div class="prev-bttn">
+          <ButtonComponent :text="navButton.prevText" type="submit" @click="changeEndCursor" />
+        </div>
+        <div class="next-bttn">
+          <ButtonComponent :text="navButton.nextText" type="submit" @click="changeStartCursor" />
+        </div>
       </div>
     </body>
   </div>
@@ -187,13 +204,15 @@ h2 {
 }
 
 .release-content {
-  padding-left: 30px;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .date-range {
   flex-direction: column;
   width: 20%;
   font-weight: 500;
+  height: 20%;
 }
 
 .title-page {
@@ -231,7 +250,7 @@ h2 {
 
 .content {
   flex-direction: column;
-  width: 60%
+  width: 80%;
 }
 
 .link {
@@ -239,22 +258,26 @@ h2 {
 }
 
 .state-options, .state-options > option {
-  /* margin-left: 60%; */
   width: 166px;
   height: 44px;
   border-radius: 4px;
   background-color: #e2e8ee;
   text-decoration: none solid rgb(22, 105, 187);
 }
+
 .pagination {
   flex-direction: row;
-  margin-left: 92%;
   margin-bottom: 5%;
+  margin-left: 2.5%;
+  display: flex;
 }
 
 .contact {
   flex-direction: column;
-  margin-left: 10%
+  width: 28%;
+  background-color: #E4EDF7;
+  border-radius: 20px;
+  height: 20%;
 }
 
 .choose-state {
@@ -275,5 +298,10 @@ h2 {
   flex-direction: column;
   width: 10%;
   margin-left: 10%;
+}
+
+.next-bttn {
+  flex-direction: column;
+  margin-left: 86%;
 }
 </style>
