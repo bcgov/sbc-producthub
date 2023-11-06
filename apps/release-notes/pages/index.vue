@@ -76,13 +76,18 @@ export default {
       if (this.pageInfo.hasPreviousPage) {
         this.pageInfo.endCursor = ''
         this.created()
+        this.scrollToTop()
       }
     },
     changeEndCursor () {
       if (this.pageInfo.hasNextPage) {
         this.pageInfo.startCursor = ''
         this.created()
+        this.scrollToTop()
       }
+    },
+    scrollToTop() {
+      window.scrollTo(0,0);
     }
   }
 }

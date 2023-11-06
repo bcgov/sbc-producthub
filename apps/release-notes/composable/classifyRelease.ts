@@ -97,19 +97,19 @@ export function getIssues (issueArray: any[]) {
   return issues
 }
 
-/**
- * This function is to get all the labels related to a particular issue
- * @param labelsArray
- * @returns Label[]
- */
-export function getLabels (labelsArray: any[]) {
-  const labels: Label[] = []
-  for (let i = 0; i < labelsArray.length; i++) {
-    const label = labelsArray[i].node
-    labels.push({
-      id: label.id,
-      name: label.name
-    })
-  }
-  return labels
-}
+// /**
+//  * This function is to get all the labels related to a particular issue
+//  * @param labelsArray
+//  * @returns Label[]
+//  */
+// export function getLabels (labelsArray: any[]) {
+//   const labels: Label[] = []
+//   for (let i = 0; i < labelsArray.length; i++) {
+//     const label = labelsArray[i].node
+//     labels.push({
+//       id: label.id,
+//       name: label.name
+//     })
+//   }
+//   return labels
+// }
