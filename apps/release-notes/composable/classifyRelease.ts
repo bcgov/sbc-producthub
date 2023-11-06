@@ -1,6 +1,6 @@
 import { GhRepo } from '../enums/dropdownEnum'
 import { getReport } from './getreport'
-import { Issue, Label, Releases, PageInfo } from '~/interface/interfaces'
+import { Issue, Releases, PageInfo } from '~/interface/interfaces'
 
 /**
  * This function is to get the response from ZenhubAPI and
