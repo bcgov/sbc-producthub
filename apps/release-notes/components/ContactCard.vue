@@ -1,33 +1,33 @@
 <template>
     <div class="contact-card">
         <h1>Contact Us</h1>
-        <p> If you have questions, contact us at:
+        <div> If you have questions, contact us at:
             <a class="email" href="mailto: bcreg.engagement@gov.bc.ca">bcreg.engagement@gov.bc.ca</a>
-        </p>
+        </div>
         <br>
         <div>
             <b>
                 Legend:
             </b>
-            <p> 
+            <div> 
                 <b>Assets</b> = Manufactured Homes Registry and Personal Property Registry 
-            </p>
+            </div>
             <br>
-            <p>
+            <div>
                 <b>Auth</b> = Authentication changes for logging in and other related activities.
-            </p>
+            </div>
             <br>
-            <p>
+            <div>
                 <b>Entities</b> = Cooperatives, Benefit Companies, Sole Proprietorships and General Partnerships.
-            </p>
+            </div>
             <br>
-            <p>
+            <div>
                 <b>Relationships</b> = authentication, payments and other features.
-            </p>
+            </div>
             <br>
-            <p>
+            <div>
                 <b>SRE</b> = Site Reliability Engineering Team - includes changes to the technology and platform.
-            </p>
+            </div>
         </div>
     </div>
     

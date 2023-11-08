@@ -104,94 +104,94 @@ export default {
     <header>
       <navbar />
     </header>
-    <body>
-      <div class="title-page">
-        <h1 class="title">
-          Release Dates
-        </h1>
-        <div class="path">
-          <h1>BC Registries and Online Services Application Releases & Notes</h1>
-          <h2>All releases that are {{ statusDisplay }} are noted below.</h2>
+    <div class="title-page">
+      <div class="title">
+        Release Dates
+      </div>
+      <div class="path">
+        <h1>BC Registries and Online Services Application Releases & Notes</h1>
+        <h2>All releases that are {{ statusDisplay }} are noted below.</h2>
+      </div>
+      <div class="choose-state">
+        <div>
+          Go to:
         </div>
-        <div class="choose-state">
-          <p>Go to:</p>
-          <select id="status" v-model="state" class="state-options">
-            <option value="close">
-              Done Releases
-            </option>
-            <option value="open">
-              In Progress Releases
-            </option>
-          </select>
-          <div class="filter-button">
-            <ButtonComponent :text="filterButton.text" type="submit" @click="switchState" />
-          </div>
+        <select id="status" v-model="state" class="state-options">
+          <option value="close">
+            Done Releases
+          </option>
+          <option value="open">
+            In Progress Releases
+          </option>
+        </select>
+        <div class="filter-button">
+          <ButtonComponent :text="filterButton.text" type="submit" @click="switchState" />
         </div>
       </div>
+    </div>
 
-      <div class="release-page">
-        <div v-if="releases">
-          <div class="page">
-            <div class="date-range">
-              <div class="dates">
-                <ul>
-                  <li v-for="release in display" :key="release.id">
-                    <button @click="scrollToElement(release.id)">
-                      {{ release.endOn }}
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="content">
+    <div class="release-page">
+      <div v-if="releases">
+        <div class="page">
+          <div class="date-range">
+            <div class="dates">
               <ul>
                 <li v-for="release in display" :key="release.id">
-                  <h1 :id="release.id" class="font-display">
-                    {{ release.endOn }} - {{ statusDisplay }}
-                  </h1>
-                  <h1> {{ release.title }} </h1>
-                  <br>
-                  <div class="release-content">
-                    <h2>Release Summary</h2>
-                    <div class="issue">
-                      {{ release.description }}
-                    </div>
-                    <br>
-                    <h2>Issues</h2>
-                    <ul>
-                      <li v-for="issue in release.issues" :key="issue.id">
-                        <h3 class="issue">
-                          {{ issue.title }} -
-                          <NuxtLink class="link" :to="issue.htmlUrl">
-                            {{ issue.number }}
-                          </NuxtLink>
-                        </h3>
-                      </li>
-                    </ul>
-                  </div>
-                  <br>
-                  <br>
+                  <button @click="scrollToElement(release.id)">
+                    {{ release.endOn }}
+                  </button>
                 </li>
               </ul>
             </div>
+          </div>
 
-            <div class="contact">
-              <ContactCard />
-            </div>
+          <div class="content">
+            <ul>
+              <li v-for="release in display" :key="release.id">
+                <h1 :id="release.id" class="font-display">
+                  {{ release.endOn }} - {{ statusDisplay }}
+                </h1>
+                <h1> {{ release.title }} </h1>
+                <br>
+                <div class="release-content">
+                  <h2>Release Summary</h2>
+                  <div class="issue">
+                    {{ release.description }}
+                  </div>
+                  <br>
+                  <h2>Issues</h2>
+                  <ul>
+                    <li v-for="issue in release.issues" :key="issue.id">
+                      <h3 class="issue">
+                        {{ issue.title }} -
+                        <NuxtLink class="link" :to="issue.htmlUrl">
+                          {{ issue.number }}
+                        </NuxtLink>
+                      </h3>
+                    </li>
+                  </ul>
+                </div>
+                <br>
+                <br>
+              </li>
+            </ul>
+          </div>
+
+          <div class="contact">
+            <ContactCard />
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="pagination">
-        <div id="prev" class="prev-bttn">
-          <ButtonComponent :text="navButton.prevText" type="submit" @click="changeEndCursor" />
-        </div>
-        <div class="next-bttn">
-          <ButtonComponent :text="navButton.nextText" type="submit" @click="changeStartCursor" />
-        </div>
+    <div class="pagination">
+      <div id="prev" class="prev-bttn">
+        <ButtonComponent :text="navButton.prevText" type="submit" @click="changeEndCursor" />
       </div>
-    </body>
+      <div class="next-bttn">
+        <ButtonComponent :text="navButton.nextText" type="submit" @click="changeStartCursor" />
+      </div>
+    </div>
   </div>
 </template>
 

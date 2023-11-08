@@ -1,6 +1,6 @@
 <template>
   <button type="button" className="buttonClasses">
-    <slot>{{ text }}</slot>
+    {{ text }}
   </button>
 </template>
 
