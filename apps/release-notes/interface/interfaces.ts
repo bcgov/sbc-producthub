@@ -28,5 +28,7 @@ export interface Releases {
 
 export interface PageInfo {
   hasPreviousPage: boolean;
-  startCursor: string
+  hasNextPage: boolean;
+  startCursor: string,
+  endCursor: string
 }

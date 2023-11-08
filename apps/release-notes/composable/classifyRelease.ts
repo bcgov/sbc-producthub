@@ -1,27 +1,37 @@
 import { GhRepo } from '../enums/dropdownEnum'
 import { getReport } from './getreport'
-import { Issue, Label, Releases, PageInfo } from '~/interface/interfaces'
+import { Issue, Releases, PageInfo } from '~/interface/interfaces'
 
 /**
  * This function is to get the response from ZenhubAPI and
  * @param team string
  * @returns Releases
  */
-export async function classifyReleases (team: string, cursor: String) {
+export async function classifyReleases (
+  team: string,
+  startCursor: string,
+  endCursor: string
+) {
   let items = {}
+  let myGhIds: string = ''
   let pageInfo: PageInfo = {
     hasPreviousPage: false,
-    startCursor: ''
+    hasNextPage: false,
+    startCursor: '',
+    endCursor: ''
   }
   if (team === 'ENTITIES') {
-    const myGhIds: String = GhRepo.ENTITIES
-    const response = await getReport(myGhIds, cursor)
-    items = response.nodes
-    pageInfo = response.pageInfo
+    myGhIds = GhRepo.ENTITIES
+  } else if (team === 'NAMETEAMSPACE') {
+    myGhIds = GhRepo.NAMETEAMSPACE
   }
+  const response = await getReport(myGhIds, startCursor, endCursor)
+  items = response.nodes
+  pageInfo = response.pageInfo
   const itemArray = Array.isArray(items) ? items : []
   // console.log(itemArray)
   const releases = filterResponse(itemArray)
+  console.log(releases)
   return {
     releases,
     pageInfo
@@ -40,9 +50,9 @@ export function filterResponse (itemArray: any[]) {
     open: [],
     close: []
   }
-  for (let i = 0; i < itemArray.length; i++) {
+  for (let i = itemArray.length - 1; i > -1; i--) {
     const item = itemArray[i]
-    console.log(item)
+    // console.log(item)
     const issues = getIssues(item.issues.nodes)
     if (item.state === 'CLOSED') {
       releases.close.push({
@@ -91,19 +101,19 @@ export function getIssues (issueArray: any[]) {
   return issues
 }
 
-/**
- * This function is to get all the labels related to a particular issue
- * @param labelsArray
- * @returns Label[]
- */
-export function getLabels (labelsArray: any[]) {
-  const labels: Label[] = []
-  for (let i = 0; i < labelsArray.length; i++) {
-    const label = labelsArray[i].node
-    labels.push({
-      id: label.id,
-      name: label.name
-    })
-  }
-  return labels
-}
+// /**
+//  * This function is to get all the labels related to a particular issue
+//  * @param labelsArray
+//  * @returns Label[]
+//  */
+// export function getLabels (labelsArray: any[]) {
+//   const labels: Label[] = []
+//   for (let i = 0; i < labelsArray.length; i++) {
+//     const label = labelsArray[i].node
+//     labels.push({
+//       id: label.id,
+//       name: label.name
+//     })
+//   }
+//   return labels
+// }
