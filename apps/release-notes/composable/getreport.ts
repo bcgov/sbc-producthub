@@ -1,8 +1,9 @@
 import { gql } from '@apollo/client/core'
 import { getClient } from './getClient'
 
-export async function getReport (ghId: String, start: String, end: String) {
+export async function getReport (ghId: string, start: string, end: string) {
   const client = getClient()
+  console.log(ghId)
   try {
     const result = await client.query({
       query: gql`
@@ -51,7 +52,7 @@ export async function getReport (ghId: String, start: String, end: String) {
         endCursor: end
       }
     })
-    console.log(result.data.workspace.releases)
+    console.log(result.data.workspace.displayName)
     return (
       result.data.workspace.releases
     )

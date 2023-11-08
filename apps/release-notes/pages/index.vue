@@ -15,6 +15,7 @@ export default {
     const endCursor = useCursor()
     const display: Release[] = releases.close
     const statusDisplay = 'Done'
+    const board: string = 'ENTITIES'
     const navButton = {
       nextText: 'Next',
       prevText: 'Prev'
@@ -38,7 +39,8 @@ export default {
       ButtonComponent,
       statusDisplay,
       navButton,
-      filterButton
+      filterButton,
+      board
     }
   },
   beforeMount () {
@@ -46,8 +48,8 @@ export default {
   },
   methods: {
     async created () {
-      console.log(this.pageInfo)
-      const response = await classifyReleases('ENTITIES', this.pageInfo.startCursor, this.pageInfo.endCursor)
+      console.log(this.board)
+      const response = await classifyReleases(this.board, this.pageInfo.startCursor, this.pageInfo.endCursor)
       this.releases = response.releases
       this.pageInfo = {
         hasPreviousPage: response.pageInfo.hasPreviousPage,
@@ -88,6 +90,10 @@ export default {
     },
     scrollToTop () {
       window.scrollTo(0, 0)
+    },
+    scrollToElement (elementID: string) {
+      const element = document.getElementById(elementID)
+      element?.scrollIntoView()
     }
   }
 }
@@ -130,7 +136,9 @@ export default {
               <div class="dates">
                 <ul>
                   <li v-for="release in display" :key="release.id">
-                    {{ release.endOn }}
+                    <button @click="scrollToElement(release.id)">
+                      {{ release.endOn }}
+                    </button>
                   </li>
                 </ul>
               </div>
@@ -139,7 +147,7 @@ export default {
             <div class="content">
               <ul>
                 <li v-for="release in display" :key="release.id">
-                  <h1 class="font-display">
+                  <h1 :id="release.id" class="font-display">
                     {{ release.endOn }} - {{ statusDisplay }}
                   </h1>
                   <h1> {{ release.title }} </h1>
@@ -176,7 +184,7 @@ export default {
       </div>
 
       <div class="pagination">
-        <div class="prev-bttn">
+        <div id="prev" class="prev-bttn">
           <ButtonComponent :text="navButton.prevText" type="submit" @click="changeEndCursor" />
         </div>
         <div class="next-bttn">

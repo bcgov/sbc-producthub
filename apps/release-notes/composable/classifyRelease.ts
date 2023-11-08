@@ -9,10 +9,11 @@ import { Issue, Releases, PageInfo } from '~/interface/interfaces'
  */
 export async function classifyReleases (
   team: string,
-  startCursor: String,
-  endCursor: String
+  startCursor: string,
+  endCursor: string
 ) {
   let items = {}
+  let myGhIds: string = ''
   let pageInfo: PageInfo = {
     hasPreviousPage: false,
     hasNextPage: false,
@@ -20,14 +21,17 @@ export async function classifyReleases (
     endCursor: ''
   }
   if (team === 'ENTITIES') {
-    const myGhIds: String = GhRepo.ENTITIES
-    const response = await getReport(myGhIds, startCursor, endCursor)
-    items = response.nodes
-    pageInfo = response.pageInfo
+    myGhIds = GhRepo.ENTITIES
+  } else if (team === 'NAMETEAMSPACE') {
+    myGhIds = GhRepo.NAMETEAMSPACE
   }
+  const response = await getReport(myGhIds, startCursor, endCursor)
+  items = response.nodes
+  pageInfo = response.pageInfo
   const itemArray = Array.isArray(items) ? items : []
   // console.log(itemArray)
   const releases = filterResponse(itemArray)
+  console.log(releases)
   return {
     releases,
     pageInfo
