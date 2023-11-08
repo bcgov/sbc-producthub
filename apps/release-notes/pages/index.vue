@@ -62,6 +62,7 @@ export default {
       } else {
         this.display = this.releases.open
       }
+      this.scrollToTop()
     },
     switchState () {
       if (this.state === 'open') {
@@ -78,14 +79,12 @@ export default {
       if (this.pageInfo.hasPreviousPage) {
         this.pageInfo.endCursor = ''
         this.created()
-        this.scrollToTop()
       }
     },
     changeEndCursor () {
       if (this.pageInfo.hasNextPage) {
         this.pageInfo.startCursor = ''
         this.created()
-        this.scrollToTop()
       }
     },
     scrollToTop () {
@@ -105,9 +104,9 @@ export default {
       <navbar />
     </header>
     <div class="title-page">
-      <div class="title">
+      <b class="title">
         Release Dates
-      </div>
+      </b>
       <div class="path">
         <h1>BC Registries and Online Services Application Releases & Notes</h1>
         <h2>All releases that are {{ statusDisplay }} are noted below.</h2>
