@@ -1,16 +1,26 @@
 import { gql } from '@apollo/client/core'
 import { getClient } from './getClient'
 
-export async function getReport (ghId: string, start: string, end: string) {
-  const client = getClient()
-  console.log(ghId)
+export async function getReport(
+  ghId: string,
+  start: string,
+  end: string,
+  state: string
+) {
+  const client = getClient();
+  console.log(state, start, end);
   try {
     const result = await client.query({
       query: gql`
-        query RepositoriesByGhId($workspaceID: ID!, $startCursor: String, $endCursor: String) {
+        query RepositoriesByGhId(
+          $workspaceID: ID!
+          $startCursor: String
+          $endCursor: String
+          $state: ReleaseState!
+        ) {
           workspace(id: $workspaceID) {
             displayName
-            releases(last: 20, before: $startCursor, after: $endCursor) {
+            releases(last: 20, before: $startCursor, after: $endCursor, state: { eq: $state }) {
               totalCount
               nodes {
                 startOn
@@ -49,15 +59,15 @@ export async function getReport (ghId: string, start: string, end: string) {
       variables: {
         workspaceID: ghId,
         startCursor: start,
-        endCursor: end
-      }
-    })
-    console.log(result.data.workspace.displayName)
-    return (
-      result.data.workspace.releases
-    )
+        endCursor: end,
+        state: state,
+      },
+    });
+    console.log("in getReport")
+    console.log(result.data.workspace);
+    return result.data.workspace.releases;
   } catch (error) {
-    console.error(error)
-    throw error
+    console.error(error);
+    throw error;
   }
 }

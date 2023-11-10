@@ -1,6 +1,6 @@
 import { GhRepo } from '../enums/dropdownEnum'
 import { getReport } from './getreport'
-import { Issue, Releases, PageInfo } from '~/interface/interfaces'
+import { Issue, Releases, PageInfo, Release } from '~/interface/interfaces'
 
 /**
  * This function is to get the response from ZenhubAPI and
@@ -10,7 +10,8 @@ import { Issue, Releases, PageInfo } from '~/interface/interfaces'
 export async function classifyReleases (
   team: string,
   startCursor: string,
-  endCursor: string
+  endCursor: string,
+  state: string
 ) {
   let items = {}
   let myGhIds: string = ''
@@ -25,12 +26,14 @@ export async function classifyReleases (
   } else if (team === 'NAMETEAMSPACE') {
     myGhIds = GhRepo.NAMETEAMSPACE
   }
-  const response = await getReport(myGhIds, startCursor, endCursor)
+  console.log("Current state:" + state)
+  const response = await getReport(myGhIds, startCursor, endCursor, state)
   items = response.nodes
   pageInfo = response.pageInfo
   const itemArray = Array.isArray(items) ? items : []
-  // console.log(itemArray)
+  console.log(itemArray)
   const releases = filterResponse(itemArray)
+  console.log("in report")
   console.log(releases)
   return {
     releases,
@@ -46,16 +49,13 @@ export async function classifyReleases (
  * @returns Releases
  */
 export function filterResponse (itemArray: any[]) {
-  const releases: Releases = {
-    open: [],
-    close: []
-  }
+  var releases: Release[] = []
   for (let i = itemArray.length - 1; i > -1; i--) {
     const item = itemArray[i]
     // console.log(item)
     const issues = getIssues(item.issues.nodes)
-    if (item.state === 'CLOSED') {
-      releases.close.push({
+    // if (item.state === 'CLOSED') {
+      releases.push({
         id: item.id,
         title: item.title,
         description: item.description,
@@ -64,17 +64,17 @@ export function filterResponse (itemArray: any[]) {
         state: item.state,
         issues
       })
-    } else {
-      releases.open.push({
-        id: item.id,
-        title: item.title,
-        description: item.description,
-        startOn: item.startOn,
-        endOn: item.endOn,
-        state: item.state,
-        issues
-      })
-    }
+    // } else {
+    //   releases.open.push({
+    //     id: item.id,
+    //     title: item.title,
+    //     description: item.description,
+    //     startOn: item.startOn,
+    //     endOn: item.endOn,
+    //     state: item.state,
+    //     issues
+    //   })
+    // }
   }
   return releases
 }

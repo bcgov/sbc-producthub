@@ -5,15 +5,16 @@ import { Release, Releases, PageInfo } from '../interface/interfaces'
 import { useCursor } from '~/composable/state'
 import ButtonComponent from '~/components/ButtonComponent.vue'
 import ContactCard from '~/components/ContactCard.vue'
+import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript'
 
 export default {
   components: { ContactCard },
   data () {
-    const releases: Releases = { open: [], close: [] }
-    const state: string = 'close'
+    const releases: Release[] = []
+    const state: string = 'CLOSED'
     const startCursor = useCursor()
     const endCursor = useCursor()
-    const display: Release[] = releases.close
+    const display: Release[] = releases
     const statusDisplay = 'Done'
     const board: string = 'ENTITIES'
     const navButton = {
@@ -48,32 +49,35 @@ export default {
   },
   methods: {
     async created () {
-      console.log(this.board)
-      const response = await classifyReleases(this.board, this.pageInfo.startCursor, this.pageInfo.endCursor)
+      const response = await classifyReleases(this.board, this.pageInfo.startCursor, this.pageInfo.endCursor, this.state)
       this.releases = response.releases
+      console.log("Response")
+      console.log(this.releases)
       this.pageInfo = {
         hasPreviousPage: response.pageInfo.hasPreviousPage,
         hasNextPage: response.pageInfo.hasNextPage,
         startCursor: response.pageInfo.startCursor,
         endCursor: response.pageInfo.endCursor
       }
-      if (this.state === 'close') {
-        this.display = this.releases.close
-      } else {
-        this.display = this.releases.open
-      }
+      this.display = this.releases
       this.scrollToTop()
     },
     switchState () {
-      if (this.state === 'open') {
-        this.state = 'open'
-        this.display = this.releases.open
+      this.display = []
+      if (this.state === 'OPEN') {
+        this.state = 'OPEN'
         this.statusDisplay = 'In progress'
       } else {
-        this.state = 'close'
-        this.display = this.releases.close
+        this.state = 'CLOSED'
         this.statusDisplay = 'Done'
       }
+      this.pageInfo = {
+        hasPreviousPage: false,
+        hasNextPage: false,
+        startCursor: '',
+        endCursor: ''
+      }
+      this.created()
     },
     changeStartCursor () {
       if (this.pageInfo.hasPreviousPage) {
@@ -116,10 +120,10 @@ export default {
           Go to:
         </div>
         <select id="status" v-model="state" class="state-options">
-          <option value="close">
+          <option value="CLOSED">
             Done Releases
           </option>
-          <option value="open">
+          <option value="OPEN">
             In Progress Releases
           </option>
         </select>
