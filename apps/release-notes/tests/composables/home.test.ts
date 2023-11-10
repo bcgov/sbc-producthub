@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { getIssues, filterResponse } from '../../composable/classifyRelease'
-import { Releases } from '~/interface/interfaces'
+import { Release } from '~/interface/interfaces'
 // const labels = {
 //   items: [
 //     {
@@ -88,31 +88,26 @@ const releases = {
     }
   ],
 
-  expected: {
-    open: [
-      {
-        id: '1',
-        title: 'Release 1',
-        description: 'This is release 1',
-        startOn: '2023-10-02',
-        endOn: '2023-12-04',
-        state: 'OPEN',
-        issues: issues.expected
-      }
-    ],
-    close: [
-      {
-        id: '2',
-        title: 'Release 2',
-        description: 'This is release 2',
-        startOn: '2022-11-19',
-        endOn: '2023-02-24',
-        state: 'CLOSED',
-        issues: issues.expected
-      }
-    ]
-  },
-
+  expected: [
+    {
+      id: '2',
+      title: 'Release 2',
+      description: 'This is release 2',
+      startOn: '2022-11-19',
+      endOn: '2023-02-24',
+      state: 'CLOSED',
+      issues: issues.expected
+    },
+    {
+      id: '1',
+      title: 'Release 1',
+      description: 'This is release 1',
+      startOn: '2023-10-02',
+      endOn: '2023-12-04',
+      state: 'OPEN',
+      issues: issues.expected
+    }
+  ],
   filterResponse
 }
 
@@ -153,7 +148,7 @@ describe('helper functions test', () => {
     expect(releases.filterResponse(releases.items)).toEqual(releases.expected)
     expect(spy).toHaveBeenCalledTimes(1)
 
-    const empty: Releases = { open: [], close: [] }
+    const empty: Release[] = []
     spy.mockImplementationOnce(() => empty)
     expect(releases.filterResponse(releases.items)).toEqual(empty)
 
