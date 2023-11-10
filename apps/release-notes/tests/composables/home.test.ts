@@ -69,47 +69,47 @@ const issues = {
 const releases = {
   items: [
     {
-      id: "1",
-      title: "Release 1",
-      description: "This is release 1",
-      startOn: "2023-10-02",
-      endOn: "2023-12-04",
-      state: "OPEN",
-      issues: { nodes: issues.items },
+      id: '1',
+      title: 'Release 1',
+      description: 'This is release 1',
+      startOn: '2023-10-02',
+      endOn: '2023-12-04',
+      state: 'OPEN',
+      issues: { nodes: issues.items }
     },
     {
-      id: "2",
-      title: "Release 2",
-      description: "This is release 2",
-      startOn: "2022-11-19",
-      endOn: "2023-02-24",
-      state: "CLOSED",
-      issues: { nodes: issues.items },
-    },
+      id: '2',
+      title: 'Release 2',
+      description: 'This is release 2',
+      startOn: '2022-11-19',
+      endOn: '2023-02-24',
+      state: 'CLOSED',
+      issues: { nodes: issues.items }
+    }
   ],
 
   expected: [
     {
-      id: "2",
-      title: "Release 2",
-      description: "This is release 2",
-      startOn: "2022-11-19",
-      endOn: "2023-02-24",
-      state: "CLOSED",
-      issues: issues.expected,
+      id: '2',
+      title: 'Release 2',
+      description: 'This is release 2',
+      startOn: '2022-11-19',
+      endOn: '2023-02-24',
+      state: 'CLOSED',
+      issues: issues.expected
     },
     {
-      id: "1",
-      title: "Release 1",
-      description: "This is release 1",
-      startOn: "2023-10-02",
-      endOn: "2023-12-04",
-      state: "OPEN",
-      issues: issues.expected,
-    },
+      id: '1',
+      title: 'Release 1',
+      description: 'This is release 1',
+      startOn: '2023-10-02',
+      endOn: '2023-12-04',
+      state: 'OPEN',
+      issues: issues.expected
+    }
   ],
-  filterResponse,
-};
+  filterResponse
+}
 
 describe('helper functions test', () => {
   afterEach(() => {
