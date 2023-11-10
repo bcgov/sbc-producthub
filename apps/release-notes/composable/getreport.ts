@@ -1,14 +1,14 @@
 import { gql } from '@apollo/client/core'
 import { getClient } from './getClient'
 
-export async function getReport(
+export async function getReport (
   ghId: string,
   start: string,
   end: string,
   state: string
 ) {
-  const client = getClient();
-  console.log(state, start, end);
+  const client = getClient()
+  console.log(state, start, end)
   try {
     const result = await client.query({
       query: gql`
@@ -60,14 +60,14 @@ export async function getReport(
         workspaceID: ghId,
         startCursor: start,
         endCursor: end,
-        state: state,
-      },
-    });
-    console.log("in getReport")
-    console.log(result.data.workspace);
-    return result.data.workspace.releases;
+        state
+      }
+    })
+    console.log('in getReport')
+    console.log(result.data.workspace)
+    return result.data.workspace.releases
   } catch (error) {
-    console.error(error);
-    throw error;
+    console.error(error)
+    throw error
   }
 }
