@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { getIssues, filterResponse } from '../../composable/classifyRelease'
 import { getReport } from '../../composable/getreport'
-import { getClient } from "../../composable/getClient"
+import { getClient } from '../../composable/getClient'
 import { Release } from '~/interface/interfaces'
 // const labels = {
 //   items: [
@@ -120,10 +120,10 @@ const client = {
 const report = {
   items: [
     {
-      team: "ENTITIES",
-      startCursor: "",
-      endCursor: "",
-      state: "CLOSED"
+      team: 'ENTITIES',
+      startCursor: '',
+      endCursor: '',
+      state: 'CLOSED'
     }
   ],
   getReport
@@ -172,22 +172,22 @@ describe('helper functions test', () => {
     expect(spy).toHaveBeenCalledTimes(2)
   })
 
-  // it("Test getClient function", () => {
-  //   const spy = vi.spyOn(client, "getClient");
-  //   expect(spy.getMockName()).toEqual("getClient");
-    
-  //   // expect(releases.filterResponse(releases.items)).toEqual(releases.expected);
-  
-  //   // const empty: Release[] = [];
-  //   // spy.mockImplementationOnce(() => empty);
-  //   // expect(releases.filterResponse(releases.items)).toEqual(empty);
+  it('Test getClient function', () => {
+    const spy = vi.spyOn(client, 'getClient')
+    expect(spy.getMockName()).toEqual('getClient')
+
+    //   // expect(releases.filterResponse(releases.items)).toEqual(releases.expected);
+
+    //   // const empty: Release[] = [];
+    //   // spy.mockImplementationOnce(() => empty);
+    //   // expect(releases.filterResponse(releases.items)).toEqual(empty);
 
   //   // expect(spy).toHaveBeenCalledTimes(2);
-  // });
+  })
 
-  it("Test getReport function", () => {
-    const spy = vi.spyOn(report, "getReport");
-    expect(spy.getMockName()).toEqual("getReport");
+  it('Test getReport function', () => {
+    const spy = vi.spyOn(report, 'getReport')
+    expect(spy.getMockName()).toEqual('getReport')
     // expect(
     //   report.getReport(
     //     report.items[0].team,
@@ -198,11 +198,11 @@ describe('helper functions test', () => {
     // );
     expect(0).toEqual(0)
     // expect(releases.filterResponse(releases.items)).toEqual(releases.expected);
-    
+
     // const empty: Release[] = [];
     // spy.mockImplementationOnce(() => empty);
     // expect(releases.filterResponse(releases.items)).toEqual(empty);
 
     // expect(spy).toHaveBeenCalledTimes(2);
-  });
+  })
 })

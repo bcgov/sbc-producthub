@@ -64,6 +64,6 @@ export async function getReport (
     })
     return result.data.workspace.releases
   } catch (error) {
-    throw error
+    console.log(error)
   }
 }
