@@ -12,6 +12,11 @@ export default defineNuxtConfig({
         {
           rel: 'stylesheet',
           href: 'https://drive.google.com/file/d/18cwKBO0ZzLNQEnoqjEfC_6PCxqETDSqt/view?usp=sharing'
+        },
+        {
+          rel: 'icon',
+          type: 'image/png',
+          href: '/BCID_V_rgb_pos_small.png'
         }
       ]
     }

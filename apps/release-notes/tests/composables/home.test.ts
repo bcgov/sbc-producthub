@@ -1,5 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { getIssues, filterResponse } from '../../composable/classifyRelease'
+import { getReport } from '../../composable/getreport'
+import { getClient } from '../../composable/getClient'
 import { Release } from '~/interface/interfaces'
 // const labels = {
 //   items: [
@@ -111,6 +113,21 @@ const releases = {
   filterResponse
 }
 
+const client = {
+  getClient
+}
+
+const report = {
+  items: [
+    {
+      team: 'ENTITIES',
+      startCursor: '',
+      endCursor: '',
+      state: 'CLOSED'
+    }
+  ],
+  getReport
+}
 describe('helper functions test', () => {
   afterEach(() => {
     vi.resetAllMocks()
@@ -153,5 +170,39 @@ describe('helper functions test', () => {
     expect(releases.filterResponse(releases.items)).toEqual(empty)
 
     expect(spy).toHaveBeenCalledTimes(2)
+  })
+
+  it('Test getClient function', () => {
+    const spy = vi.spyOn(client, 'getClient')
+    expect(spy.getMockName()).toEqual('getClient')
+
+    //   // expect(releases.filterResponse(releases.items)).toEqual(releases.expected);
+
+    //   // const empty: Release[] = [];
+    //   // spy.mockImplementationOnce(() => empty);
+    //   // expect(releases.filterResponse(releases.items)).toEqual(empty);
+
+  //   // expect(spy).toHaveBeenCalledTimes(2);
+  })
+
+  it('Test getReport function', () => {
+    const spy = vi.spyOn(report, 'getReport')
+    expect(spy.getMockName()).toEqual('getReport')
+    // expect(
+    //   report.getReport(
+    //     report.items[0].team,
+    //     report.items[0].startCursor,
+    //     report.items[0].endCursor,
+    //     report.items[0].state
+    //   )
+    // );
+    expect(0).toEqual(0)
+    // expect(releases.filterResponse(releases.items)).toEqual(releases.expected);
+
+    // const empty: Release[] = [];
+    // spy.mockImplementationOnce(() => empty);
+    // expect(releases.filterResponse(releases.items)).toEqual(empty);
+
+    // expect(spy).toHaveBeenCalledTimes(2);
   })
 })

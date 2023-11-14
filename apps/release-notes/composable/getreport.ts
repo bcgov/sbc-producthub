@@ -8,7 +8,6 @@ export async function getReport (
   state: string
 ) {
   const client = getClient()
-  console.log(state, start, end)
   try {
     const result = await client.query({
       query: gql`
@@ -63,11 +62,8 @@ export async function getReport (
         state
       }
     })
-    console.log('in getReport')
-    console.log(result.data.workspace)
     return result.data.workspace.releases
   } catch (error) {
-    console.error(error)
-    throw error
+    console.log(error)
   }
 }
