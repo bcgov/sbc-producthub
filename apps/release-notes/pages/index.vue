@@ -50,8 +50,6 @@ export default {
     async created () {
       const response = await classifyReleases(this.board, this.pageInfo.startCursor, this.pageInfo.endCursor, this.state)
       this.releases = response.releases
-      console.log('Response')
-      console.log(this.releases)
       this.pageInfo = {
         hasPreviousPage: response.pageInfo.hasPreviousPage,
         hasNextPage: response.pageInfo.hasNextPage,
@@ -115,9 +113,9 @@ export default {
         <h2>All releases that are {{ statusDisplay }} are noted below.</h2>
       </div>
       <div class="choose-state">
-        <div>
+        <b>
           Go to:
-        </div>
+        </b>
         <select id="status" v-model="state" class="state-options">
           <option value="CLOSED">
             Done Releases
@@ -150,7 +148,7 @@ export default {
           <div class="content">
             <ul>
               <li v-for="release in display" :key="release.id">
-                <h1 :id="release.id" class="font-display">
+                <h1 :id="release.id">
                   {{ release.endOn }} - {{ statusDisplay }}
                 </h1>
                 <h1> {{ release.title }} </h1>
@@ -283,7 +281,7 @@ h2 {
 .pagination {
   flex-direction: row;
   margin-bottom: 5%;
-  margin-left: 2.5%;
+  margin-left: 45%;
   display: flex;
 }
 
@@ -317,6 +315,6 @@ h2 {
 
 .next-bttn {
   flex-direction: column;
-  margin-left: 86%;
+  margin-left: 2%;
 }
 </style>

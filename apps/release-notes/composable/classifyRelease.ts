@@ -26,15 +26,11 @@ export async function classifyReleases (
   } else if (team === 'NAMETEAMSPACE') {
     myGhIds = GhRepo.NAMETEAMSPACE
   }
-  console.log('Current state:' + state)
   const response = await getReport(myGhIds, startCursor, endCursor, state)
   items = response.nodes
   pageInfo = response.pageInfo
   const itemArray = Array.isArray(items) ? items : []
-  console.log(itemArray)
   const releases = filterResponse(itemArray)
-  console.log('in report')
-  console.log(releases)
   return {
     releases,
     pageInfo
@@ -52,9 +48,7 @@ export function filterResponse (itemArray: any[]) {
   const releases: Release[] = []
   for (let i = itemArray.length - 1; i > -1; i--) {
     const item = itemArray[i]
-    // console.log(item)
     const issues = getIssues(item.issues.nodes)
-    // if (item.state === 'CLOSED') {
     releases.push({
       id: item.id,
       title: item.title,
@@ -64,17 +58,6 @@ export function filterResponse (itemArray: any[]) {
       state: item.state,
       issues
     })
-    // } else {
-    //   releases.open.push({
-    //     id: item.id,
-    //     title: item.title,
-    //     description: item.description,
-    //     startOn: item.startOn,
-    //     endOn: item.endOn,
-    //     state: item.state,
-    //     issues
-    //   })
-    // }
   }
   return releases
 }
