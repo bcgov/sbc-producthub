@@ -131,6 +131,14 @@ export default {
     </div>
 
     <div class="release-page">
+      <div class="pagination">
+        <div id="prev" class="prev-bttn">
+          <ButtonComponent :text="navButton.prevText" type="submit" @click="changeEndCursor" />
+        </div>
+        <div class="next-bttn">
+          <ButtonComponent :text="navButton.nextText" type="submit" @click="changeStartCursor" />
+        </div>
+      </div>
       <div v-if="releases">
         <div class="page">
           <div class="date-range">
