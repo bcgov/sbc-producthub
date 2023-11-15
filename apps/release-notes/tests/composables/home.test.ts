@@ -175,7 +175,6 @@ describe('helper functions test', () => {
   it('Test getClient function', () => {
     const spy = vi.spyOn(client, 'getClient')
     expect(spy.getMockName()).toEqual('getClient')
-
     //   // expect(releases.filterResponse(releases.items)).toEqual(releases.expected);
 
     //   // const empty: Release[] = [];
