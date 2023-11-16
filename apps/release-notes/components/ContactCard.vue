@@ -1,14 +1,14 @@
 <template>
     <div class="contact-card">
-        <h1>Contact Us</h1>
+        <h1 class="contact-title">Contact Us</h1>
         <div> If you have questions, contact us at:
             <a class="email" href="mailto: bcreg.engagement@gov.bc.ca">bcreg.engagement@gov.bc.ca</a>
         </div>
         <br>
         <div>
-            <b>
+            <h1 class="contact-title">
                 Legend:
-            </b>
+            </h1>
             <div> 
                 <b>Assets</b> = Manufactured Homes Registry and Personal Property Registry 
             </div>
@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent } from 'vue';
 export default defineComponent ({
     props: {
         color: {
@@ -46,7 +46,7 @@ export default defineComponent ({
 </script>
 
 <style>
-    .contact-card > h1 {
+    .contact-title {
         color: black;
     }
     .email {
