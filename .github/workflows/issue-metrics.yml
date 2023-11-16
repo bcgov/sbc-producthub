@@ -33,9 +33,12 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SEARCH_QUERY: 'repo:bcgov/sbc-producthub is:issue created:${{ env.last_month }} -reason:"not planned"'
 
+    - name: Echo md file
+      run: echo "./issue_metrics.md"
+      
     - name: Create issue
       uses: peter-evans/create-issue-from-file@v4
       with:
         title: Monthly issue metrics report
-        # token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
         content-filepath: ./issue_metrics.md
