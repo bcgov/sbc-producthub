@@ -247,7 +247,7 @@ h2 {
 
 }
 
-.path > h1 {
+.path > h1, .choose-state > b {
   color: black;
 }
 
