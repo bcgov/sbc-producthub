@@ -105,9 +105,7 @@ export default {
       <navbar />
     </header>
     <div class="title-page">
-      <b class="title">
-        Release Dates
-      </b>
+      <b class="title" />
       <div class="path">
         <h1>BC Registries and Online Services Application Releases & Notes</h1>
         <h2>All releases that are {{ statusDisplay }} are noted below.</h2>
@@ -135,6 +133,9 @@ export default {
         <div class="page">
           <div class="date-range">
             <div class="dates">
+              <b class="title">
+                Release Dates
+              </b>
               <ul>
                 <li v-for="release in display" :key="release.id">
                   <button @click="scrollToElement(release.id)">
@@ -237,6 +238,7 @@ h2 {
   align-self: center;
   width: 30%;
   color: black;
+  font-size: 20px;
 }
 
 .path {
