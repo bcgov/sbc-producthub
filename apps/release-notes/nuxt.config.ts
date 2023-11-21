@@ -2,6 +2,11 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss'],
+  css: [
+    '~/assets/css/BCSans.css',
+    '~/assets/css/tailwind.css'
+
+  ],
   tailwindcss: {
     cssPath: '~/assets/css/tailwind.css',
     configPath: 'tailwind.config'
@@ -9,10 +14,6 @@ export default defineNuxtConfig({
   app: {
     head: {
       link: [
-        {
-          rel: 'stylesheet',
-          href: 'https://drive.google.com/file/d/18cwKBO0ZzLNQEnoqjEfC_6PCxqETDSqt/view?usp=sharing'
-        },
         {
           rel: 'icon',
           type: 'image/png',
