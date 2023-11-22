@@ -4,12 +4,6 @@ import type { Config } from 'tailwindcss'
 export default <Partial<Config>>{
   theme: {
     extend: {
-      // colors: {
-      //   primary: defaultTheme.colors.green
-      // },
-      fontFamily: {
-        sans: 'Noto Sans, ui-serif'
-      },
       transitionProperty: {
         flow: 'background-position'
       },

@@ -1,0 +1,45 @@
+@font-face {
+    font-family: 'BCSans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/BCSans-Regular_2f.woff2') format('woff2'),
+        /* Optimized for very modern browsers */
+        url('../fonts/BCSans-Regular_2f.woff') format('woff'),
+        local('BCSans');
+    /* Modern Browsers */
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'BCSans';
+    font-style: italic;
+    src: url('../fonts/BCSans-Italic_2f.woff2') format('woff2'),
+        /* Optimized for very modern browsers */
+        url('../fonts/BCSans-Italic_2f.woff') format('woff'),
+        local('BCSans');
+    /* Modern Browsers */
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'BCSans';
+    font-weight: 700;
+    src: url('../fonts/BCSans-Bold_2f.woff2') format('woff2'),
+        /* Optimized for very modern browsers */
+        url('../fonts/BCSans-Bold_2f.woff') format('woff'),
+        local('BCSans');
+    /* Modern Browsers */
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'BCSans';
+    font-style: italic;
+    font-weight: 700;
+    src: url('../fonts/BCSans-BoldItalic_2f.woff2') format('woff2'),
+        /* Optimized for very modern browsers */
+        url('../fonts/BCSans-BoldItalic_2f.woff') format('woff'),
+        local('BCSans');
+    /* Modern Browsers */
+    font-display: swap;
+}
