@@ -3,9 +3,6 @@ import { getClient } from './getClient'
 
 export async function getSprint (
   workspaceID: string
-//   start: string,
-//   end: string,
-//   state: string
 ) {
   const client = getClient()
   try {

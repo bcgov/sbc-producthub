@@ -54,7 +54,6 @@
 </template>
 
 <script lang="ts">
-import { Zenhub } from '../enums/dropdownEnum'
 import getData from '../helper/getData'
 
 import { Response, Sprint } from '../interface/interfaces'
@@ -96,8 +95,9 @@ export default {
   methods: {
 
     async getContent () {
-      this.entities = await getData(Zenhub.ENTITIES)
-      this.nameteam = await getData(Zenhub.NAMETEAMSPACE)
+      const config = useRuntimeConfig()
+      this.entities = await getData(config.public.ENTITIES_ID)
+      this.nameteam = await getData(config.public.NAMETEAMSPACE_ID)
     },
     calculateTotalIssue (data: Response) {
       let sum = 0

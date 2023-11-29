@@ -88,7 +88,7 @@ export default {
     changeEndCursor () {
       if (this.pageInfo.hasNextPage) {
         this.pageInfo.endCursor = ''
-        this.pageInfo.startCursor = this.prev[this.prev.length-2]
+        this.pageInfo.startCursor = this.prev[this.prev.length - 2]
         this.prev.pop()
         this.created()
       }

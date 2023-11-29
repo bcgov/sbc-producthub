@@ -20,7 +20,9 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      zenhubAPI: process.env.ZENHUB_APIKEY
+      zenhubAPI: process.env.ZENHUB_APIKEY,
+      ENTITIES_ID: process.env.ENTITIES,
+      NAMETEAMSPACE_ID: process.env.NAMETEAMSPACE
     }
   }
 })
