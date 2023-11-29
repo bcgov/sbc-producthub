@@ -2,6 +2,7 @@
   "name": "application-status",
   "private": true,
   "scripts": {
+    "build-check": "nuxt build",
     "build": "nuxt generate",
     "dev": "nuxt dev",
     "lint": "eslint .",
@@ -9,7 +10,8 @@
     "test": "vitest --passWithNoTests",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "coverage": "vitest run --coverage"
   },
   "devDependencies": {
     "@nuxt/content": "^2.8.2",
