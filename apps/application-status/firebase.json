@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "release-notes-dev",
+    "site": "application-status-dev",
     "public": "dist",
     "ignore": [
       "**/devops/**",
