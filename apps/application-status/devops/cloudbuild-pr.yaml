@@ -7,6 +7,8 @@ steps:
       pnpm install
       pnpm build
     dir: 'apps/application-status'
+    env:
+      - 'ZENHUB_APIKEY=$_ZENHUB_APIKEY'
 
   #
   # Deploy to firebase channel, using the PR #
