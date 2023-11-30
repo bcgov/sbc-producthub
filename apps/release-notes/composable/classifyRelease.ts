@@ -1,7 +1,6 @@
-import { GhRepo } from '../enums/dropdownEnum'
 import { getReport } from './getreport'
+import { getBoard } from './getBoard'
 import { Issue, PageInfo, Release } from '~/interface/interfaces'
-
 /**
  * This function is to get the response from ZenhubAPI and
  * @param team string
@@ -22,9 +21,9 @@ export async function classifyReleases (
     endCursor: ''
   }
   if (team === 'ENTITIES') {
-    myGhIds = GhRepo.ENTITIES
+    myGhIds = await getBoard('entities-team-space-2023')
   } else if (team === 'NAMETEAMSPACE') {
-    myGhIds = GhRepo.NAMETEAMSPACE
+    myGhIds = await getBoard('names-team-board')
   }
   const response = await getReport(myGhIds, startCursor, endCursor, state)
   items = response.nodes

@@ -2,11 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss'],
-  css: [
-    '~/assets/css/BCSans.css',
-    '~/assets/css/tailwind.css'
-
-  ],
+  css: ['~/assets/css/BCSans.css', '~/assets/css/tailwind.css'],
   tailwindcss: {
     cssPath: '~/assets/css/tailwind.css',
     configPath: 'tailwind.config'
