@@ -6,7 +6,6 @@ on:
     paths:
       - "apps/application-status/**"
 
-
 defaults:
   run:
     shell: bash
@@ -42,6 +41,9 @@ jobs:
       - name: Install dependencies
         run: |
           pnpm install
+      - name: build
+        run: |
+          pnpm run build-check
       - name: Linting
         run: |
           pnpm run lint
@@ -66,9 +68,12 @@ jobs:
       - name: Install dependencies
         run: |
           pnpm install
+      - name: build
+        run: |
+          pnpm run build-check
       - name: Testing
         run: |
-          pnpm run test
+          pnpm run test --coverage
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
@@ -95,4 +100,7 @@ jobs:
           version: 8
       - name: Install dependencies
         run: |
-          pnpm run build
+          pnpm install
+      - name: run test
+        run: |
+          pnpm run build-check

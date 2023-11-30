@@ -16,6 +16,7 @@ export default {
     const display: Release[] = releases
     const statusDisplay = 'Done'
     const board: string = 'ENTITIES'
+    const prev: string[] = ['']
     const navButton = {
       nextText: 'Next',
       prevText: 'Prev'
@@ -40,7 +41,8 @@ export default {
       statusDisplay,
       navButton,
       filterButton,
-      board
+      board,
+      prev
     }
   },
   beforeMount () {
@@ -79,12 +81,15 @@ export default {
     changeStartCursor () {
       if (this.pageInfo.hasPreviousPage) {
         this.pageInfo.endCursor = ''
+        this.prev.push(this.pageInfo.startCursor)
         this.created()
       }
     },
     changeEndCursor () {
       if (this.pageInfo.hasNextPage) {
-        this.pageInfo.startCursor = ''
+        this.pageInfo.endCursor = ''
+        this.pageInfo.startCursor = this.prev[this.prev.length - 2]
+        this.prev.pop()
         this.created()
       }
     },
