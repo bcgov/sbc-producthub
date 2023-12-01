@@ -9,8 +9,6 @@ steps:
     dir: 'apps/application-status'
     env:
       - 'ZENHUB_APIKEY=$_ZENHUB_APIKEY'
-      - 'ENTITIES=$_ENTITIES'
-      - 'NAMETEAMSPACE=$_NAMETEAMSPACE'
 
   #
   # Deploy to firebase channel, using the PR #
