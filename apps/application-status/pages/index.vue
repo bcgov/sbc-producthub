@@ -55,8 +55,9 @@
 
 <script lang="ts">
 import getData from '../helper/getData'
-
+import BoardName from '../enums/boardName'
 import { Response, Sprint } from '../interface/interfaces'
+import { getBoard } from '../composables/getBoard'
 export default {
   data () {
     const id = 1
@@ -82,7 +83,6 @@ export default {
       sprint,
       releases: []
     }
-    // var data = {}
     return {
       id,
       entities,
@@ -95,9 +95,10 @@ export default {
   methods: {
 
     async getContent () {
-      const config = useRuntimeConfig()
-      this.entities = await getData(config.public.ENTITIES_ID)
-      this.nameteam = await getData(config.public.NAMETEAMSPACE_ID)
+        const entities = await getBoard(BoardName.ENTITIES)
+        const nameteam = await getBoard(BoardName.NAMETEAMSPACE)
+        this.entities = await getData(entities)
+        this.nameteam = await getData(nameteam)
     },
     calculateTotalIssue (data: Response) {
       let sum = 0
