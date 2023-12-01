@@ -18,11 +18,11 @@
             </div>
             <br>
             <div>
-                <b>Entities</b> = Cooperatives, Benefit Companies, Sole Proprietorships and General Partnerships.
+                <b>Entities</b> = Cooperatives, Benefit Companies, Sole Proprietorships, BC Corporations and General Partnerships.
             </div>
             <br>
             <div>
-                <b>Relationships</b> = authentication, payments and other features.
+                <b>Relationships</b> = Authentication, payments and other features.
             </div>
             <br>
             <div>
