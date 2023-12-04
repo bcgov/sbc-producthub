@@ -6,10 +6,7 @@ async function runWorkflow (owner: string, repo: string, runID: number) {
     {
       owner,
       repo,
-      runID,
-      headers: {
-        'X-GitHub-Api-Version': '2022-11-28'
-      }
+      runID
     }
   )
 }
