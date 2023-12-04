@@ -1,6 +1,6 @@
 {
   "name": "application-status",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "build-check": "nuxt build",
@@ -29,6 +29,7 @@
   "dependencies": {
     "@apollo/client": "^3.8.7",
     "graphql": "^16.8.1",
-    "graphql-tag": "^2.12.6"
+    "graphql-tag": "^2.12.6",
+    "octokit": "^3.1.2"
   }
 }

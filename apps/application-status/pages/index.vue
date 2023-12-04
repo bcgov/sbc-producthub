@@ -50,6 +50,10 @@
         <pre>{{ calculateTotalIssue(nameteam) }}</pre>
       </div>
     </div>
+    <pre class="mx-20">
+        Loading issues
+        {{ issues }}
+    </pre>
   </div>
 </template>
 
@@ -58,6 +62,10 @@ import getData from '../helper/getData'
 import BoardName from '../enums/boardName'
 import { Response, Sprint } from '../interface/interfaces'
 import { getBoard } from '../composables/getBoard'
+import workflowRun from '../enums/workflowRun'
+import runWorkFlow from '../composables/runWorkFlow'
+import runJob from '../enums/runJob'
+import waitForSuccessStatus from '../composables/getWorkFlows'
 export default {
   data () {
     const id = 1
@@ -83,10 +91,12 @@ export default {
       sprint,
       releases: []
     }
+    const issues: any = null
     return {
       id,
       entities,
-      nameteam
+      nameteam,
+      issues
     }
   },
   beforeMount () {
@@ -95,10 +105,13 @@ export default {
   methods: {
 
     async getContent () {
-        const entities = await getBoard(BoardName.ENTITIES)
-        const nameteam = await getBoard(BoardName.NAMETEAMSPACE)
-        this.entities = await getData(entities)
-        this.nameteam = await getData(nameteam)
+      const entities = await getBoard(BoardName.ENTITIES)
+      const nameteam = await getBoard(BoardName.NAMETEAMSPACE)
+      this.entities = await getData(entities)
+      this.nameteam = await getData(nameteam)
+      await runWorkFlow(workflowRun.OWNER, workflowRun.REPO, runJob.ENTITIES)
+      this.issues = await waitForSuccessStatus(workflowRun.OWNER, workflowRun.REPO, runJob.ENTITIES, 'Entity')
+      console.log(this.issues)
     },
     calculateTotalIssue (data: Response) {
       let sum = 0
