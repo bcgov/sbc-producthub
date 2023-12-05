@@ -111,7 +111,6 @@ export default {
       this.nameteam = await getData(nameteam)
       await runWorkFlow(workflowRun.OWNER, workflowRun.REPO, runJob.ENTITIES)
       this.issues = await waitForSuccessStatus(workflowRun.OWNER, workflowRun.REPO, runJob.ENTITIES, 'Entity')
-      console.log(this.issues)
     },
     calculateTotalIssue (data: Response) {
       let sum = 0
