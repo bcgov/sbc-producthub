@@ -149,10 +149,12 @@ export default {
               <b class="title">
                 Release Dates
               </b>
-              <ul>
+              <ul >
                 <li v-for="release in display" :key="release.id">
                   <button @click="scrollToElement(release.id)">
-                    {{ release.endOn }}
+                    <p class="link underline underline-offset-1">
+                      {{ release.endOn }}
+                    </p>
                   </button>
                 </li>
               </ul>
