@@ -18,7 +18,7 @@
             </div>
             <br>
             <div>
-                <b>Entities</b> = Cooperatives, Benefit Companies, Sole Proprietorships, BC Corporations and General Partnerships.
+                <b>Entities</b> = Cooperatives, Corporations (e.g., Benefit Companies), Sole Proprietorships and General Partnerships.
             </div>
             <br>
             <div>
