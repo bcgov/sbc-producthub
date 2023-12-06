@@ -17,6 +17,5 @@ export function filterReleaseByTeam (releases: Release[], team: string) {
     const title = release.title
     return title.toLowerCase().includes(team)
   })
-  console.log(releaseHasName)
   return releaseHasName
 }

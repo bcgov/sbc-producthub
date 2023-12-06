@@ -27,7 +27,6 @@ export async function getReleases (
         workspaceID
       }
     })
-    // console.log(result.data.workspace.sprints)
     return result.data.workspace.releases
   } catch (error) {
     console.log(error)
