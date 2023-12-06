@@ -1,4 +1,5 @@
-function filterReleases (releases: any, startAt: any, endAt: any) {
+import { Release } from '~/interface/interfaces'
+export function filterReleasesByDate (releases: any, startAt: any, endAt: any) {
   const releasesWithinDateRange =
       releases.nodes.filter((release: any) => {
         const closedAt = new Date(release.closedAt)
@@ -10,4 +11,12 @@ function filterReleases (releases: any, startAt: any, endAt: any) {
   return releasesWithinDateRange
 }
 
-export default filterReleases
+export function filterReleaseByTeam (releases: Release[], team: string) {
+  console.log(releases)
+  const releaseHasName = releases.filter((release: Release) => {
+    const title = release.title
+    return title.toLowerCase().includes(team)
+  })
+  console.log(releaseHasName)
+  return releaseHasName
+}

@@ -1,4 +1,5 @@
 export interface Release {
+  title: string
   closeAt: string
   issues: number
 }
@@ -16,6 +17,9 @@ export interface Sprint {
   totalPoints: number
   updatedAt: string
   numberOfRelease: number
+  issues: {
+    totalCount: number
+  }
 }
 
 export interface Response {

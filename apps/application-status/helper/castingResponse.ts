@@ -13,7 +13,8 @@ export function castingSprint (sprint: any, noReleases: any) {
     state: sprint.state,
     totalPoints: sprint.totalPoints,
     updatedAt: sprint.updatedAt,
-    numberOfRelease: noReleases
+    numberOfRelease: noReleases,
+    issues: sprint.issues
   }
   return res
 }
@@ -24,7 +25,8 @@ export function castingReleases (releases: any) {
     const release = releases[i]
     res.push({
       closeAt: release.closeAt,
-      issues: release.issues.totalCount
+      issues: release.issues.totalCount,
+      title: release.title
     })
   }
   return res

@@ -29,7 +29,7 @@ async function waitForSuccessStatus (
     console.log('status' + status)
     if (status === 'completed') {
       const issues = await getIssue(owner, repo, teamName)
-      return issues
+      return issues.body
     }
 
     // Wait for a specified delay before checking again
