@@ -14,6 +14,7 @@ export async function getReleases (
               totalCount
               nodes {
                 closedAt
+                title
                 issues {
                   totalCount
                 }

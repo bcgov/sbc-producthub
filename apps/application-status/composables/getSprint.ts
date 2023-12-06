@@ -22,6 +22,9 @@ export async function getSprint (
               state
               totalPoints
               updatedAt
+              issues {
+                totalCount
+              }
             }
           }
         }

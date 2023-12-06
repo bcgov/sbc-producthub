@@ -2,56 +2,39 @@
   <div>
     <navbar />
     <div class="metrics flex flex-col self-center">
-      <div>
-        <b class="text-3xl">{{ entities.sprint.name }}</b>
-      </div>
-      <br>
-      <div>
-        <b class="text-2xl">ENTITIES REPO</b>
-      </div>
-      <div>
-        <h2 class="text-xl">
-          Total Points
-        </h2>
-        <pre>{{ entities.sprint.totalPoints }}</pre>
-      </div>
-      <div>
-        <h2 class="text-xl">
-          Total closed releases
-        </h2>
-        <pre>{{ entities.sprint.numberOfRelease }}</pre>
-      </div>
-      <div>
-        <h2 class="text-xl">
-          Total Issues
-        </h2>
-        <pre>{{ calculateTotalIssue(entities) }}</pre>
-      </div>
-      <br>
-      <div>
-        <b class="text-2xl">NAME TEAM REPO</b>
-      </div>
-      <div>
-        <h2 class="text-xl">
-          Total Points
-        </h2>
-        <pre>{{ nameteam.sprint.totalPoints }}</pre>
-      </div>
-      <div>
-        <h2 class="text-xl">
-          Total closed releases
-        </h2>
-        <pre>{{ nameteam.sprint.numberOfRelease }}</pre>
-      </div>
-      <div>
-        <h2 class="text-xl">
-          Total Issues
-        </h2>
-        <pre>{{ calculateTotalIssue(nameteam) }}</pre>
-      </div>
+      <ul>
+        <li v-for="team in teams" :key="team.id">
+          <div>
+            <b class="text-2xl">{{ team.title }}</b>
+          </div>
+          <div>
+            <b class="text-2xl">{{ team.sprint.name }}</b>
+          </div>
+          <div>
+            <h2 class="text-xl">
+              Total Points
+            </h2>
+            <pre>{{ team.sprint.totalPoints }}</pre>
+          </div>
+          <div>
+            <h2 class="text-xl">
+              Total closed releases
+            </h2>
+            <pre>{{ team.result.totalReleases }}</pre>
+          </div>
+          <div>
+            <h2 class="text-xl">
+              Total Issues
+            </h2>
+            <pre>{{ team.sprint.issues.totalCount }}</pre>
+          </div>
+        </li>
+      </ul>
     </div>
     <pre class="mx-20">
+      <div v-if="issues === null">
         Loading issues
+      </div>
         {{ issues }}
     </pre>
   </div>
@@ -60,12 +43,12 @@
 <script lang="ts">
 import getData from '../helper/getData'
 import BoardName from '../enums/boardName'
-import { Response, Sprint } from '../interface/interfaces'
+import { Sprint, Release } from '../interface/interfaces'
 import { getBoard } from '../composables/getBoard'
-import workflowRun from '../enums/workflowRun'
-import runWorkFlow from '../composables/runWorkFlow'
-import runJob from '../enums/runJob'
-import waitForSuccessStatus from '../composables/getWorkFlows'
+// import workflowRun from '../enums/workflowRun'
+// import runWorkFlow from '../composables/runWorkFlow'
+// import runJob from '../enums/runJob'
+// import waitForSuccessStatus from '../composables/getWorkFlows'
 export default {
   data () {
     const id = 1
@@ -81,21 +64,54 @@ export default {
       state: '',
       totalPoints: 0,
       updatedAt: '',
-      numberOfRelease: 0
+      numberOfRelease: 0,
+      issues: {
+        totalCount: 0
+      }
     }
-    const entities: Response = {
-      sprint,
-      releases: []
+    const result = {
+      totalReleases: 0,
+      totalIssues: 0,
+      totalBugs: 0
     }
-    const nameteam: Response = {
-      sprint,
-      releases: []
-    }
+    const teams = [
+      {
+        id: 1,
+        title: 'ENTITIES',
+        board: BoardName.ENTITIES,
+        keyWord: 'enti',
+        result,
+        sprint
+      },
+      {
+        id: 2,
+        title: 'NAME TEAM SPACE',
+        board: BoardName.NAMETEAMSPACE,
+        keyWord: 'name',
+        result,
+        sprint
+      },
+      {
+        id: 3,
+        title: 'ASSETS',
+        board: BoardName.ASSETS,
+        keyWord: 'assets',
+        result,
+        sprint
+      },
+      {
+        id: 4,
+        title: 'RELATIONSHIPS',
+        board: BoardName.RELATIONSHIPS,
+        keyWord: 'relationships',
+        result,
+        sprint
+      }
+    ]
     const issues: any = null
     return {
       id,
-      entities,
-      nameteam,
+      teams,
       issues
     }
   },
@@ -105,17 +121,27 @@ export default {
   methods: {
 
     async getContent () {
-      const entities = await getBoard(BoardName.ENTITIES)
-      const nameteam = await getBoard(BoardName.NAMETEAMSPACE)
-      this.entities = await getData(entities)
-      this.nameteam = await getData(nameteam)
-      await runWorkFlow(workflowRun.OWNER, workflowRun.REPO, runJob.ENTITIES)
-      this.issues = await waitForSuccessStatus(workflowRun.OWNER, workflowRun.REPO, runJob.ENTITIES, 'Entity')
+      // this.assets = await getData(entities, 'assets', releases)
+      // await runWorkFlow(workflowRun.OWNER, workflowRun.REPO, runJob.ENTITIES)
+      // this.issues = await waitForSuccessStatus(workflowRun.OWNER, workflowRun.REPO, runJob.ENTITIES, 'Entity')
+      for (let i = 0; i < this.teams.length; i++) {
+        const team = this.teams[i]
+        const boardID = await getBoard(team.board)
+        team.id = boardID
+        const releases = await getReleases(boardID)
+        const teamsContent = await getData(boardID, team.keyWord, releases)
+        team.sprint = teamsContent.sprint
+        team.result = {
+          totalIssues: this.calculateTotalIssue(teamsContent.releases),
+          totalReleases: teamsContent.releases.length,
+          totalBugs: 0
+        }
+      }
     },
-    calculateTotalIssue (data: Response) {
+    calculateTotalIssue (releases: Release[]) {
       let sum = 0
-      for (let i = 0; i < data.releases.length; i++) {
-        sum += data.releases[i].issues
+      for (let i = 0; i < releases.length; i++) {
+        sum += releases[i].issues
       }
       return sum
     }
