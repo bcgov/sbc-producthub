@@ -51,7 +51,7 @@
 import getData from '../helper/getData'
 import { Release } from '../interface/interfaces'
 import { getBoard } from '../composables/getBoard'
-import {getIssueZenhub} from '../composables/getIssues'
+import { getIssueZenhub } from '../composables/getIssues'
 import getBugs from '../helper/countBugs'
 // import workflowRun from '../enums/workflowRun'
 // import runWorkFlow from '../composables/runWorkFlow'

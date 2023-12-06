@@ -1,6 +1,6 @@
+import { gql } from '@apollo/client/core'
+import { getClient } from './getClient'
 import { getOctokit } from '~/githubClient'
-import { gql } from "@apollo/client/core";
-import { getClient } from "./getClient";
 
 export async function getIssueGithub (owner: string, repo: string, teamName: string) {
   const issues = await getOctokit().request('GET /repos/{owner}/{repo}/issues', {
@@ -11,8 +11,8 @@ export async function getIssueGithub (owner: string, repo: string, teamName: str
   return issues.data[0]
 }
 
-export async function getIssueZenhub(workspaceID: string) {
-  const client = getClient();
+export async function getIssueZenhub (workspaceID: string) {
+  const client = getClient()
   try {
     const result = await client.query({
       query: gql`
@@ -33,11 +33,11 @@ export async function getIssueZenhub(workspaceID: string) {
         }
       `,
       variables: {
-        workspaceID,
-      },
-    });
-    return result.data.workspace.activeSprint.issues.nodes;
+        workspaceID
+      }
+    })
+    return result.data.workspace.activeSprint.issues.nodes
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 }

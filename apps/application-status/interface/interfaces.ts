@@ -26,7 +26,3 @@ export interface Response {
   sprint: Sprint
   releases: Release[]
 }
-
-export interface Label {
-  name: string
-}
