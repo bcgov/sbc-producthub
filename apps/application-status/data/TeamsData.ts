@@ -16,11 +16,14 @@ const sprint: Sprint = {
   numberOfRelease: 0,
   issues: {
     totalCount: 0
+  },
+  scopeChange: {
+    totalCount: 0,
+    issues: []
   }
 }
 const result = {
   totalReleases: 0,
-  totalIssues: 0,
   totalBugs: 0
 }
 const teams = [
