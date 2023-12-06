@@ -28,6 +28,7 @@
             </h2>
             <pre>{{ team.sprint.issues.totalCount }}</pre>
           </div>
+          <br>
         </li>
       </ul>
     </div>
@@ -42,75 +43,18 @@
 
 <script lang="ts">
 import getData from '../helper/getData'
-import BoardName from '../enums/boardName'
-import { Sprint, Release } from '../interface/interfaces'
+import { Release } from '../interface/interfaces'
 import { getBoard } from '../composables/getBoard'
 // import workflowRun from '../enums/workflowRun'
 // import runWorkFlow from '../composables/runWorkFlow'
 // import runJob from '../enums/runJob'
 // import waitForSuccessStatus from '../composables/getWorkFlows'
+import teams from '../data/TeamsData'
+
 export default {
   data () {
-    const id = 1
-    const sprint: Sprint = {
-      closedIssuesCount: 0,
-      completedPoints: 0,
-      createdAt: '',
-      description: '',
-      endAt: '',
-      id: '',
-      name: '',
-      startAt: '',
-      state: '',
-      totalPoints: 0,
-      updatedAt: '',
-      numberOfRelease: 0,
-      issues: {
-        totalCount: 0
-      }
-    }
-    const result = {
-      totalReleases: 0,
-      totalIssues: 0,
-      totalBugs: 0
-    }
-    const teams = [
-      {
-        id: 1,
-        title: 'ENTITIES',
-        board: BoardName.ENTITIES,
-        keyWord: 'enti',
-        result,
-        sprint
-      },
-      {
-        id: 2,
-        title: 'NAME TEAM SPACE',
-        board: BoardName.NAMETEAMSPACE,
-        keyWord: 'name',
-        result,
-        sprint
-      },
-      {
-        id: 3,
-        title: 'ASSETS',
-        board: BoardName.ASSETS,
-        keyWord: 'assets',
-        result,
-        sprint
-      },
-      {
-        id: 4,
-        title: 'RELATIONSHIPS',
-        board: BoardName.RELATIONSHIPS,
-        keyWord: 'relationships',
-        result,
-        sprint
-      }
-    ]
     const issues: any = null
     return {
-      id,
       teams,
       issues
     }

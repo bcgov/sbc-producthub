@@ -17,6 +17,5 @@ export default async function getData (boardID: any, team: string, releases: any
     sprint: castedSprint,
     releases: releaseInTeam
   }
-  console.log(res)
   return res
 }
