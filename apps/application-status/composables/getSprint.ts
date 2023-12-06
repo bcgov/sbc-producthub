@@ -33,7 +33,6 @@ export async function getSprint (
         workspaceID
       }
     })
-    // console.log(result.data.workspace.sprints)
     return result.data.workspace.activeSprint
   } catch (error) {
     console.log(error)

@@ -1,4 +1,4 @@
-import getIssue from './getIssues'
+import { getIssueGithub } from './getIssues'
 import { getOctokit } from '~/githubClient'
 async function getWorkflows (owner: string, repo: string, runID: number) {
   const result = await getOctokit().request(
@@ -23,12 +23,10 @@ async function waitForSuccessStatus (
   const maxAttempts: number = 20
   const delay: number = 10000
   while (attempts < maxAttempts) {
-    console.log('hello')
     const res = await getWorkflows(owner, repo, runID)
     const status = res.data.status
-    console.log('status' + status)
     if (status === 'completed') {
-      const issues = await getIssue(owner, repo, teamName)
+      const issues = await getIssueGithub(owner, repo, teamName)
       return issues.body
     }
 
