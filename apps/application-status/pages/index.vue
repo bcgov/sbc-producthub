@@ -34,22 +34,41 @@
             </h2>
             <pre>{{ team.result.totalBugs }}</pre>
           </div>
+          <div>
+            <h2 class="text-xl">
+              Scope Change
+            </h2>
+            <pre>{{ team.sprint.scopeChange.totalCount }}</pre>
+            <h2 class="text-xl">
+              Scope Change Issues
+            </h2>
+            <div v-if="team.sprint.scopeChange.issues.length === 0">
+              No Scope Changes in this Sprint
+            </div>
+            <ul v-else class="flex flex-row space-x-4">
+              <li v-for="issue in team.sprint.scopeChange.issues" :key="issue.id">
+                <NuxtLink class="link underline underline-offset-1" :to="issue.htmlUrl">
+                  {{ issue.number }}
+                </NuxtLink>
+              </li>
+            </ul>
+          </div>
           <br>
         </li>
       </ul>
     </div>
-    <pre class="mx-20">
+    <!-- <pre class="mx-20">
       <div v-if="issues === null">
         Loading issues
       </div>
         {{ issues }}
-    </pre>
+    </pre> -->
   </div>
 </template>
 
 <script lang="ts">
 import getData from '../helper/getData'
-import { Release } from '../interface/interfaces'
+// import { Release } from '../interface/interfaces'
 import { getBoard } from '../composables/getBoard'
 import { getIssueZenhub } from '../composables/getIssues'
 import getBugs from '../helper/countBugs'
@@ -84,20 +103,12 @@ export default {
         const teamsContent = await getData(boardID, team.keyWord, releases)
         team.sprint = teamsContent.sprint
         team.result = {
-          totalIssues: this.calculateTotalIssue(teamsContent.releases),
           totalReleases: teamsContent.releases.length,
           totalBugs: 0
         }
         const issues = await getIssueZenhub(boardID)
         team.result.totalBugs = getBugs(issues)
       }
-    },
-    calculateTotalIssue (releases: Release[]) {
-      let sum = 0
-      for (let i = 0; i < releases.length; i++) {
-        sum += releases[i].issues
-      }
-      return sum
     }
   }
 }
@@ -105,6 +116,11 @@ export default {
 <style>
 .metrics {
     margin-left: 35%;
+    margin-right: 35%;
     margin-top: 40px;
+}
+
+.link {
+  color: #1669BB
 }
 </style>
