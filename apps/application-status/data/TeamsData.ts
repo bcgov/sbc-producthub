@@ -58,6 +58,14 @@ const teams = [
     keyWord: 'relationships',
     result,
     sprint
+  },
+  {
+    id: 5,
+    title: BoardTitles.BTR,
+    board: BoardName.BTR,
+    keyWord: 'btr',
+    result,
+    sprint
   }
 ]
 
