@@ -24,7 +24,7 @@ const sprint: Sprint = {
 }
 const result = {
   totalReleases: 0,
-  totalBugs: 0
+  totalDefects: 0
 }
 const teams = [
   {
@@ -56,6 +56,14 @@ const teams = [
     title: BoardTitles.RELATIONSHIPS,
     board: BoardName.RELATIONSHIPS,
     keyWord: 'relationships',
+    result,
+    sprint
+  },
+  {
+    id: 5,
+    title: BoardTitles.BTR,
+    board: BoardName.BTR,
+    keyWord: 'btr',
     result,
     sprint
   }

@@ -16,8 +16,9 @@
 }
 
 .rec > img {
-  margin-left: 2.5%;
+  margin-left: 5%;
   resize: both;
+  scale: 80%;
 }
 
 .rec > h2 {
