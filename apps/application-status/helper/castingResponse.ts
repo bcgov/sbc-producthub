@@ -1,4 +1,4 @@
-import { Sprint } from '~/interface/interfaces'
+import { Sprint, Issue } from '~/interface/interfaces'
 
 export function castingSprint (sprint: any, noReleases: any) {
   const res: Sprint = {
@@ -14,7 +14,24 @@ export function castingSprint (sprint: any, noReleases: any) {
     totalPoints: sprint.totalPoints,
     updatedAt: sprint.updatedAt,
     numberOfRelease: noReleases,
-    issues: sprint.issues
+    issues: sprint.issues,
+    scopeChange: {
+      totalCount: sprint.scopeChange.totalCount,
+      issues: castingIssues(sprint.scopeChange.nodes)
+    }
+  }
+  return res
+}
+
+function castingIssues (issues: any) {
+  const res: Issue[] = []
+  for (let i = 0; i < issues.length; i++) {
+    const issue = issues[i].issue
+    res.push({
+      number: issue.number,
+      htmlUrl: issue.htmlUrl,
+      id: issue.id
+    })
   }
   return res
 }

@@ -12,7 +12,6 @@ export function filterReleasesByDate (releases: any, startAt: any, endAt: any) {
 }
 
 export function filterReleaseByTeam (releases: Release[], team: string) {
-  console.log(releases)
   const releaseHasName = releases.filter((release: Release) => {
     const title = release.title
     return title.toLowerCase().includes(team)

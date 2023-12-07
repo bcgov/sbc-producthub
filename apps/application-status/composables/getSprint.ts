@@ -25,6 +25,16 @@ export async function getSprint (
               issues {
                 totalCount
               }
+              scopeChange {
+                totalCount
+                nodes {
+                  issue {
+                    htmlUrl
+                    id
+                    number
+                  }
+                }
+              }
             }
           }
         }

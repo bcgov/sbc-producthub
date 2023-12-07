@@ -4,6 +4,11 @@ export interface Release {
   issues: number
 }
 
+export interface Issue {
+  htmlUrl: string
+  id: string
+  number: number
+}
 export interface Sprint {
   closedIssuesCount: number
   completedPoints: number
@@ -19,6 +24,10 @@ export interface Sprint {
   numberOfRelease: number
   issues: {
     totalCount: number
+  }
+  scopeChange: {
+    totalCount: number,
+    issues: Issue[]
   }
 }
 
