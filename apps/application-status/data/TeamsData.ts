@@ -24,7 +24,7 @@ const sprint: Sprint = {
 }
 const result = {
   totalReleases: 0,
-  totalBugs: 0
+  totalDefects: 0
 }
 const teams = [
   {

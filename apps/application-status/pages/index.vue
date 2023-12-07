@@ -30,9 +30,9 @@
           </div>
           <div>
             <h2 class="text-xl">
-              Total Bugs
+              Total Prod Defects
             </h2>
-            <pre>{{ team.result.totalBugs }}</pre>
+            <pre>{{ team.result.totalDefects }}</pre>
           </div>
           <div>
             <h2 class="text-xl">
@@ -71,12 +71,12 @@ import getData from '../helper/getData'
 // import { Release } from '../interface/interfaces'
 import { getBoard } from '../composables/getBoard'
 import { getIssueZenhub } from '../composables/getIssues'
-import getBugs from '../helper/countBugs'
 // import workflowRun from '../enums/workflowRun'
 // import runWorkFlow from '../composables/runWorkFlow'
 // import runJob from '../enums/runJob'
 // import waitForSuccessStatus from '../composables/getWorkFlows'
 import teams from '../data/TeamsData'
+import getDefects from '../helper/countDefects'
 
 export default {
   data () {
@@ -104,10 +104,10 @@ export default {
         team.sprint = teamsContent.sprint
         team.result = {
           totalReleases: teamsContent.releases.length,
-          totalBugs: 0
+          totalDefects: 0
         }
         const issues = await getIssueZenhub(boardID)
-        team.result.totalBugs = getBugs(issues)
+        team.result.totalDefects = getDefects(issues)
       }
     }
   }
