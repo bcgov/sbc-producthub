@@ -1,7 +1,39 @@
 # SBC-ProductHub
+This Repo consists of 2 projects:
 
+1. **Metrics report** (Within application-status folder)
+
+2. **Release Notes** (Within release-notes folder)
 ## Apps
 
 ### Application Status
+An MVP Product [Metrics Report](www.metrics.bcregistry.gov.bc.ca)
+
+The app focuses on getting the metrics for all products developed by **Ministry of Citizen Services, Business Registry Branch**.
+
+The app displays the statistics of what the team has been working on during the last sprint so that the team can reflect on their team performance and keep track of the progress of their development. 
 
 ### Release Notes
+An MVP Product [Release Notes](https://www.release-notes.bcregistry.gov.bc.ca/)
+
+The app focuses on displaying the releases for all products developed by **Ministry of Citizen Services, Business Registry Branch**.
+
+The audience can get the latest update about the Government products, what have been fixed, what are new features, what have been improved, etc
+
+## Tech Stack
+### Nuxt.js/ Vue.js/ TypeScript
+Please refer to this documentation to see how the codespace layout is set up. Look at the [documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+
+### Zenhub GraphQL API and Apollo Client
+What is Zenhub API?
+[Getting Started](https://developers.zenhub.com/graphql-api-docs/getting-started)
+
+[Postman Collection](https://developers.zenhub.com/graphql-api-docs/postman-collection)
+
+![Sample Schema](image.png)
+
+What is Apollo Client? 
+
+[Apollo Client on Vue.js](https://v4.apollo.vuejs.org/guide/installation.html)
+
+[Apollo Client Usage](https://www.apollographql.com/docs/react/get-started/)
