@@ -1,6 +1,11 @@
 import { gql } from '@apollo/client/core'
 import { getClient } from './getClient'
 
+/**
+ * Get the active sprint on Zenhub, and their scope changes within that sprint
+ * @param workspaceID 
+ * @returns 
+ */
 export async function getSprint (
   workspaceID: string
 ) {

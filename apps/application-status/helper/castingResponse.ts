@@ -1,5 +1,11 @@
 import { Sprint, Issue } from '~/interface/interfaces'
 
+/**
+ * Cast the response from Zenhub to type Sprint
+ * @param sprint 
+ * @param noReleases 
+ * @returns 
+ */
 export function castingSprint (sprint: any, noReleases: any) {
   const res: Sprint = {
     closedIssuesCount: sprint.closedIssuesCount,
@@ -23,6 +29,11 @@ export function castingSprint (sprint: any, noReleases: any) {
   return res
 }
 
+/**
+ * Casting the response from Zenhub to type Issue
+ * @param issues 
+ * @returns 
+ */
 function castingIssues (issues: any) {
   const res: Issue[] = []
   for (let i = 0; i < issues.length; i++) {

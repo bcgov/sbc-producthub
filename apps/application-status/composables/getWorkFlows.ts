@@ -1,5 +1,13 @@
 import { getIssueGithub } from './getIssues'
 import { getOctokit } from '~/githubClient'
+
+/**
+ * Get the workflow by runID
+ * @param owner 
+ * @param repo 
+ * @param runID 
+ * @returns Workflpw data
+ */
 async function getWorkflows (owner: string, repo: string, runID: number) {
   const result = await getOctokit().request(
     'GET /repos/{owner}/{repo}/actions/runs/{runID}',
@@ -13,6 +21,9 @@ async function getWorkflows (owner: string, repo: string, runID: number) {
   return result
 }
 
+/**
+ * Wait for the workflow to finish running then get the latest issue
+ */
 async function waitForSuccessStatus (
   owner: string,
   repo: string,

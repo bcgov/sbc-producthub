@@ -1,6 +1,10 @@
 import { gql } from '@apollo/client/core'
 import { getClient } from './getClient'
-
+/**
+ * This function is to get the boardId by the board name
+ * @param teamName: string
+ * @returns boardID: string
+ */
 export async function getBoard (
   teamName: string
 ) {
