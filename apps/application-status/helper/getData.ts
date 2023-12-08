@@ -3,6 +3,13 @@ import { castingReleases, castingSprint } from './castingResponse'
 import { Response } from '~/interface/interfaces'
 import { getSprint } from '~/composables/getSprint'
 
+/**
+ * Get the formated response from Zenhub
+ * @param boardID
+ * @param team
+ * @param releases
+ * @returns
+ */
 export default async function getData (boardID: any, team: string, releases: any) {
   const sprint = await getSprint(boardID)
   const releasesInRange = filterReleasesByDate(

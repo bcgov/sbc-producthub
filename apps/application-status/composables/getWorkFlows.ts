@@ -3,9 +3,9 @@ import { getOctokit } from '~/githubClient'
 
 /**
  * Get the workflow by runID
- * @param owner 
- * @param repo 
- * @param runID 
+ * @param owner
+ * @param repo
+ * @param runID
  * @returns Workflpw data
  */
 async function getWorkflows (owner: string, repo: string, runID: number) {

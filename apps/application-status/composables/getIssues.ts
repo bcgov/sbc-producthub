@@ -4,9 +4,9 @@ import { getOctokit } from '~/githubClient'
 
 /**
  * Get issues in Gibhub by repo and label
- * @param owner 
- * @param repo 
- * @param teamName 
+ * @param owner
+ * @param repo
+ * @param teamName
  * @returns the latest issue
  */
 export async function getIssueGithub (owner: string, repo: string, teamName: string) {
@@ -21,7 +21,7 @@ export async function getIssueGithub (owner: string, repo: string, teamName: str
 /**
  * Get issues in the active sprint on Zenhub
  * @param workspaceID string
- * @returns 
+ * @returns
  */
 export async function getIssueZenhub (workspaceID: string) {
   const client = getClient()

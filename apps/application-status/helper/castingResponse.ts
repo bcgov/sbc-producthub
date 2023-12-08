@@ -2,9 +2,9 @@ import { Sprint, Issue } from '~/interface/interfaces'
 
 /**
  * Cast the response from Zenhub to type Sprint
- * @param sprint 
- * @param noReleases 
- * @returns 
+ * @param sprint
+ * @param noReleases
+ * @returns
  */
 export function castingSprint (sprint: any, noReleases: any) {
   const res: Sprint = {
@@ -31,8 +31,8 @@ export function castingSprint (sprint: any, noReleases: any) {
 
 /**
  * Casting the response from Zenhub to type Issue
- * @param issues 
- * @returns 
+ * @param issues
+ * @returns
  */
 function castingIssues (issues: any) {
   const res: Issue[] = []

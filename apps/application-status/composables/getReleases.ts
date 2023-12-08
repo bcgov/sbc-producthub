@@ -3,8 +3,8 @@ import { getClient } from './getClient'
 
 /**
  * Get total releases on Zenhub
- * @param workspaceID 
- * @returns 
+ * @param workspaceID
+ * @returns
  */
 export async function getReleases (
   workspaceID: string
