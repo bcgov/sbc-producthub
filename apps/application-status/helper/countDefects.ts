@@ -1,4 +1,4 @@
-function getBugs (issues: any) {
+function getDefects (issues: any) {
   let count: number = 0
   for (let i = 0; i < issues.length; i++) {
     const issue = issues[i]
@@ -8,11 +8,11 @@ function getBugs (issues: any) {
       const label = labels[j]
       issueLabels.push(label.name)
     }
-    if (issueLabels.includes('bug')) {
+    if (issueLabels.includes('prod defect')) {
       count++
     }
   }
   return count
 }
 
-export default getBugs
+export default getDefects
