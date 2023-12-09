@@ -2,7 +2,7 @@ import { gql } from '@apollo/client/core'
 import { getClient } from './getClient'
 
 /**
- * Get the active sprint on Zenhub, and their scope changes within that sprint
+ * Get the active sprint by teams, and number of scope changes within that sprint.
  * @param workspaceID
  * @returns
  */

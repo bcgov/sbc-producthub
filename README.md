@@ -11,14 +11,14 @@ An MVP Product [Metrics Report](www.metrics.bcregistry.gov.bc.ca)
 
 The app focuses on getting the metrics for all products developed by **Ministry of Citizen Services, Business Registry Branch**.
 
-The app displays the statistics of what the team has been working on during the last sprint so that the team can reflect on their team performance and keep track of the progress of their development. 
+The app displays statistics of what teams have been working on during the last sprint, so that teams can reflect on their performance and keep track of the development progress. 
 
 ### Release Notes
 An MVP Product [Release Notes](https://www.release-notes.bcregistry.gov.bc.ca/)
 
-The app focuses on displaying the releases for all products developed by **Ministry of Citizen Services, Business Registry Branch**.
+The app focuses on displaying releases for all products developed by **Ministry of Citizen Services, Business Registry Branch**.
 
-The audience can get the latest update about the Government products, what have been fixed, what are new features, what have been improved, etc
+Audience can get latest updates about the BC Registries products, what has been fixed, new features, improvements, etc.
 
 ## Tech Stack
 ### Nuxt.js/ Vue.js/ TypeScript
@@ -55,7 +55,7 @@ Please refer to this documentation to see how the codespace layout is set up. Lo
 
     ![Alt text](image-1.png)
 
-    c. In GraphQL API, name your key then click **Generate New Key**
+    c. In GraphQL API, name your key, then click **Generate New Key**
     ![Alt text](image-2.png)
 
     d. Copy the generated key to .env file
