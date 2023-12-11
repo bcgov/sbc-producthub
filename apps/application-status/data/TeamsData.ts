@@ -1,6 +1,9 @@
 import { Sprint } from '~/interface/interfaces'
 import BoardName from '~/enums/boardName'
 import BoardTitles from '~/enums/boardTitles'
+/**
+ * Centralize data to display on frontend
+ */
 const sprint: Sprint = {
   closedIssuesCount: 0,
   completedPoints: 0,

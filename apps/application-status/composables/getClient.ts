@@ -1,5 +1,9 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client/core'
 
+/**
+ * Create a client component for accessing Zenhub API
+ * @returns client
+ */
 export function getClient () {
   // Get the API key from environment variables
   const config = useRuntimeConfig()

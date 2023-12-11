@@ -1,3 +1,8 @@
+/**
+ * Get total of defect under production
+ * @param issues
+ * @returns
+ */
 function getDefects (issues: any) {
   let count: number = 0
   for (let i = 0; i < issues.length; i++) {
