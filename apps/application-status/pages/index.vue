@@ -2,6 +2,9 @@
   <div>
     <navbar />
     <div class="metrics flex flex-col self-center">
+      <NuxtLink to="./sprints/entity">
+        Go
+      </NuxtLink>
       <ul>
         <li v-for="team in teams" :key="team.id">
           <div>

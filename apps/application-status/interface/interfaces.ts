@@ -35,3 +35,16 @@ export interface Response {
   sprint: Sprint
   releases: Release[]
 }
+
+export interface PageInfo {
+  endCursor: string
+  hasNextPage: boolean
+  hasPreviousPage: boolean
+  startCursor: string
+}
+
+export interface TeamSprints {
+  totalCount: number,
+  sprints: Sprint[],
+  pageInfo: PageInfo
+}
