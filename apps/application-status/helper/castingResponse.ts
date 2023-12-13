@@ -7,6 +7,13 @@ import { Sprint, Issue } from '~/interface/interfaces'
  * @returns
  */
 export function castingSprint (sprint: any, noReleases: any) {
+  let scopeChangeCount = 0
+  let issues: Issue[] = []
+  if (sprint.scopeChange != null) {
+    scopeChangeCount = sprint.scopeChange.totalCount
+    issues = castingIssues(sprint.scopeChange.nodes)
+  }
+
   const res: Sprint = {
     closedIssuesCount: sprint.closedIssuesCount,
     completedPoints: sprint.completedPoints,
@@ -22,8 +29,8 @@ export function castingSprint (sprint: any, noReleases: any) {
     numberOfRelease: noReleases,
     issues: sprint.issues,
     scopeChange: {
-      totalCount: sprint.scopeChange.totalCount,
-      issues: castingIssues(sprint.scopeChange.nodes)
+      totalCount: scopeChangeCount,
+      issues
     }
   }
   return res

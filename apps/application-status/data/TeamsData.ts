@@ -31,44 +31,49 @@ const result = {
 }
 const teams = [
   {
-    id: 1,
+    id: '1',
     title: BoardTitles.ENTITIES,
     board: BoardName.ENTITIES,
     keyWord: 'enti',
     result,
-    sprint
+    sprint,
+    path: './entity'
   },
   {
-    id: 2,
+    id: '2',
     title: BoardTitles.NAMESTEAMSPACE,
     board: BoardName.NAMETEAMSPACE,
     keyWord: 'name',
     result,
-    sprint
+    sprint,
+    path: './nameteamspace'
   },
   {
-    id: 3,
+    id: '3',
     title: BoardTitles.ASSETS,
     board: BoardName.ASSETS,
     keyWord: 'assets',
     result,
-    sprint
+    sprint,
+    path: './assets'
   },
   {
-    id: 4,
+    id: '4',
     title: BoardTitles.RELATIONSHIPS,
     board: BoardName.RELATIONSHIPS,
     keyWord: 'relationships',
     result,
-    sprint
+    sprint,
+    path: './relationships'
   },
   {
-    id: 5,
+    id: '5',
     title: BoardTitles.BTR,
     board: BoardName.BTR,
     keyWord: 'btr',
     result,
-    sprint
+    sprint,
+    path: './btr'
   }
 ]
 
