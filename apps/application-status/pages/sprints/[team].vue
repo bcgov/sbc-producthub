@@ -25,6 +25,7 @@ import getSprints from '../../helper/getSprints'
 import teams from '../../data/TeamsData'
 import { PageInfo, TeamSprints } from '../../interface/interfaces'
 import { getReleases } from '../../composables/getReleases'
+import teamName from '../../enums/teamNames'
 export default {
   data () {
     const route = useRoute()
@@ -66,19 +67,19 @@ export default {
   methods: {
     async displayData () {
       if (this.boardId === '' && this.keyWord === '') {
-        if (this.teamName === 'entity') {
+        if (this.teamName === teamName.ENTITIES) {
           this.boardId = this.curTeams[0].id
           this.keyWord = this.curTeams[0].keyWord
-        } else if (this.teamName === 'nameteamspace') {
+        } else if (this.teamName === teamName.NAMESTEAMSPACE) {
           this.boardId = this.curTeams[1].id
           this.keyWord = this.curTeams[1].keyWord
-        } else if (this.teamName === 'assets') {
+        } else if (this.teamName === teamName.ASSETS) {
           this.boardId = this.curTeams[2].id
           this.keyWord = this.curTeams[2].keyWord
-        } else if (this.teamName === 'relationships') {
+        } else if (this.teamName === teamName.RELATIONSHIPS) {
           this.boardId = this.curTeams[3].id
           this.keyWord = this.curTeams[3].keyWord
-        } else if (this.teamName === 'btr') {
+        } else if (this.teamName === teamName.BTR) {
           this.boardId = this.curTeams[4].id
           this.keyWord = this.curTeams[4].keyWord
         }
@@ -100,7 +101,6 @@ export default {
       if (this.pageInfo.hasNextPage) {
         this.pageInfo.startCursor = ''
         this.prev.push(this.pageInfo.endCursor)
-        console.log(this.prev)
         this.displayData()
       }
     }
