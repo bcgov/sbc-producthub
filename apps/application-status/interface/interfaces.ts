@@ -24,6 +24,7 @@ export interface Sprint {
   numberOfRelease: number
   issues: {
     totalCount: number
+    totalDefect: number
   }
   scopeChange: {
     totalCount: number,

@@ -2,32 +2,78 @@
   <div>
     <navbar />
     <div class="grid justify-items-center">
-      <div>
-        <ul class="grid grid-cols-5 divide-x">
+      <div class="flex flex-row gap-4 mt-10">
+        <button class="bg-button rounded-lg bg-auto w-20 h-10 text-white">
+          <NuxtLink to="../">
+            &lt; Back
+          </NuxtLink>
+        </button>
+        <ul class="grid grid-cols-5 gap-4">
           <li v-for="team in curTeams" :key="team.id">
             <NuxtLink :to="team.path">
-              <button class="bg-secondary rounded-lg bg-auto w-64 h-20">
-                {{ team.title }}
-              </button>
+              <div v-if="team.id===boardId">
+                <button class="bg-button rounded-lg bg-auto w-64 h-20 text-white">
+                  {{ team.title }}
+                </button>
+              </div>
+              <div v-else>
+                <button class="bg-secondary rounded-lg bg-auto w-64 h-20">
+                  {{ team.title }}
+                </button>
+              </div>
             </NuxtLink>
           </li>
         </ul>
       </div>
       <br>
-      <div>
-        <button class="bg-button rounded-lg bg-auto w-36 h-11 text-white" @click="changeEndCursor">
-          Next
-        </button>
-        <button class="bg-button rounded-lg bg-auto w-36 h-11 text-white" @click="changeStartCursor">
-          Prev
-        </button>
+      <div class="grid grid-cols-2 gap-4">
+        <div v-if="display.pageInfo.hasPreviousPage">
+          <button class="bg-button rounded-lg bg-auto w-36 h-11 text-white" @click="changeStartCursor">
+            Prev
+          </button>
+        </div>
+        <div v-else>
+          <button class="bg-inactive rounded-lg bg-auto w-36 h-11" @click="changeStartCursor">
+            Prev
+          </button>
+        </div>
+        <div v-if="display.pageInfo.hasNextPage">
+          <button class="bg-button rounded-lg bg-auto w-36 h-11 text-white" @click="changeEndCursor">
+            Next
+          </button>
+        </div>
+        <div v-else>
+          <button class="bg-inactive rounded-lg bg-auto w-36 h-11" @click="changeEndCursor">
+            Next
+          </button>
+        </div>
       </div>
       <br>
-      <div>
-        <p> {{ teamName }} </p>
-        <pre>
-                {{ display }}
-            </pre>
+      <div class="grid justify-items-center">
+        <b class="text-5xl"> {{ teamTitle }} </b>
+        <b class="text-lg">Total sprints: {{ display.totalCount }}</b>
+        <br>
+        <ul>
+          <li v-for="sprint in display.sprints" :key="sprint.id">
+            <b>
+              {{ sprint.name }} - {{ sprint.state }}
+            </b>
+            <br>
+            <b>
+              {{ formatDate(sprint.startAt) }} -  {{ formatDate(sprint.endAt) }}
+            </b>
+            <p>
+              Total points: {{ sprint.totalPoints }}
+            </p>
+            <p>
+              Total closed releases: {{ sprint.numberOfRelease }}
+            </p>
+            <p>
+              Total issues: {{ sprint.issues.totalCount }}
+            </p>
+            <br>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -39,6 +85,7 @@ import teams from '../../data/TeamsData'
 import { PageInfo, TeamSprints } from '../../interface/interfaces'
 import { getReleases } from '../../composables/getReleases'
 import teamName from '../../enums/teamNames'
+import formatDate from '../../helper/formatDate'
 export default {
   data () {
     const route = useRoute()
@@ -63,6 +110,7 @@ export default {
     const curTeams = teams
     const boardId = ''
     const keyWord = ''
+    const teamTitle = ''
     return {
       teamName,
       pageInfo,
@@ -70,7 +118,9 @@ export default {
       prev,
       curTeams,
       boardId,
-      keyWord
+      keyWord,
+      teamTitle,
+      formatDate
     }
   },
   beforeMount () {
@@ -83,18 +133,23 @@ export default {
         if (this.teamName === teamName.ENTITIES) {
           this.boardId = this.curTeams[0].id
           this.keyWord = this.curTeams[0].keyWord
+          this.teamTitle = this.curTeams[0].title
         } else if (this.teamName === teamName.NAMESTEAMSPACE) {
           this.boardId = this.curTeams[1].id
           this.keyWord = this.curTeams[1].keyWord
+          this.teamTitle = this.curTeams[1].title
         } else if (this.teamName === teamName.ASSETS) {
           this.boardId = this.curTeams[2].id
           this.keyWord = this.curTeams[2].keyWord
+          this.teamTitle = this.curTeams[2].title
         } else if (this.teamName === teamName.RELATIONSHIPS) {
           this.boardId = this.curTeams[3].id
           this.keyWord = this.curTeams[3].keyWord
+          this.teamTitle = this.curTeams[3].title
         } else if (this.teamName === teamName.BTR) {
           this.boardId = this.curTeams[4].id
           this.keyWord = this.curTeams[4].keyWord
+          this.teamTitle = this.curTeams[4].title
         }
       }
       const releases = await getReleases(this.boardId)
