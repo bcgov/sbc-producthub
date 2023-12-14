@@ -39,6 +39,13 @@ export async function getAllSprints (workspaceID: string, startCursor: string, e
                 updatedAt
                 issues {
                   totalCount
+                  nodes {
+                    labels {
+                      nodes {
+                        name
+                      }
+                    }
+                  }
                 }
               }
             }
