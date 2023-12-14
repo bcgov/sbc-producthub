@@ -1,22 +1,35 @@
 <template>
   <div>
-    <ul>
-      <li v-for="team in curTeams" :key="team.id">
-        <NuxtLink :to="team.path">
-          {{ team.title }}
-        </NuxtLink>
-      </li>
-    </ul>
-    <button @click="changeEndCursor">
-      Next
-    </button>
-    <button @click="changeStartCursor">
-      Prev
-    </button>
-    <p> {{ teamName }} </p>
-    <pre>
-            {{ display }}
-        </pre>
+    <navbar />
+    <div class="grid justify-items-center">
+      <div>
+        <ul class="grid grid-cols-5 divide-x">
+          <li v-for="team in curTeams" :key="team.id">
+            <NuxtLink :to="team.path">
+              <button class="bg-secondary rounded-lg bg-auto w-64 h-20">
+                {{ team.title }}
+              </button>
+            </NuxtLink>
+          </li>
+        </ul>
+      </div>
+      <br>
+      <div>
+        <button class="bg-button rounded-lg bg-auto w-36 h-11 text-white" @click="changeEndCursor">
+          Next
+        </button>
+        <button class="bg-button rounded-lg bg-auto w-36 h-11 text-white" @click="changeStartCursor">
+          Prev
+        </button>
+      </div>
+      <br>
+      <div>
+        <p> {{ teamName }} </p>
+        <pre>
+                {{ display }}
+            </pre>
+      </div>
+    </div>
   </div>
 </template>
 

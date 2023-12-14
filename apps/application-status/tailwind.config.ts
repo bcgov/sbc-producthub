@@ -4,9 +4,10 @@ import type { Config } from 'tailwindcss'
 export default <Partial<Config>>{
   theme: {
     extend: {
-      // colors: {
-      //   primary: defaultTheme.colors.green
-      // },
+      colors: {
+        button: '#1669bb',
+        secondary: '#E4EDF7'
+      },
       transitionProperty: {
         flow: 'background-position'
       },

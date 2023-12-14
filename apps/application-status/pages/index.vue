@@ -3,7 +3,9 @@
     <navbar />
     <div class="metrics flex flex-col self-center">
       <NuxtLink to="./sprints/entity">
-        Go
+        <button class="bg-button rounded-lg bg-auto w-36 h-11 text-white">
+          Sprints by Team
+        </button>
       </NuxtLink>
       <ul>
         <li v-for="team in teams" :key="team.id">
