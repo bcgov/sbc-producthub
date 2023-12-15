@@ -5,12 +5,12 @@ import { TeamSprints } from '~/interface/interfaces'
 
 /**
  * Get all of the sprints in each Zenhub board.
- * @param boardId 
- * @param startCursor 
- * @param endCursor 
- * @param releases 
- * @param team 
- * @returns 
+ * @param boardId
+ * @param startCursor
+ * @param endCursor
+ * @param releases
+ * @param team
+ * @returns
  */
 export default async function getSprints (boardId: string, startCursor: string, endCursor: string, releases: any, team: string) {
   const data = await getAllSprints(boardId, startCursor, endCursor)
