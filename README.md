@@ -39,6 +39,25 @@ Please refer to this documentation to see how the codespace layout is set up. Lo
 
 [Apollo Client Usage](https://www.apollographql.com/docs/react/get-started/)
 
+### Install Node.js and npm
+Navigate to this link and download the node version that matches your platform [Node Download](https://nodejs.org/en/download)
+
+The version that these projects are currently using is **Node 20.6.1**
+
+After downloading Node.js and following their instructions, check whether it is successfully installed or not, and their version by:
+```
+node -v
+npm -v
+```
+
+### Install pnpm
+Make sure pnpm has been installed in your computer before running the projects.
+
+```
+npm install -g pnpm
+```
+
+
 ## Set up the project
 1. Navigate to correct folder
 
