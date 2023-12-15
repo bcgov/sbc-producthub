@@ -1,5 +1,5 @@
+import getDefects from '../helper/countDefects'
 import { Sprint, Issue } from '~/interface/interfaces'
-
 /**
  * Cast the response from Zenhub to type Sprint
  * @param sprint
@@ -27,7 +27,10 @@ export function castingSprint (sprint: any, noReleases: any) {
     totalPoints: sprint.totalPoints,
     updatedAt: sprint.updatedAt,
     numberOfRelease: noReleases,
-    issues: sprint.issues,
+    issues: {
+      totalCount: sprint.issues.totalCount,
+      totalDefect: getDefects(sprint.issues.nodes)
+    },
     scopeChange: {
       totalCount: scopeChangeCount,
       issues

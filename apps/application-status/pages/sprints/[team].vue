@@ -71,6 +71,9 @@
             <p>
               Total issues: {{ sprint.issues.totalCount }}
             </p>
+            <p>
+              Total Production Defects: {{ sprint.issues.totalDefect }}
+            </p>
             <br>
           </li>
         </ul>

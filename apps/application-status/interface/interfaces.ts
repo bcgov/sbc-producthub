@@ -23,7 +23,7 @@ export interface Sprint {
   updatedAt: string
   numberOfRelease: number
   issues: {
-    totalCount: number
+    totalCount: number,
     totalDefect: number
   }
   scopeChange: {
