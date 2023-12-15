@@ -4,6 +4,9 @@
  * @returns
  */
 function getDefects (issues: any) {
+  if (issues == null) {
+    return 0
+  }
   let count: number = 0
   for (let i = 0; i < issues.length; i++) {
     const issue = issues[i]
