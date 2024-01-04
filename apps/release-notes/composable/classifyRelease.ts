@@ -21,10 +21,11 @@ export async function classifyReleases (
     endCursor: ''
   }
   if (team === 'ENTITIES') {
-    myGhIds = await getBoard('entities-team-space-2023')
+    myGhIds = await getBoard('Entities Team Space - new')
   } else if (team === 'NAMETEAMSPACE') {
-    myGhIds = await getBoard('names-team-board')
+    myGhIds = await getBoard('Names-Team-Board (New)')
   }
+
   const response = await getReport(myGhIds, startCursor, endCursor, state)
   items = response.nodes
   pageInfo = response.pageInfo
