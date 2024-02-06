@@ -89,93 +89,98 @@ import { PageInfo, TeamSprints } from '../../interface/interfaces'
 import { getReleases } from '../../composables/getReleases'
 import teamName from '../../enums/teamNames'
 import formatDate from '../../helper/formatDate'
+import EachTeamLegend from '~/components/EachTeamLegend.vue'
 export default {
-  data () {
-    const route = useRoute()
-    const teamName = route.params.team
-    const display: TeamSprints = {
-      totalCount: 0,
-      pageInfo: {
-        endCursor: '',
-        hasNextPage: false,
-        hasPreviousPage: false,
-        startCursor: ''
-      },
-      sprints: []
-    }
-    const pageInfo: PageInfo = {
-      startCursor: '',
-      endCursor: '',
-      hasNextPage: false,
-      hasPreviousPage: false
-    }
-    const prev: string[] = ['']
-    const curTeams = teams
-    const boardId = ''
-    const keyWord = ''
-    const teamTitle = ''
-    return {
-      teamName,
-      pageInfo,
-      display,
-      prev,
-      curTeams,
-      boardId,
-      keyWord,
-      teamTitle,
-      formatDate
-    }
-  },
-  beforeMount () {
-    this.displayData()
-  },
-
-  methods: {
-    async displayData () {
-      if (this.boardId === '' && this.keyWord === '') {
-        if (this.teamName === teamName.ENTITIES) {
-          this.boardId = this.curTeams[0].id
-          this.keyWord = this.curTeams[0].keyWord
-          this.teamTitle = this.curTeams[0].title
-        } else if (this.teamName === teamName.NAMESTEAMSPACE) {
-          this.boardId = this.curTeams[1].id
-          this.keyWord = this.curTeams[1].keyWord
-          this.teamTitle = this.curTeams[1].title
-        } else if (this.teamName === teamName.ASSETS) {
-          this.boardId = this.curTeams[2].id
-          this.keyWord = this.curTeams[2].keyWord
-          this.teamTitle = this.curTeams[2].title
-        } else if (this.teamName === teamName.RELATIONSHIPS) {
-          this.boardId = this.curTeams[3].id
-          this.keyWord = this.curTeams[3].keyWord
-          this.teamTitle = this.curTeams[3].title
-        } else if (this.teamName === teamName.BTR) {
-          this.boardId = this.curTeams[4].id
-          this.keyWord = this.curTeams[4].keyWord
-          this.teamTitle = this.curTeams[4].title
+    data() {
+        const route = useRoute();
+        const teamName = route.params.team;
+        const display: TeamSprints = {
+            totalCount: 0,
+            pageInfo: {
+                endCursor: '',
+                hasNextPage: false,
+                hasPreviousPage: false,
+                startCursor: ''
+            },
+            sprints: []
+        };
+        const pageInfo: PageInfo = {
+            startCursor: '',
+            endCursor: '',
+            hasNextPage: false,
+            hasPreviousPage: false
+        };
+        const prev: string[] = [''];
+        const curTeams = teams;
+        const boardId = '';
+        const keyWord = '';
+        const teamTitle = '';
+        return {
+            teamName,
+            pageInfo,
+            display,
+            prev,
+            curTeams,
+            boardId,
+            keyWord,
+            teamTitle,
+            formatDate
+        };
+    },
+    beforeMount() {
+        this.displayData();
+    },
+    methods: {
+        async displayData() {
+            if (this.boardId === '' && this.keyWord === '') {
+                if (this.teamName === teamName.ENTITIES) {
+                    this.boardId = this.curTeams[0].id;
+                    this.keyWord = this.curTeams[0].keyWord;
+                    this.teamTitle = this.curTeams[0].title;
+                }
+                else if (this.teamName === teamName.NAMESTEAMSPACE) {
+                    this.boardId = this.curTeams[1].id;
+                    this.keyWord = this.curTeams[1].keyWord;
+                    this.teamTitle = this.curTeams[1].title;
+                }
+                else if (this.teamName === teamName.ASSETS) {
+                    this.boardId = this.curTeams[2].id;
+                    this.keyWord = this.curTeams[2].keyWord;
+                    this.teamTitle = this.curTeams[2].title;
+                }
+                else if (this.teamName === teamName.RELATIONSHIPS) {
+                    this.boardId = this.curTeams[3].id;
+                    this.keyWord = this.curTeams[3].keyWord;
+                    this.teamTitle = this.curTeams[3].title;
+                }
+                else if (this.teamName === teamName.BTR) {
+                    this.boardId = this.curTeams[4].id;
+                    this.keyWord = this.curTeams[4].keyWord;
+                    this.teamTitle = this.curTeams[4].title;
+                }
+            }
+            const releases = await getReleases(this.boardId);
+            const data = await getSprints(this.boardId, this.pageInfo.startCursor, this.pageInfo.endCursor, releases, this.keyWord);
+            this.display = data;
+            this.pageInfo = this.display.pageInfo;
+        },
+        changeStartCursor() {
+            if (this.pageInfo.hasPreviousPage) {
+                this.pageInfo.startCursor = '';
+                this.pageInfo.endCursor = this.prev[this.prev.length - 2];
+                this.prev.pop();
+                this.displayData();
+            }
+        },
+        changeEndCursor() {
+            if (this.pageInfo.hasNextPage) {
+                this.pageInfo.startCursor = '';
+                this.prev.push(this.pageInfo.endCursor);
+                this.displayData();
+            }
         }
-      }
-      const releases = await getReleases(this.boardId)
-      const data = await getSprints(this.boardId, this.pageInfo.startCursor, this.pageInfo.endCursor, releases, this.keyWord)
-      this.display = data
-      this.pageInfo = this.display.pageInfo
     },
-    changeStartCursor () {
-      if (this.pageInfo.hasPreviousPage) {
-        this.pageInfo.startCursor = ''
-        this.pageInfo.endCursor = this.prev[this.prev.length - 2]
-        this.prev.pop()
-        this.displayData()
-      }
-    },
-    changeEndCursor () {
-      if (this.pageInfo.hasNextPage) {
-        this.pageInfo.startCursor = ''
-        this.prev.push(this.pageInfo.endCursor)
-        this.displayData()
-      }
-    }
-  }
+    components: { EachTeamLegend }
 }
 
 </script>

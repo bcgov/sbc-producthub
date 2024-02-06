@@ -7,6 +7,7 @@
           Sprints by Team
         </button>
       </NuxtLink>
+      <div class="legend">
       <ul>
         <li v-for="team in teams" :key="team.id">
           <div>
@@ -61,7 +62,12 @@
           <br>
         </li>
       </ul>
+      <div class="legend-legend">
+        <EachTeamLegend/>
+      </div>
     </div>
+    </div>
+    
     <!-- <pre class="mx-20">
       <div v-if="issues === null">
         Loading issues
@@ -123,9 +129,30 @@ export default {
     margin-left: 35%;
     margin-right: 35%;
     margin-top: 40px;
+    display: flex;
+  justify-content: space-between; 
 }
 
 .link {
   color: #1669BB
 }
+.legend{
+  width: 60rem;
+  display: flex;
+  justify-content: space-between;
+  &-legend{
+    background-color: #94b9de;
+    height: max-content;
+    padding: 2rem;
+    border-radius: 2rem;
+  }
+
+}
+.team-container {
+  display: flex;
+  justify-content: space-between;  /* Add this line */
+  align-items: flex-start;  /* Add this line if you want the content to align at the top */
+  margin-bottom: 20px;  /* Adjust margin as needed */
+}
+
 </style>
