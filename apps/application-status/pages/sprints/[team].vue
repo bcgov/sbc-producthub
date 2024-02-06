@@ -89,9 +89,7 @@ import { PageInfo, TeamSprints } from '../../interface/interfaces'
 import { getReleases } from '../../composables/getReleases'
 import teamName from '../../enums/teamNames'
 import formatDate from '../../helper/formatDate'
-import EachTeamLegend from '~/components/EachTeamLegend.vue'
 export default {
-  components: { EachTeamLegend },
   data () {
     const route = useRoute()
     const teamName = route.params.team
