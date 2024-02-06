@@ -7,61 +7,67 @@
           Sprints by Team
         </button>
       </NuxtLink>
-      <ul>
-        <li v-for="team in teams" :key="team.id">
-          <div>
-            <b class="text-2xl">{{ team.title }}</b>
-          </div>
-          <div>
-            <b class="text-2xl">{{ team.sprint.name }}</b>
-          </div>
-          <div>
-            <h2 class="text-xl">
-              Total Points
-            </h2>
-            <pre>{{ team.sprint.totalPoints }}</pre>
-          </div>
-          <div>
-            <h2 class="text-xl">
-              Total closed releases
-            </h2>
-            <pre>{{ team.result.totalReleases }}</pre>
-          </div>
-          <div>
-            <h2 class="text-xl">
-              Total Issues
-            </h2>
-            <pre>{{ team.sprint.issues.totalCount }}</pre>
-          </div>
-          <div>
-            <h2 class="text-xl">
-              Total Prod Defects
-            </h2>
-            <pre>{{ team.result.totalDefects }}</pre>
-          </div>
-          <div>
-            <h2 class="text-xl">
-              Scope Change
-            </h2>
-            <pre>{{ team.sprint.scopeChange.totalCount }}</pre>
-            <h2 class="text-xl">
-              Scope Change Issues
-            </h2>
-            <div v-if="team.sprint.scopeChange.issues.length === 0">
-              No Scope Changes in this Sprint
+      <div class="legend">
+        <ul>
+          <li v-for="team in teams" :key="team.id">
+            <div>
+              <b class="text-2xl">{{ team.title }}</b>
             </div>
-            <ul v-else class="flex flex-row space-x-4">
-              <li v-for="issue in team.sprint.scopeChange.issues" :key="issue.id">
-                <NuxtLink class="link underline underline-offset-1" :to="issue.htmlUrl">
-                  {{ issue.number }}
-                </NuxtLink>
-              </li>
-            </ul>
-          </div>
-          <br>
-        </li>
-      </ul>
+            <div>
+              <b class="text-2xl">{{ team.sprint.name }}</b>
+            </div>
+            <div>
+              <h2 class="text-xl">
+                Total Points
+              </h2>
+              <pre>{{ team.sprint.totalPoints }}</pre>
+            </div>
+            <div>
+              <h2 class="text-xl">
+                Total closed releases
+              </h2>
+              <pre>{{ team.result.totalReleases }}</pre>
+            </div>
+            <div>
+              <h2 class="text-xl">
+                Total Issues
+              </h2>
+              <pre>{{ team.sprint.issues.totalCount }}</pre>
+            </div>
+            <div>
+              <h2 class="text-xl">
+                Total Prod Defects
+              </h2>
+              <pre>{{ team.result.totalDefects }}</pre>
+            </div>
+            <div>
+              <h2 class="text-xl">
+                Scope Change
+              </h2>
+              <pre>{{ team.sprint.scopeChange.totalCount }}</pre>
+              <h2 class="text-xl">
+                Scope Change Issues
+              </h2>
+              <div v-if="team.sprint.scopeChange.issues.length === 0">
+                No Scope Changes in this Sprint
+              </div>
+              <ul v-else class="flex flex-row space-x-4">
+                <li v-for="issue in team.sprint.scopeChange.issues" :key="issue.id">
+                  <NuxtLink class="link underline underline-offset-1" :to="issue.htmlUrl">
+                    {{ issue.number }}
+                  </NuxtLink>
+                </li>
+              </ul>
+            </div>
+            <br>
+          </li>
+        </ul>
+        <div class="legend-legend">
+          <EachTeamLegend />
+        </div>
+      </div>
     </div>
+
     <!-- <pre class="mx-20">
       <div v-if="issues === null">
         Loading issues
@@ -123,9 +129,30 @@ export default {
     margin-left: 35%;
     margin-right: 35%;
     margin-top: 40px;
+    display: flex;
+  justify-content: space-between;
 }
 
 .link {
   color: #1669BB
 }
+.legend{
+  width: 60rem;
+  display: flex;
+  justify-content: space-between;
+  &-legend{
+    background-color: #94b9de;
+    height: max-content;
+    padding: 2rem;
+    border-radius: 2rem;
+  }
+
+}
+.team-container {
+  display: flex;
+  justify-content: space-between;  /* Add this line */
+  align-items: flex-start;  /* Add this line if you want the content to align at the top */
+  margin-bottom: 20px;  /* Adjust margin as needed */
+}
+
 </style>

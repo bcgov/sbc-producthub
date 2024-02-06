@@ -129,7 +129,6 @@ export default {
   beforeMount () {
     this.displayData()
   },
-
   methods: {
     async displayData () {
       if (this.boardId === '' && this.keyWord === '') {
