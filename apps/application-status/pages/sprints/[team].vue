@@ -130,6 +130,7 @@ export default {
     this.displayData()
   },
   methods: {
+
     async displayData () {
       if (this.boardId === '' && this.keyWord === '') {
         if (this.teamName === teamName.ENTITIES) {
@@ -152,12 +153,21 @@ export default {
           this.boardId = this.curTeams[4].id
           this.keyWord = this.curTeams[4].keyWord
           this.teamTitle = this.curTeams[4].title
+        } else if (this.teamName === teamName.ENTITIESOLGA) {
+          this.boardId = this.curTeams[5].id
+          this.keyWord = this.curTeams[5].keyWord
+          this.teamTitle = this.curTeams[5].title
         }
       }
       const releases = await getReleases(this.boardId)
       const data = await getSprints(this.boardId, this.pageInfo.startCursor, this.pageInfo.endCursor, releases, this.keyWord)
       this.display = data
       this.pageInfo = this.display.pageInfo
+    },
+    async getLastCursor () {
+      const releases = await getReleases(this.boardId)
+      const data = await getSprints(this.boardId, '', '', releases, this.keyWord)
+      return data.pageInfo.endCursor
     },
     changeStartCursor () {
       if (this.pageInfo.hasPreviousPage) {

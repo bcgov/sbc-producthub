@@ -42,6 +42,15 @@ const teams = [
   },
   {
     id: '2',
+    title: BoardTitles.ENTITIESOLGA,
+    board: BoardName.ENTITIESOLGA,
+    keyWord: 'enti',
+    result,
+    sprint,
+    path: './entity'
+  },
+  {
+    id: '3',
     title: BoardTitles.NAMESTEAMSPACE,
     board: BoardName.NAMETEAMSPACE,
     keyWord: 'name',
@@ -50,7 +59,7 @@ const teams = [
     path: './nameteamspace'
   },
   {
-    id: '3',
+    id: '4',
     title: BoardTitles.ASSETS,
     board: BoardName.ASSETS,
     keyWord: 'assets',
@@ -59,7 +68,7 @@ const teams = [
     path: './assets'
   },
   {
-    id: '4',
+    id: '5',
     title: BoardTitles.RELATIONSHIPS,
     board: BoardName.RELATIONSHIPS,
     keyWord: 'relationships',
@@ -68,7 +77,7 @@ const teams = [
     path: './relationships'
   },
   {
-    id: '5',
+    id: '6',
     title: BoardTitles.BTR,
     board: BoardName.BTR,
     keyWord: 'btr',
@@ -76,6 +85,7 @@ const teams = [
     sprint,
     path: './btr'
   }
+
 ]
 
 export default teams
