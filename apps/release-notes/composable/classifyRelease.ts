@@ -22,7 +22,7 @@ export async function classifyReleases (
   }
   if (team === 'ENTITIES') {
     myGhIds = await getBoard('Entities - David')
-  }else if (team === 'NAMETEAMSPACE') {
+  } else if (team === 'NAMETEAMSPACE') {
     myGhIds = await getBoard('Names-Team-Board (New)')
   }
 

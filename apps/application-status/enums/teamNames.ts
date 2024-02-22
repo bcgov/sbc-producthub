@@ -4,7 +4,7 @@ enum TeamNames {
   ASSETS = 'assets',
   RELATIONSHIPS = 'relationships',
   BTR = 'btr',
-  ENTITIESOLGA = 'entity'
+  ENTITIESOLGA = 'entityolga'
 }
 
 export default TeamNames
