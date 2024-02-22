@@ -4,6 +4,7 @@ enum BoardName {
   ASSETS = 'Assets Team Space (New)',
   RELATIONSHIPS = 'Relationships Team Space (New)',
   BTR = 'Beneficial Ownership 2023',
-}
+  ENTITIESOLGA = "ENTITIESOLGA"
+} 
 
 export default BoardName

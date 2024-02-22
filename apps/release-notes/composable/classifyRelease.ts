@@ -21,8 +21,8 @@ export async function classifyReleases (
     endCursor: ''
   }
   if (team === 'ENTITIES') {
-    myGhIds = await getBoard('Entities Team Space - new')
-  } else if (team === 'NAMETEAMSPACE') {
+    myGhIds = await getBoard('entities---david')
+  }else if (team === 'NAMETEAMSPACE') {
     myGhIds = await getBoard('Names-Team-Board (New)')
   }
 
