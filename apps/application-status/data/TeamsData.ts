@@ -84,7 +84,8 @@ const teams = [
     result,
     sprint,
     path: './btr'
-  }
+  },
+  
 ]
 
 export default teams
