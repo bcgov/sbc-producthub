@@ -30,5 +30,4 @@ jobs:
         working_directory: "./apps/release-notes"
     secrets:
         APP_NAME: "release-notes"
-        OP_CONNECT_URL: ${{ secrets.OP_CONNECT_URL }}
-        OP_CONNECT_TOKEN: ${{ secrets.OP_CONNECT_TOKEN }}
+        OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
